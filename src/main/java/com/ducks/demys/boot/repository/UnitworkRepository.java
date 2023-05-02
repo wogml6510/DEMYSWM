@@ -15,6 +15,8 @@ public interface UnitworkRepository {
 	
 	public Unitwork getUnitworkByUW_NUM(int UW_NUM);
 	
+	public int selectUnitworkSequenceNextValue();
+	
 	public void registUnitwork(Unitwork unitWork);
 	
 	public void modifyUnitwork(Unitwork unitWork);

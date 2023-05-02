@@ -13,7 +13,11 @@ public interface Issue_AttachRepository {
 	
 	public Issue_Attach getIssueatByISSUEAT_NUM(int ISSUEAT_NUM);
 	
+	public int selectIssue_AttachSequenceNextValue();
+	
 	public void registIssue_Attach(Issue_Attach issueat);
 		
 	public void removeIssue_Attach(int ISSUEAT_NUM);
+
+	public void removeIssue_AttachAll(int ISSUE_NUM);
 }

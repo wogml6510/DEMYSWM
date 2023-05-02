@@ -13,7 +13,11 @@ public interface Product_AttachRepository {
 	
 	public Product_Attach getPdatByPDAT_NUM(int PDAT_NUM);
 	
+	public int selectProduct_AttachSequenceNextValue();
+	
 	public void registProduct_Attach(Product_Attach pdat);
 		
 	public void removeProduct_Attach(int PDAT_NUM);
+
+	public void removeProduct_AttachAll(int PRODUCT_NUM);
 }

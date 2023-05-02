@@ -15,6 +15,8 @@ public interface PjhrRepository {
 	
 	public Pjhr getPjhrByPJHR_NUM(int PJHR_NUM);
 	
+	public int selectPjhrSequenceNextValue();
+	
 	public void registPjhr(Pjhr pjhr);
 	
 	public void modifyPjhr(Pjhr pjhr);

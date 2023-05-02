@@ -12,8 +12,8 @@ public class Unitwork {
 	private int UW_NUM;
 	private String UW_TYPE;
 	private String UW_NAME;
-	private Date STARTDATE;
-	private Date ENDDATE;
+	private Date UW_STARTDATE;
+	private Date UW_ENDDATE;
 	private int UW_PERCENT;
 	private int UW_STATUS;
 	private String UW_NOTE;

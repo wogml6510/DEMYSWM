@@ -11,8 +11,8 @@ public class IssueReply {
 	
 	private int ISSUERE_NUM;
 	private String ISSUERE_CONTENT;
-	private Date REGDATE;
-	private Date UPDATEDATE;
+	private Date ISSUERE_REGDATE;
+	private Date ISSUERE_UPDATEDATE;
 	private int MEMBER_NUM;
 	private int ISSUE_NUM;
 

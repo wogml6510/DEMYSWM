@@ -9,9 +9,11 @@ import com.ducks.demys.boot.vo.MeetingBook;
 @Mapper
 public interface MeetingBookRepository {
 
-	public List<MeetingBook> getMeetingBookList();
+	public List<MeetingBook> getMeetingBookListByPJ_NUM(int PJ_NUM);
 	
 	public MeetingBook getMeetingBookByMB_NUM(int MB_NUM);
+	
+	public int selectMeetingBookSequenceNextValue();
 	
 	public void registMeetingBook(MeetingBook meetingBook);
 	

@@ -9,9 +9,11 @@ import com.ducks.demys.boot.vo.Budget_Detail;
 @Mapper
 public interface Budget_DetailRepository {
 
-	public List<Budget_Detail> getBuddtList();
+	public List<Budget_Detail> getBuddtListByBUD_NUM(int BUD_NUM);
 	
 	public Budget_Detail getBuddtByBUDDT_NUM(int BUDDT_NUM);
+	
+	public int selectBuddtSequenceNextValue();
 	
 	public void registBUDDT(Budget_Detail buddt);
 	

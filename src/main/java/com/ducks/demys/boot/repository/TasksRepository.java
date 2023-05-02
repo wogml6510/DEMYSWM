@@ -15,6 +15,8 @@ public interface TasksRepository {
 	
 	public Tasks getTasksByTASKS_NUM(int TASKS_NUM);
 	
+	public int selectTasksSequenceNextValue();
+	
 	public void registTasks(Tasks tasks);
 	
 	public void modifyTasks(Tasks tasks);

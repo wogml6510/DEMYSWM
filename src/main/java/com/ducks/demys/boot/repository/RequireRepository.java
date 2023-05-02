@@ -13,6 +13,8 @@ public interface RequireRepository {
 	
 	public Require getRequireByREQUIRE_NUM(int REQUIRE_NUM);
 	
+	public int selectRequireSequenceNextValue();
+	
 	public void registRequire(Require require);
 	
 	public void modifyRequire(Require require);

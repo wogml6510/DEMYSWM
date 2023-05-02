@@ -9,11 +9,13 @@ import com.ducks.demys.boot.vo.Schedule;
 @Mapper
 public interface ScheduleRepository {
 
-	public List<Schedule> getScheduleListByMEMBER_NUM(int MEMBER_NUM);
-
 	public List<Schedule> getScheduleList();
+
+	public List<Schedule> getScheduleListByMEMBER_NUM(int MEMBER_NUM);
 	
-	public Schedule getScheduleByMSG_NUM(int SC_NUM);
+	public Schedule getScheduleBySC_NUM(int SC_NUM);
+	
+	public int selectScheduleSequenceNextValue();
 	
 	public void registSchedule(Schedule schedule);
 	

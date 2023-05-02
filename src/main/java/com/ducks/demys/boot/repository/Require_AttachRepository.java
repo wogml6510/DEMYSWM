@@ -13,7 +13,11 @@ public interface Require_AttachRepository {
 	
 	public Require_Attach getRqatByRQAT_NUM(int RQAT_NUM);
 	
+	public int selectRequire_AttachSequenceNextValue();
+	
 	public void registRequire_Attach(Require_Attach rqat);
 		
 	public void removeRequire_Attach(int RQAT_NUM);
+
+	public void removeRequire_AttachAll(int REQUIRE_NUM);
 }

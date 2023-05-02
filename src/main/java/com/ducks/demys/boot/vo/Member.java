@@ -23,5 +23,4 @@ public class Member {
 	private String MEMBER_DEP;
 	private int MEMBER_STATUS;
 	
-
 }

@@ -14,7 +14,7 @@ public class Tasks {
 	private Date REGDATE;
 	private int TASKS_STATUS;
 	private int TASKS_IMP;
-	private Date ENDDATE;
+	private Date TASKS_ENDDATE;
 	private int TASKS_SHARE;
 	private int MEMBER_NUM;
 

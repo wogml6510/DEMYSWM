@@ -15,6 +15,8 @@ public interface Sc_TagRepository {
 	
 	public Sc_Tag getSc_TagBySCTAG_NUM(int SCTAG_NUM);
 	
+	public int selectSc_TagSequenceNextValue();
+	
 	public void registSc_Tag(Sc_Tag sctag);
 	
 	public void modifySc_Tag(Sc_Tag sctag);

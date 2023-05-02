@@ -9,9 +9,13 @@ import com.ducks.demys.boot.vo.Projects;
 @Mapper
 public interface ProjectsRepository {
 
-	public List<Projects> getProjectList();
+	public List<Projects> getPJList();
+
+	public List<Projects> getPJListByMEMBER_NUM(int MEMBER_NUM);
 	
 	public Projects getPJByPJ_NUM(int PJ_NUM);
+	
+	public int selectPJSequenceNextValue();
 	
 	public void registPJ(Projects project);
 	

@@ -13,6 +13,8 @@ public interface MessageRepository {
 	
 	public Message getMessageByMSG_NUM(int MSG_NUM);
 	
+	public int selectMessageSequenceNextValue();
+	
 	public void registMessage(Message msg);
 	
 	public void modifyMessage(Message msg);

@@ -17,7 +17,7 @@ public interface MemberRepository {
 	
 	public int selectMemberSequenceNextValue();
 	
-	public void registMember(Member member);	
+	public void registMember(Member member);
 	
 	public void modifyMember(Member member);
 

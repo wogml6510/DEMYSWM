@@ -18,4 +18,6 @@ public class Contacts {
 	private Date CT_REGDATE;
 	private Date CT_UPDATEDATE;
 	private int CT_TYPE;
+	private String CT_ADDR;
+	private String CT_EMAIL;
 }

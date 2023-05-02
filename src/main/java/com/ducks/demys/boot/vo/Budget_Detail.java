@@ -14,8 +14,8 @@ public class Budget_Detail {
 	private int BUDDT_COST;
 	private String BUDDT_INFO;
 	private String BUDDT_ETC;
-	private Date REGDATE;
-	private Date UPDATEDATE;
+	private Date BUDDT_REGDATE;
+	private Date BUDDT_UPDATEDATE;
 	private int BUD_NUM;
 
 }

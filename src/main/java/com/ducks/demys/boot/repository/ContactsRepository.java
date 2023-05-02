@@ -10,8 +10,12 @@ import com.ducks.demys.boot.vo.Contacts;
 public interface ContactsRepository {
 
 	public List<Contacts> getContactsList();
+
+	public List<Contacts> getContactsListByPJ_NUM(int PJ_NUM);
 	
 	public Contacts getContactsByCT_NUM(int CT_NUM);
+	
+	public int selectContactsSequenceNextValue();
 	
 	public void registContacts(Contacts contacts);
 	

@@ -13,7 +13,12 @@ public interface Mb_AttachRepository {
 	
 	public Mb_Attach getMbatByMBAT_NUM(int MBAT_NUM);
 	
+	public int selectMb_AttachSequenceNextValue();
+	
 	public void registMb_Attach(Mb_Attach mbat);
 		
 	public void removeMb_Attach(int MBAT_NUM);
+
+	public void removeMb_AttachAll(int MB_NUM);
+	
 }

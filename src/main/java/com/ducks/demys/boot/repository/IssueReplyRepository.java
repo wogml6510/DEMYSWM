@@ -13,6 +13,8 @@ public interface IssueReplyRepository {
 	
 	public IssueReply getIssueByISSUERE_NUM(int ISSUERE_NUM);
 	
+	public int selectIssueReplyequenceNextValue();
+	
 	public void registIssueReply(IssueReply issuere);
 	
 	public void modifyIssueReply(IssueReply issuere);

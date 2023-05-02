@@ -10,8 +10,14 @@ import com.ducks.demys.boot.vo.Issue;
 public interface IssueRepository {
 
 	public List<Issue> getIssueList();
+
+	public List<Issue> getIssueListByPJ_NUM(int PJ_NUM);
+	
+	public List<Issue> getIssueListByMEMBER_NUM(int MEMBER_NUM);
 	
 	public Issue getIssueByISSUE_NUM(int ISSUE_NUM);
+	
+	public int selectIssueSequenceNextValue();
 	
 	public void registIssue(Issue issue);
 	
