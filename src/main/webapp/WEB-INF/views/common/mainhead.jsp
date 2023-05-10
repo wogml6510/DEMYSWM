@@ -49,18 +49,19 @@
    min-height: 1rem;
    height: 55px;
 }
-.btn-drop:hover{
+a:hover{
    background-color:#016FA0;
    color:white;
 }
 </style>
 <body>
       <div class="navbar text-neutral-content bg-white">
-         <a href="#">
-            <img style="width:160px; height:55px;" src="/resource/img/logo.jpg" alt="" />
-         </a>
+            <a href="#">
+                  <img style="width: 160px; height: 55px;" src="/resource/img/logo.jpg" alt="" />
+            </a>
             <div class="flex-1"></div>
-            <div class="flex-none"><div class="dropdown dropdown-end">
+            <div class="flex-none">
+                  <div class="dropdown dropdown-end">
                         <button tabindex="0" class="btn btn-top btn-circle">
                               <div class="indicator">
                                     <svg style="color: black;" xmlns="http://www.w3.org/2000/svg" class="h-6 w6" fill="none" viewBox="0 0 24 24"
@@ -147,48 +148,46 @@
                         <ul tabindex="0" class="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
                               style="color: black;">
                               <li>
-                                    <a href="#" class="justify-between btn-drop"> MyPage </a>
+                                    <a href="#" class="justify-between"> MyPage </a>
                               </li>
                               <li>
-                                    <a href="#" class="btn-drop">Logout</a>
+                                    <a href="#">Logout</a>
                               </li>
                         </ul>
                   </div>
             </div>
       </div>
       <div class="flex" style="background-color: #153A66;">
-            <div class="navbar text-neutral-content" style="width:18%; border-right: 2px solid #f7f7f7;">
-                  <a class="btn btn-ghost normal-case text-xl">사이드바</a>
-            </div>
-            <div class="navbar text-neutral-content"  style="width:82%;">            
-            <ul class="text-white" style="margin-left:auto;">
-                  <li>
-                        <a href="#" class="btn btn-ghost normal-case text-xl"  style="width:130px;">
-                        <span>DashBoard</span>
-                        </a>
-                  </li>
-                  <li>
-                        <a href="#" class="btn btn-ghost normal-case text-xl" style="width:130px;">
-                              <span>Projects</span>
-                        </a>
-                  </li>
-                  <li>
-                        <a href="#" class="btn btn-ghost normal-case text-xl" style="width:130px;">
-                              <span>Calendar</span>
-                        </a>
-                  </li>
-                  <li>
-                        <a href="#" class="btn btn-ghost normal-case text-xl" style="width:130px;">
-                              <span>Tasks</span>
-                        </a>
-                  </li>
+            <div class="navbar text-neutral-content" style="width: 100%;">
+                  <ul class="text-white" style="margin-left: auto;">
+                        <li>
+                              <a href="#" class="btn btn-ghost normal-case text-xl" style="width: 130px;">
+                                    <span>DashBoard</span>
+                              </a>
+                        </li>
+                        <li>
+                              <a href="#" class="btn btn-ghost normal-case text-xl" style="width: 130px;">
+                                    <span>Projects</span>
+                              </a>
+                        </li>
+                        <li>
+                              <a href="#" class="btn btn-ghost normal-case text-xl" style="width: 130px;">
+                                    <span>Calendar</span>
+                              </a>
+                        </li>
+                        <li>
+                              <a href="#" class="btn btn-ghost normal-case text-xl" style="width: 130px;">
+                                    <span>Tasks</span>
+                              </a>
+                        </li>
 
-                  <li>
-                        <a href="#" class="btn btn-ghost normal-case text-xl" style="width:130px;">
-                              <span>Contacts</span>
-                        </a>
-                  </li>
+                        <li>
+                              <a href="#" class="btn btn-ghost normal-case text-xl" style="width: 130px;">
+                                    <span>Contacts</span>
+                              </a>
+                        </li>
 
-            </ul>
+                  </ul>
             </div>
       </div>
+      <div style="width:100%; height:955px; border:1px solid red;"></div>
