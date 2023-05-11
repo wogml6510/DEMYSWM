@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
-<%@ include file="mainhead.jsp"%>
+<%@ include file="../../../mainhead.jsp"%>
 
 <style>
 #modal {
@@ -8,7 +8,7 @@
 	position: relative;
 	width: 100%;
 	height: 100%;
-	z-index: 1;
+	z-index: 3;
 }
 
 #modal h2 {
@@ -293,4 +293,3 @@
 
 		</body>
 		</html>
-		<%@ include file="WEB-INF/views/common/foot.jsp" %>

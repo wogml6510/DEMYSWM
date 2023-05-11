@@ -4,7 +4,7 @@
 
 
 
-<%@ include file="mainhead.jsp"%>
+<%@ include file="../../../mainhead.jsp"%>
 
 
 
@@ -284,16 +284,6 @@
 				document.getElementById("modal").style.display = "none";
 			}
 		</script>
-
-
-
-
-
-
-
-
-
-
 
 
 </body>
