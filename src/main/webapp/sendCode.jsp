@@ -67,6 +67,7 @@ body {
 	font-size:70px;
 	width:100px;
 	height:80px;
+	color : #153A66;
 }
 .main-content {
 	font-size: 0.8rem;

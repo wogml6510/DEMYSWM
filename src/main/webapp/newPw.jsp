@@ -7,6 +7,9 @@
 <meta charset="UTF-8">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
+<!-- 제이쿼리 불러오기 -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
 <!-- 테일윈드 불러오기 -->
 <!-- 노말라이즈, 라이브러리까지 한번에 해결 -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.7/tailwind.min.css" />
@@ -16,7 +19,11 @@
 
 <!-- 폰트어썸 불러오기 -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" />
-<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+
+<!-- 사이트 공통 CSS -->
+<link rel="stylesheet" href="/resource/common.css" />
+<!-- 사이트 공통 JS -->
+<script src="/resource/common.js" defer="defer"></script>
 </head>
 <style>
 
@@ -53,13 +60,8 @@ body {
 	height : 313px;
 }
 .main-title {
-	padding-top : 10px;
-	padding-bottom : 10px;
 	text-align : center;
-	font-weight: bold;
-	font-size: 1.3rem;
 }
-
 .input-group {
 	margin :5px 0px;
 	height:40px;
@@ -103,14 +105,21 @@ body {
 	justify-content:center;
 }
 
-.findPw-name {
+.newPw-name {
 	font-size:0.8rem;
 	font-weight: bold;
-	width:20%;
+	width:47%;
 	height:40px;    
 	display: flex;
     align-items: center;
     margin-right:10px;
+}
+.fa-gear {
+	margin :15px auto;
+	color : #153A66;
+	font-size:70px;
+	width:100px;
+	height:80px;
 }
 </style>
 <body>
@@ -122,31 +131,23 @@ body {
 		</div>
 	<div class="main">	
 		<div class="main-box">	
-			<div class="main-title">비밀번호 찾기</div>
+			<div class="main-title"><i class="fa-solid fa-gear"></i></div>
 				<div class="form-group">
-      				<label class="findPw-name">이름</label>
+      				<label class="newPw-name">새 비밀번호</label>
       			<div class="input-group">
         			<div class="input-group-prepend">
-        				<input type="text" placeholder="뭥미뭥미" class="input input-bordered"  id="" name="" />
+        				<input type="text" placeholder="0글자 영문자,숫자,특수문자 조합" class="input input-bordered"  id="" name="" />
  					</div>     			
       			</div>
       			</div>
       			<div class="form-group">
-      			<label class="findPw-name">아이디</label>
+      			<label class="newPw-name">새 비밀번호 확인</label>
       			<div class="input-group">
         			<div class="input-group-prepend">
-        				<input type="text" placeholder="anjdal92" class="input input-bordered"  id="" name="" />
+        				<input type="text" placeholder="0글자 영문자,숫자,특수문자 조합" class="input input-bordered"  id="" name="" />
  					</div>     			
       			</div>
       			</div>
-      			<div class="form-group">
-      			<label class="findPw-name">이메일</label>
-      			<div class="input-group">
-        			<div class="input-group-prepend">
-        				<input type="text" placeholder="anjdal92@naver.com" class="input input-bordered"  id="" name="" />
- 					</div>     			
-      			</div>
-				</div>
 		<div class="card-footer row">						
 			<button type="button" id="findBtn"  onclick="find_go();" class="btn btn-se" style="margin-right: 10px;">확 인</button>
 			<div class="col-sm-4"></div>
