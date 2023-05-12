@@ -53,11 +53,11 @@ body {
 	height : 313px;
 }
 .main-title {
-	padding-top : 5px;
+	padding-top : 10px;
 	padding-bottom : 10px;
 	text-align : center;
 	font-weight: bold;
-	font-size: 1.5rem;
+	font-size: 1.3rem;
 }
 
 .input-group {
@@ -73,10 +73,11 @@ body {
 	width: 100%;
 	height:40px;
 	border : 1px solid #aaaaaa;
+	font-size:0.8rem;
 }
 
 .btn-se {
-	width : 130px;
+	width : 80px;
 	min-height:1rem;
 	border:none;
 	color:#ffffff;
@@ -94,7 +95,7 @@ body {
 	align-items: center;
 }
 .card-footer {
-	padding-top : 35px;
+	padding-top : 25px;
 	margin-top: 0; 
 	border-top: none;
 	display:flex;
@@ -103,6 +104,7 @@ body {
 }
 
 .findPw-name {
+	font-size:0.8rem;
 	font-weight: bold;
 	width:20%;
 	height:40px;    
@@ -125,7 +127,7 @@ body {
       				<label class="findPw-name">이름</label>
       			<div class="input-group">
         			<div class="input-group-prepend">
-        				<input type="text" placeholder="Type here" class="input input-bordered"  id="" name="" />
+        				<input type="text" placeholder="뭥미뭥미" class="input input-bordered"  id="" name="" />
  					</div>     			
       			</div>
       			</div>
@@ -133,7 +135,7 @@ body {
       			<label class="findPw-name">아이디</label>
       			<div class="input-group">
         			<div class="input-group-prepend">
-        				<input type="text" placeholder="Type here" class="input input-bordered"  id="" name="" />
+        				<input type="text" placeholder="anjdal92" class="input input-bordered"  id="" name="" />
  					</div>     			
       			</div>
       			</div>
@@ -141,7 +143,7 @@ body {
       			<label class="findPw-name">이메일</label>
       			<div class="input-group">
         			<div class="input-group-prepend">
-        				<input type="text" placeholder="Type here" class="input input-bordered"  id="" name="" />
+        				<input type="text" placeholder="anjdal92@naver.com" class="input input-bordered"  id="" name="" />
  					</div>     			
       			</div>
 				</div>
@@ -170,7 +172,6 @@ function CloseWindow(parentURL){
 }
    </script>
 </body>
-
 
 
 

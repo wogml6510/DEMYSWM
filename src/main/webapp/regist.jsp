@@ -44,14 +44,14 @@ body {
 }
 
 .register-card-body {
-	height : 668px;
+	height : 638px;
 	border : 4.5px solid #153A66;
 }
 .input-group {
 	width: 100%;
     display: flex;
     justify-content: center;
-    margin : 10px auto;
+    margin : 13px auto;
 }
 .input-group2 {
 	 display: flex;
@@ -63,12 +63,13 @@ body {
 	color:#ffffff;
   	background-color:#153A66;
   	height:30px;
+  	font-size:0.8rem;
 }
 .btn-se:hover {
 	background-color:#016FA0;
 }
 .mailbox-attachment-icon {
-	border: 1px solid pink; 
+	border: 1px solid #153A66;
 	height: 150px; 
 	width: 150px; 
 	margin: 0 auto;
@@ -77,11 +78,28 @@ body {
 .form-horizontal {
 	width: 80%;
 	margin: 0 auto;
-	border : 1px solid green;
+	/* border : 1px solid green; */
 }
-option{
-	padding-top:10px;
-	margin-top:20px;
+
+.form-group {
+	/* border:1px solid #D5D5D5; */
+}
+
+.form-control {
+	border:1px solid #D5D5D5;
+	border-radius : 0;
+	font-size:0.7rem;
+}
+
+.form-control2 {
+	height : 30px;
+	border:1px solid #D5D5D5;
+}
+.label-box {
+	font-weight:bold;
+	font-size:0.7rem;
+	width:24.5%;
+	margin:auto;
 }
 </style>
 <body>
@@ -102,7 +120,7 @@ option{
 								<div class="mailbox-attachment-info">
 									<div class="input-group input-group-sm">
 										<label for="inputFile" class=" btn btn-se btn-sm btn-flat input-group-addon">파일선택</label>
-										<input id="inputFileName" class="form-control" type="text" name="tempPicture" disabled /> 
+										<input id="inputFileName" class="form-control2" type="text" name="tempPicture" disabled /> 
 										<span class="btn btn-se btn-sm btn-append input-group-append-sm">
 											<button type="button" class="btn btn-se btn-sm btn-append" onclick="upload_go();">업로드</button>
 										</span>
@@ -111,55 +129,55 @@ option{
 							</div>
 							<br />
 						</div>
-						<div class="form-group" style="display:flex;border:1px solid red;">
-      						<label style="font-weight:bold;font-size:0.9rem;width:25%;margin:auto;">아이디</label>
-							<div class="input-group2 input-group-sm" style="width:75%;border:1px solid purple;">
+						<div class="form-group" style="display:flex;">
+      						<label class="label-box">아이디</label>
+							<div class="input-group2 input-group-sm" style="width:75.5%;">
 								<input name="id" onkeyup="this.value=this.value.replace(/[\ㄱ-ㅎㅏ-ㅣ가-힣]/g, &#39;&#39;);" type="text" class="form-control" id="id"
-									placeholder="13글자 영문자,숫자 조합" style="width:73%;margin-left:auto;"> 
+									placeholder="   13글자 영문자,숫자 조합" style="width:74.5%;margin-left:auto;"> 
 									<span class="input-group-append-sm">
 									<button type="button" onclick="idCheck_go();" class="btn btn-se btn-sm btn-append">중복확인</button>
 								</span>
 							</div>
 						</div>
-						<div class="form-group" style="display:flex;border:1px solid red;">
-      						<label style="font-weight:bold;font-size:0.9rem;width:25%;margin:auto;">비밀번호</label>
-							<div class="input-group2 input-group-sm" style="width:75%;border:1px solid purple;">
+						<div class="form-group" style="display:flex;">
+      						<label class="label-box">비밀번호</label>
+							<div class="input-group2 input-group-sm" style="width:75%;">
 								<input name="pw"  type="password" class="form-control" id="pw"
-									 placeholder="20글자 영문자,숫자,특수문자 조합" style="width:100%;"> 
+									 placeholder="   20글자 영문자,숫자,특수문자 조합" style="width:100%;"> 
 							</div>
 						</div>
-						<div class="form-group" style="display:flex;border:1px solid red;">
-      						<label style="font-weight:bold;font-size:0.9rem;width:25%;margin:auto;">비밀번호 확인</label>
-							<div class="input-group2 input-group-sm" style="width:75%;border:1px solid purple;">
+						<div class="form-group" style="display:flex;">
+      						<label class="label-box">비밀번호 확인</label>
+							<div class="input-group2 input-group-sm" style="width:75%;">
 								<input name="pw"  type="password" class="form-control" id="pw"
-									 placeholder="비밀번호 확인" style="width:100%;"> 
+									 placeholder="   비밀번호 확인" style="width:100%;"> 
 							</div>
 						</div>
-						<div class="form-group" style="display:flex;border:1px solid red;">
-      						<label style="font-weight:bold;font-size:0.9rem;width:25%;margin:auto;">이름</label>
-							<div class="input-group2 input-group-sm" style="width:75%;border:1px solid purple;">
+						<div class="form-group" style="display:flex;">
+      						<label class="label-box">이름</label>
+							<div class="input-group2 input-group-sm" style="width:75%;">
 								<input name="name"  type="text" class="form-control" id="name"
-									 placeholder="이름" style="width:100%;"> 
+									 placeholder="   이름" style="width:100%;"> 
 							</div>
 						</div>
-						<div class="form-group" style="display:flex;border:1px solid red;">
-      						<label style="font-weight:bold;font-size:0.9rem;width:25%;margin:auto;">휴대폰 번호</label>
-							<div class="input-group2 input-group-sm" style="width:75%;border:1px solid purple;">
+						<div class="form-group" style="display:flex;">
+      						<label class="label-box">휴대폰 번호</label>
+							<div class="input-group2 input-group-sm" style="width:75%;">
 								<input name="phone"  type="text" class="form-control" id="phone"
-									 placeholder="'-'없이 입력해주세요." style="width:100%;"> 
+									 placeholder="   '-'없이 입력해주세요." style="width:100%;"> 
 							</div>
 						</div>
-						<div class="form-group" style="display:flex;border:1px solid red;">
-      						<label style="font-weight:bold;font-size:0.9rem;width:25%;margin:auto;">이메일</label>
-							<div class="input-group2 input-group-sm" style="width:75%;border:1px solid purple;">
+						<div class="form-group" style="display:flex;">
+      						<label class="label-box">이메일</label>
+							<div class="input-group2 input-group-sm" style="width:75%;">
 								<input name="email"  type="text" class="form-control" id="email"
-									 placeholder="이메일을 입력해주세요." style="width:100%;"> 
+									 placeholder="   이메일을 입력해주세요." style="width:100%;"> 
 							</div>
 						</div>
-						<div class="form-group" style="display:flex;border:1px solid red;">
-      						<label style="font-weight:bold;font-size:0.9rem;width:25%;margin:auto;">소속부서</label>
-							<div class="input-group2 input-group-sm" style="width:75%;border:1px solid purple;">
-								<select class="form-control w-full" style="height:32px;">
+						<div class="form-group" style="display:flex;">
+      						<label class="label-box">소속부서</label>
+							<div class="input-group2 input-group-sm" style="width:75%;">
+								<select class="select form-control select-sm w-full">
 									<option disabled selected>전체</option>
 									<option>개발1팀</option>
 									<option>개발2팀</option>
@@ -167,17 +185,34 @@ option{
 								 </select>
 							</div>
 						</div>
-						
-
-						<div class="card-footer">
-							<div class="row">
-								<div class="col-sm-6">
-									<button type="button" id="registBtn" onclick="regist_go();" class="btn btn-info">등&nbsp;&nbsp;록</button>
+						<div class="form-group" style="display:flex;">
+      						<label class="label-box">직책</label>
+							<div class="input-group2 input-group-sm" style="width:75%;">
+								<select class="select form-control select-sm w-full">
+									<option disabled selected>전체</option>
+									<option>팀원</option>
+									<option>팀장</option>
+								 </select>
+							</div>
+						</div>
+						<div class="form-group" style="display:flex;">
+      						<label class="label-box">직급</label>
+							<div class="input-group2 input-group-sm" style="width:75%;">
+								<select class="select form-control select-sm w-full">
+									<option disabled selected>전체</option>
+									<option>사원</option>
+									<option>선임</option>
+									<option>책임</option>
+								 </select>
+							</div>
+						</div>
+						<div class="card-footer" style="">
+							<div class="row" style="display:flex;flex-direction:row;justify-content:center;margin-top:35px;">
+								<div class="" style="margin-right:10px;">
+									<button type="button" id="registBtn" onclick="regist_go();" class="btn btn-se">등&nbsp;&nbsp;록</button>
 								</div>
-
-								<div class="col-sm-6">
-									<button type="button" id="cancelBtn" onclick="CloseWindow();" class="btn btn-default float-right">&nbsp;&nbsp;&nbsp;취
-										&nbsp;&nbsp;소&nbsp;&nbsp;&nbsp;</button>
+								<div class="" style="margin-left:10px;">
+									<button type="button" id="cancelBtn" onclick="CloseWindow();" class="btn btn-se">취&nbsp;&nbsp;소</button>
 								</div>
 							</div>
 						</div>

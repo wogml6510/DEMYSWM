@@ -208,7 +208,7 @@ html,body{
       </div>
       <div>
          <div id="root" class="mt-5">
-            <button id="registBtn" class="font-demys" onclick="OpenWindow('regist.jsp','계정등록',500,700);">계정등록</button>&nbsp;&nbsp;
+            <button id="registBtn" class="font-demys" onclick="OpenWindow('regist.jsp','계정등록',500,670);">계정등록</button>&nbsp;&nbsp;
             <button id="findPwBtn" class="font-demys" onclick="OpenWindow('findPw.jsp','비밀번호 찾기',400,350);">비밀번호 찾기</button>
          </div>
       </div>
