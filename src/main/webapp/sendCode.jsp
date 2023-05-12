@@ -5,6 +5,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
 <!-- 제이쿼리 불러오기 -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
@@ -58,16 +60,23 @@ body {
 	height : 313px;
 }
 .main-title {
-	padding-top : 10px;
-	padding-bottom : 10px;
 	text-align : center;
-	font-weight: bold;
-	font-size: 1.3rem;
 }
-
+.fa-envelope {
+	margin : 30px auto;
+	font-size:70px;
+	width:100px;
+	height:80px;
+}
+.main-content {
+	font-size: 0.8rem;
+	text-align: center;
+	margin-bottom : 30px;
+}
 .input-group {
 	margin :5px 0px;
 	height:40px;
+	display:flex;
 }
 
 .input-group-prepend {
@@ -75,10 +84,19 @@ body {
 }
 
 .input-bordered {
-	width: 100%;
+	width: 70%;
 	height:40px;
 	border : 1px solid #aaaaaa;
 	font-size:0.8rem;
+}
+.findPw-name {
+	font-size:0.8rem;
+	font-weight: bold;
+	width:20%;
+	height:40px;    
+	display: flex;
+    align-items: center;
+    margin-right:10px;
 }
 
 .btn-se {
@@ -93,30 +111,6 @@ body {
 	background-color:#016FA0;
 }
 
-.form-group {
-	width:100%;
-	margin :5px 0px;
-	display:flex;
-	align-items: center;
-}
-.card-footer {
-	padding-top : 25px;
-	margin-top: 0; 
-	border-top: none;
-	display:flex;
-	flex-direction:row;
-	justify-content:center;
-}
-
-.findPw-name {
-	font-size:0.8rem;
-	font-weight: bold;
-	width:20%;
-	height:40px;    
-	display: flex;
-    align-items: center;
-    margin-right:10px;
-}
 </style>
 <body>
 	<div class="regist_content">
@@ -127,39 +121,17 @@ body {
 		</div>
 	<div class="main">	
 		<div class="main-box">	
-			<div class="main-title">비밀번호 찾기</div>
-				<div class="form-group">
-      				<label class="findPw-name">이름</label>
+			<div class="main-title"><i class="fa-regular fa-envelope"></i></div>
+				<div class="main-content">입력하신 이메일로 인증번호를 발송하였습니다.</div>
       			<div class="input-group">
         			<div class="input-group-prepend">
-        				<input type="text" placeholder="뭥미뭥미" class="input input-bordered"  id="" name="" />
+        				<input type="text" placeholder="인증번호 입력" class="input input-bordered"  id="" name="" />
+        				<button type="button" id="findBtn"  onclick="find_go();" class="btn btn-se" style="margin-right: 10px;">인 증</button>
  					</div>     			
       			</div>
-      			</div>
-      			<div class="form-group">
-      			<label class="findPw-name">아이디</label>
-      			<div class="input-group">
-        			<div class="input-group-prepend">
-        				<input type="text" placeholder="anjdal92" class="input input-bordered"  id="" name="" />
- 					</div>     			
-      			</div>
-      			</div>
-      			<div class="form-group">
-      			<label class="findPw-name">이메일</label>
-      			<div class="input-group">
-        			<div class="input-group-prepend">
-        				<input type="text" placeholder="anjdal92@naver.com" class="input input-bordered"  id="" name="" />
- 					</div>     			
-      			</div>
-				</div>
-		<div class="card-footer row">						
-			<button type="button" id="findBtn"  onclick="find_go();" class="btn btn-se" style="margin-right: 10px;">확 인</button>
-			<div class="col-sm-4"></div>
-			<button type="button" id="cancelBtn" onclick="CloseWindow();" class="btn btn-se"  style="margin-left: 10px;">취 소</button>
-		</div>	
-		</div>
-					</div>
-				</div>
+      	</div>
+	</div>
+	</div>
 
 
 <script>

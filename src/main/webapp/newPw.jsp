@@ -5,7 +5,6 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<!-- 제이쿼리 불러오기 -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
 <!-- 테일윈드 불러오기 -->
@@ -17,11 +16,7 @@
 
 <!-- 폰트어썸 불러오기 -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" />
-
-<!-- 사이트 공통 CSS -->
-<link rel="stylesheet" href="/resource/common.css" />
-<!-- 사이트 공통 JS -->
-<script src="/resource/common.js" defer="defer"></script>
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 </head>
 <style>
 
