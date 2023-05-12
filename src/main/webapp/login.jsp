@@ -208,8 +208,8 @@ html,body{
       </div>
       <div>
          <div id="root" class="mt-5">
-            <button id="modal_openregist_btn" class="font-demys" >계정등록</button>&nbsp;&nbsp;
-            <button id="modal_open_btn" class="font-demys">비밀번호 찾기</button>
+            <button id="registBtn" class="font-demys" onclick="OpenWindow('regist.jsp','계정등록',500,700);">계정등록</button>&nbsp;&nbsp;
+            <button id="findPwBtn" class="font-demys" onclick="OpenWindow('findPw.jsp','비밀번호 찾기',400,350);">비밀번호 찾기</button>
          </div>
       </div>
    </div>
@@ -217,13 +217,21 @@ html,body{
 
  
 <script>
-   document.getElementById("modal_open_btn").onclick = function() {
-      document.getElementById("modal_layer").style.display = "block";
-   }
+	function OpenWindow(UrlStr, WinTitle, WinWidth, WinHeight) {
+		winleft = (screen.width - WinWidth) / 2;
+		wintop = (screen.height - WinHeight) / 2;
+		var win = window.open(UrlStr , WinTitle , "scrollbars=yes,width="+ WinWidth  
+								+",height="+ WinHeight +",top="+ wintop +",left=" 
+								+ winleft +",resizable=yes"  );
+		win.focus() ; 
+	}
 
-   document.getElementById("modal_close_btn").onclick = function() {
-   document.getElementById("modal_layer").style.display = "none";
-   }
+	//팝업창 닫기
+	function CloseWindow(parentURL){
+	
+	window.opener.location.reload(true);		
+	window.close();
+	}
 </script>
 
 </body>
