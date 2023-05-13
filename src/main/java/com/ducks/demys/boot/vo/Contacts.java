@@ -20,4 +20,5 @@ public class Contacts {
 	private int CT_TYPE;
 	private String CT_ADDR;
 	private String CT_EMAIL;
+	private String CT_FAX;
 }

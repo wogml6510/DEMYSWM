@@ -1,12 +1,7 @@
-
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ include file="../common/mainhead.jsp"%>
-<!DOCTYPE html>
-<html lang="ko" class="light" data-theme="light">
-<head>
-<meta charset="UTF-8">
-<title>DashBoard</title>
+
 <!-- 제이쿼리 불러오기 -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
@@ -18,8 +13,7 @@
 <link href="https://cdn.jsdelivr.net/npm/daisyui@2.51.5/dist/full.css" rel="stylesheet" type="text/css" />
 
 <!-- 폰트어썸 불러오기 -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font
--awesome/6.1.1/css/all.min.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" />
 
 <!-- 사이트 공통 CSS -->
 <link rel="stylesheet" href="/resource/common.css" />
@@ -85,8 +79,7 @@ a:hover{
 
 .list-body {
 	margin : 0 20px;
-	overflow-y:auto;
-  	overflow-x:hidden;
+
 	border-top:2px solid #333333;
     border-bottom:2px solid #333333;
 }
@@ -129,13 +122,14 @@ a:hover{
                    </button>
             </span>
     <div class="regist-btn">
-    	<button type="button" class="btn btn-se" onclick="OpenWindow('regist.jsp','신규업체 등록',550,800);" >등 록</button>
+    	<button type="button" class="btn btn-se" onclick="OpenWindow('regist','신규업체 등록',550,800);" >등 록</button>
     </div>
     </div>
  </div>
  <div class="list-body">
  		<table class="table table-bordered text-center" style="text-align:center;width:100%" >
  		<colgroup>   
+          <col width="50"/>
           <col width="100"/>
           <col width="100"/>
           <col width="100"/>
@@ -147,6 +141,7 @@ a:hover{
         </colgroup>
         <thead>
 			<tr>
+				<th>업체번호</th>
 				<th>업체명</th>
 				<th>대표자명</th>
 				<th>대표번호</th>
@@ -156,16 +151,19 @@ a:hover{
 				<th>담당자연락처</th>
 			</tr>
 		</thead>
-		<tbody style="overflow-y:scroll;overflow-x:hidden;">
-			<%-- <c:forEach items="" var=""> --%>
-			<tr>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td></td>
+		<tbody style="">
+		<c:forEach items="${contactsList }" var="contacts" >
+			<tr class="hover">
+				<td>${contacts.CT_NUM }</td>
+				<td>${contacts.CT_NAME }</td>
+				<td>${contacts.CT_CEO }</td>
+				<td>${contacts.CT_TEL }</td>
+				<td>${contacts.CT_FAX }</td>
+				<td>${contacts.CT_ADDR }</td>
+				<td>${contacts.CT_MANAGER }</td>
+				<td>${contacts.CT_MG_TEL }</td>
 				</tr>
-		<%-- 	</c:forEach>   --%>
+			</c:forEach>
 		</tbody>	 
 	</table>
 </div>
