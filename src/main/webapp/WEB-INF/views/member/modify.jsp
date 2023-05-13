@@ -4,7 +4,7 @@
 
 
 
-<%@ include file="../../../mainhead.jsp"%>
+<%@ include file="../common/mainhead.jsp"%>
 
 
 
