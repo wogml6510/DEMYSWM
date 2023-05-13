@@ -139,11 +139,9 @@ html,body{
 <body>
 <div class="item-box">
    <div class="img">
-       <img src="/resource/img/back.png" style="width:190vh;height:1067px;"/>
+       <img src="/resource/img/back.png" style="width:190vh;height:1066px;"/>
    </div>
-   <div class="content-box" style="border:5px solid #153A66;">
-   
-   
+<div class="content-box" style="border:5px solid #153A66;"> 
 
 <!-- 모달창  -->
 
@@ -223,7 +221,7 @@ html,body{
 	function OpenWindow(UrlStr, WinTitle, WinWidth, WinHeight) {
 		winleft = (screen.width - WinWidth) / 2;
 		wintop = (screen.height - WinHeight) / 2;
-		var win = window.open(UrlStr , WinTitle , "scrollbars=yes,width="+ WinWidth  
+		var win = window.open(UrlStr , WinTitle , "scrollbars=no,width="+ WinWidth  
 								+",height="+ WinHeight +",top="+ wintop +",left=" 
 								+ winleft +",resizable=yes"  );
 		win.focus() ; 
