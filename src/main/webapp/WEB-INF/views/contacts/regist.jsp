@@ -82,12 +82,14 @@ body {
 	width: 100%;
 	height:30px;
 	border : 1px solid #aaaaaa;
+	font-size:0.8rem;
 }
 
 .select-bordered {
 	height:30px;
 	min-height:1rem;
 	border : 1px solid #aaaaaa;
+	font-size:0.8rem;
 }
 .form-group {
 	width:100%;
@@ -121,12 +123,13 @@ body {
 		</div>
 	<div class="main">	
 		<div class="main-box">	
+		<form class="table-box-type-1" method="POST" action="../contacts/doRegist" >
 			<div class="main-title">신규업체 등록</div>
 				<div class="form-group">
       				<label style="font-weight: bold;">업체명</label>
       			<div class="input-group">
         			<div class="input-group-prepend">
-        				<input type="text" placeholder="Type here" class="input input-bordered w-full"  id="" name="" />
+        				<input type="text" placeholder="업체명 입력" class="input input-bordered w-full"  id="CT_NAME" name="CT_NAME" />
  					</div>     			
       			</div>
       			<div class="flex justify-between">
@@ -135,13 +138,13 @@ body {
  				</div>     			
       			<div class="input-group">
         			<div class="input-group-prepend2">
-        				<input type="text"  placeholder="Type here" class="input input-bordered w-full"  id="" name=""/>
+        				<input type="text"  placeholder="대표자명을 입력하세요." class="input input-bordered w-full"  id="CT_CEO" name="CT_CEO"/>
  					</div>
  					<div class="input-group-prepend3">
         				<select class="select select-bordered w-full" >
-							<option>협력업체</option>
-							<option>클라이언트</option>
-							<option>거래처</option>
+							<option value="1">협력업체</option>
+							<option value="2">클라이언트</option>
+							<option value="3">거래처</option>
 						 </select>
       				</div>
       			</div>
@@ -149,16 +152,16 @@ body {
 					<label style="font-weight: bold;">전화번호</label>
 						<div class="form-box" style="display:flex;">
 							<div class="input-group-sm">
-								<select style="width: 22%;" name="" id="" class="select select-bordered float-left">
+								<select style="width: 22%;" name="CT_TEL" id="CT_TEL" class="select select-bordered float-left">
 										<option value="">-선택-</option>
 										<option value="010">010</option>
 										<option value="011">011</option>
 										<option value="010">070</option>
 								</select> 
 									<label class="float-left" style="padding: 0; text-align: center;width:5%;">&nbsp;-&nbsp;</label> 
-								<input style="width:34%;" type="text" class="input input-bordered float-left"  id="" name="" /> 
+								<input style="width:34%;" type="text" class="input input-bordered float-left"  id="CT_TEL" name="CT_TEL" /> 
 									<label class="float-left" style="padding: 0; text-align: center;width:5%;">&nbsp;-&nbsp;</label> 
-								<input style="width:34%;" type="text" class="input input-bordered float-right"  id="" name=""/>
+								<input style="width:34%;" type="text" class="input input-bordered float-right"  id="CT_TEL" name="CT_TEL"/>
 								</div>
 							</div>
 						</div>
@@ -166,10 +169,10 @@ body {
 					<label style="font-weight: bold;">이메일</label>
 						<div class="form-box" style="display:flex;">
 							<div class="input-group-sm w-full flex">
-								<input style="width:45%;" type="text" class="input input-bordered float-left"  id="" name="" /> 
+								<input style="width:45%;" type="text" class="input input-bordered float-left"  id="CT_EMAIL" name="CT_EMAIL" /> 
 								<label class="float-left" style="padding: 0; text-align: center;width:10%;">&nbsp;@&nbsp;</label> 
 								<div style="width:45%;">
-									<select name="" id="" class="select select-bordered float-left w-full">
+									<select name="CT_EMAIL" id="CT_EMAIL" class="select select-bordered float-left w-full">
 										<option value="">-선택-</option>
 										<option value="">naver.com</option>
 										<option value="">gmail.com</option>
@@ -183,11 +186,11 @@ body {
 					<label style="font-weight: bold;">팩스번호</label>
 						<div class="form-box" style="display:flex;">
 							<div class="input-group-sm">
-								<input style="width:30%;" type="text" class="input input-bordered float-left"  id="" name=""/> 
+								<input style="width:30%;" type="text" class="input input-bordered float-left"  id="CT_FAX" name="CT_FAX"/> 
 									<label class="float-left" style="padding: 0; text-align: center;width:5%;">&nbsp;-&nbsp;</label> 
-								<input style="width:30%;" type="text" class="input input-bordered float-left"  id="" name=""/> 
+								<input style="width:30%;" type="text" class="input input-bordered float-left"  id="CT_FAX" name="CT_FAX"/> 
 									<label class="float-left" style="padding: 0; text-align: center;width:5%;">&nbsp;-&nbsp;</label> 
-								<input style="width:30%;" type="text" class="input input-bordered float-right" id="" name="" />
+								<input style="width:30%;" type="text" class="input input-bordered float-right" id="CT_FAX" name="CT_FAX" />
 								</div>
 							</div>
 						</div>
@@ -218,23 +221,23 @@ body {
       					<label style="font-weight: bold;">담당자명</label>
       					<div class="input-group">
         					<div class="input-group-prepend">
-        						<input type="text" placeholder="Type here" class="input input-bordered w-full"  id="" name=""/>
+        						<input type="text" placeholder="Type here" class="input input-bordered w-full"  id="CT_MANAGER" name="CT_MANAGER"/>
  							</div>     			
       					</div>
       					<div class="form-group row">
 						<label style="font-weight: bold;">전화번호</label>
 						<div class="form-box" style="display:flex;">
 							<div class="input-group-sm">
-								<select style="width:22%;" name="" id="" class="select select-bordered float-left">
+								<select style="width:22%;" name="CT_MG_TEL" id="CT_MG_TEL" class="select select-bordered float-left">
 										<option value="">-선택-</option>
 										<option value="010">010</option>
 										<option value="011">011</option>
 										<option value="010">070</option>
 								</select> 
 									<label class="float-left" style="padding: 0; text-align: center;width:5%;">&nbsp;-&nbsp;</label> 
-								<input style="width:34%;" type="text" class="input input-bordered float-left"  id="" name=""/> 
+								<input style="width:34%;" type="text" class="input input-bordered float-left"  id="CT_MG_TEL" name="CT_MG_TEL"/> 
 									<label class="float-left" style="padding: 0; text-align: center;width:5%;">&nbsp;-&nbsp;</label> 
-								<input style="width:34%;" type="text" class="input input-bordered float-right"  id="" name=""/>
+								<input style="width:34%;" type="text" class="input input-bordered float-right"  id="CT_MG_TEL" name="CT_MG_TEL"/>
 								</div>
 							</div>
 						</div>
@@ -244,6 +247,7 @@ body {
 			<button type="button" id="cancelBtn" onclick="CloseWindow();" class="btn btn-se"  style="margin-left: 10px;">취 소</button>
 		</div>	
 					</div>
+					</form>
 				</div>
 		</div>
 	</div>
@@ -299,7 +303,9 @@ function sample6_execDaumPostcode() {
 }
 
 function regist_go(){
-	var form = $('form[role="form"]');		
+	var form = $('form[role="form"]');
+	form.attr("action","../contacts/doRegist");
+	alert('등록');
 	form.submit();
 
 }
@@ -309,6 +315,8 @@ function CloseWindow(parentURL){
 	window.opener.location.reload(true);		
 	window.close();
 }
+
+
    </script>
 </body>
 

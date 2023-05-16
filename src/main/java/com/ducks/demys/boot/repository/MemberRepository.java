@@ -24,4 +24,7 @@ public interface MemberRepository {
 	public void modifyForQuitMember(Member member);
 	
 	public void removeMember(int MEMBER_NUM);
+
+	public void doJoin(String MEMBER_ID, String MEMBER_PW, String MEMBER_NAME, String MEMBER_PHONE, String MEMBER_EMAIL,
+			String MEMBER_DEP, int MEMBER_AUTHORITY, int MEMBER_STATUS, String MEMBER_PIC);
 }

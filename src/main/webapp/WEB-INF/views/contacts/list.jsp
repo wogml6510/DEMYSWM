@@ -93,6 +93,11 @@ a:hover{
 	padding-right:20px;
 }
 
+.btn-hover {
+	border:none;
+	background-color:#016FA0;
+}
+
 </style>
 
 <body>
@@ -152,7 +157,7 @@ a:hover{
 			</tr>
 		</thead>
 		<tbody style="">
-		<c:forEach items="${contactsList }" var="contacts" >
+		  <c:forEach items="${contactsList }" var="contacts" >
 			<tr class="hover">
 				<td>${contacts.CT_NUM }</td>
 				<td>${contacts.CT_NAME }</td>
@@ -162,10 +167,42 @@ a:hover{
 				<td>${contacts.CT_ADDR }</td>
 				<td>${contacts.CT_MANAGER }</td>
 				<td>${contacts.CT_MG_TEL }</td>
-				</tr>
-			</c:forEach>
+			</tr>
+		  </c:forEach>
 		</tbody>	 
 	</table>
+</div>
+<div class="page-menu mt-5 flex justify-center" >
+    <div class="pagination d-inline flex" style="text-align:center;">
+        <div class="page-item d-inline-flex" >
+      <a class="btn btn-sm btn-se ${currentPage > 1 ? '' : 'disabled'}" href="?page=${currentPage - 1}" aria-label="Previous">
+        <span aria-hidden="true" >&laquo;</span>
+        <span class="sr-only">Previous</span>
+      </a>
+    </div> 
+
+    <c:forEach begin="1" end="${totalPages}" var="pageNumber">
+      <c:choose>
+        <c:when test="${pageNumber == currentPage}">
+          <div class="page-item active d-inline-flex" aria-current="page">
+            <a class="btn btn-sm btn-hover">${pageNumber}</a>
+          </div>
+        </c:when>
+        <c:otherwise>
+          <div class="page-item d-inline-flex">
+            <a class="btn btn-sm btn-se"  href="?page=${pageNumber}">${pageNumber}</a>
+          </div>
+        </c:otherwise>
+      </c:choose>
+    </c:forEach>
+
+    <div class="page-item d-inline-flex">
+      <a class="btn btn-sm btn-se ${currentPage < totalPages ? '' : 'disabled'}" href="?page=${currentPage + 1}" aria-label="Next">
+        <span aria-hidden="true">&raquo;</span>
+        <span class="sr-only">Next</span>
+      </a>
+    </div>
+  </div>
 </div>
 </div>
 	<script>
@@ -184,6 +221,19 @@ a:hover{
 		window.opener.location.reload(true);		
 		window.close();
 	}
+	
+	 document.addEventListener("DOMContentLoaded", function() {
+		    const paginationButtons = document.querySelectorAll(".pagination .page-item");
+
+		    paginationButtons.forEach(function(button) {
+		      button.addEventListener("click", function() {
+		        paginationButtons.forEach(function(btn) {
+		          btn.classList.remove("active");
+		        });
+		        this.classList.add("active");
+		      });
+		    });
+		  });
  </script>
 		</body>
 		</html>

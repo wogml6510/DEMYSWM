@@ -8,33 +8,39 @@
 		FROM CONTACTS
 		ORDER BY CT_NUM DESC
 	</select>
+	
 	<select id="getContactsListByPJ_NUM" resultType="Contacts">
 		SELECT *
 		FROM CONTACTS
 		WHERE PJ_NUM=#{PJ_NUM}
 		ORDER BY CT_NUM DESC
 	</select>
+	
 	<select id="getContactsByCT_NUM" resultType="Contacts">
 		SELECT *
 		FROM CONTACTS
 		WHERE CT_NUM=#{CT_NUM}
 	</select>
+	
 	<select id="selectContactsSequenceNextValue" resultType="int">
 		SELECT
 		CONTACTS_seq.nextVal
 		FROM DUAL
 	</select>
+	
 	<insert id="registContacts">
 		INSERT INTO
 		CONTACTS(CT_NAME,CT_TEL,CT_CEO,CT_MANAGER,CT_MG_TEL,CT_TYPE,CT_ADDR,CT_EMAIL)
 		VALUES(#{CT_NAME},#{CT_TEL},#{CT_CEO},#{CT_MANAGER},#{CT_MG_TEL},#{CT_TYPE},#{CT_ADDR},#{CT_EMAIL})
 	</insert>
+	
 	<update id="modifyContacts">
 		UPDATE CONTACTS
 		SET
 		CT_NAME=#{CT_NAME},CT_TEL=#{CT_TEL},CT_CEO=#{CT_CEO},CT_MANAGER=#{CT_MANAGER},CT_MG_TEL=#{CT_MG_TEL},CT_TYPE=#{CT_TYPE},CT_ADDR=#{CT_ADDR},CT_EMAIL=#{CT_EMAIL},CT_UPDATEDATE=SYSDATE
 		WHERE CT_NUM=#{CT_NUM}
 	</update>
+	
 	<delete id="removeContacts">
 		DELETE
 		FROM CONTACTS

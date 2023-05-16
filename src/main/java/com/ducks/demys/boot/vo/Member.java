@@ -2,11 +2,15 @@ package com.ducks.demys.boot.vo;
 
 import java.util.Date;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Getter
 @Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class Member {
 	
 	private int MEMBER_NUM;
@@ -22,5 +26,6 @@ public class Member {
 	private int MEMBER_AUTHORITY;
 	private String MEMBER_DEP;
 	private int MEMBER_STATUS;
+	private int MEMBER_POSITION;
 	
 }

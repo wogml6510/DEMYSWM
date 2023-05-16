@@ -138,7 +138,34 @@ a:hover{
                               
                         </ul>
                   </div>
-                  <h3 class="text-black text-right ml-2 mr-1">김미영 팀장</h3>
+                <c:if test="${not empty member.MEMBER_ID}">
+				  <li style="margin: 0 auto;color:black;list-style-type: none;">
+				    <span>
+				      ${member.MEMBER_NAME}
+				      <c:choose>
+				        <c:when test="${member.MEMBER_POSITION eq 1}">
+				          사원
+				        </c:when>
+				        <c:when test="${member.MEMBER_POSITION eq 2}">
+				          선임
+				        </c:when>
+				        <c:when test="${member.MEMBER_POSITION eq 3}">
+				          책임
+				        </c:when>
+				      </c:choose>
+				    </span>
+				  </li>
+				</c:if>
+				
+				<c:if test="${empty member.MEMBER_ID}">
+				  <li>
+				    <a href="/member/login" class="text-black text-right ml-2 mr-1">
+				      <span>로그인</span>
+				    </a>
+				  </li>
+				</c:if>
+
+
                   <div class="dropdown dropdown-end">
                         <label tabindex="0" class="btn btn-top btn-circle avatar">
                               <div class="w-10 rounded-full">
@@ -151,8 +178,8 @@ a:hover{
                                     <a href="#" class="justify-between"> MyPage </a>
                               </li>
                               <li>
-                                    <a href="#">Logout</a>
-                              </li>
+								    <a href="/member/logout" > Logout </a>
+							  </li>
                         </ul>
                   </div>
             </div>

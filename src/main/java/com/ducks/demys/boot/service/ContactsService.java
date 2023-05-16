@@ -17,6 +17,7 @@ public class ContactsService {
 	}
 	
 	public List<Contacts> getContactsList(){
+
 		return contactsRepository.getContactsList();
 	}
 	
@@ -28,9 +29,10 @@ public class ContactsService {
 		return contactsRepository.getContactsByCT_NUM(CT_NUM);
 	}
 	
-	public void registContacts(Contacts contacts) {
+	public Contacts registContacts(Contacts contacts) {
 		contacts.setCT_NUM(contactsRepository.selectContactsSequenceNextValue());
 		contactsRepository.registContacts(contacts);
+		return contacts;
 	}
 	
 	public void modifyContacts(Contacts contacts) {
@@ -40,4 +42,5 @@ public class ContactsService {
 	public void removeContacts(int CT_NUM) {
 		contactsRepository.removeContacts(CT_NUM);
 	}
+
 }

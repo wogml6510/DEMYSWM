@@ -137,7 +137,32 @@
                               
                         </ul>
                   </div>
-                  <h3 class="text-black text-right ml-2 mr-1">김미영 팀장</h3>
+                  <ul>
+                  <c:if test="${!rq.logined}">
+	        <li>
+	          <a href="${rq.joinUri}" class="h-full flex items-center px-3 hover:underline">
+	            <span>회원가입</span>
+	          </a>
+	        </li>
+	      	<li>
+	          <a href="${rq.loginUri}" class="h-full flex items-center px-3 hover:underline">
+	            <span>로그인</span>
+	          </a>
+	        </li>
+        </c:if>
+        <c:if test="${session.logined}">
+        	<li>
+	          <a href="/member/myPage" class="h-full flex items-center px-3 hover:underline">
+	            <span>${member.MEMBER_NICKNAME}'s Profile</span>
+	          </a>
+	        </li>
+        	<li>
+	          <a href="${session.logoutUri}" class="h-full flex items-center px-3 hover:underline">
+	            <span>로그아웃</span>
+	          </a>
+	        </li>
+        </c:if>
+        </ul>
                   <div class="dropdown dropdown-end">
                         <label tabindex="0" class="btn btn-top btn-circle avatar">
                               <div class="w-10 rounded-full">
