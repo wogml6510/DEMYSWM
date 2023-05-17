@@ -3,6 +3,7 @@ package com.ducks.demys.boot.repository;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.springframework.data.repository.query.Param;
 
 import com.ducks.demys.boot.vo.Member;
 
@@ -24,7 +25,15 @@ public interface MemberRepository {
 	public void modifyForQuitMember(Member member);
 	
 	public void removeMember(int MEMBER_NUM);
+	
+	
+	//비밀번호 찾기
 
-	public void doJoin(String MEMBER_ID, String MEMBER_PW, String MEMBER_NAME, String MEMBER_PHONE, String MEMBER_EMAIL,
-			String MEMBER_DEP, int MEMBER_AUTHORITY, int MEMBER_STATUS, String MEMBER_PIC);
+	public Member readMember(String MEMBER_ID);
+    
+    public Member idCheck(String MEMBER_ID);
+  
+    public void modifyPw(Member member);
+
+
 }

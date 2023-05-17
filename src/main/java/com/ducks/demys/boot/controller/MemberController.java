@@ -1,8 +1,13 @@
 package com.ducks.demys.boot.controller;
 
+import javax.mail.MessagingException;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -11,7 +16,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.ducks.demys.boot.service.MemberService;
 import com.ducks.demys.boot.vo.Member;
 
+import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import javax.mail.*;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
+import java.util.Properties;
 
 @Controller
 public class MemberController {
@@ -55,23 +65,32 @@ public class MemberController {
 	    session.removeAttribute("MEMBER_ID");
 	    return "redirect:/member/login";
 	}
-	
-	
-	@RequestMapping("/member/doJoin")
-	@ResponseBody
-	public String doJoin(String MEMBER_ID, String MEMBER_PW, String MEMBER_NAME, String MEMBER_PHONE,String MEMBER_EMAIL, String MEMBER_DEP, int MEMBER_AUTHORITY, int MEMBER_STATUS, String MEMBER_PIC) {
-		memberService.doJoin(MEMBER_ID, MEMBER_PW, MEMBER_NAME, MEMBER_PHONE, MEMBER_EMAIL, MEMBER_DEP,MEMBER_AUTHORITY, MEMBER_STATUS, MEMBER_PIC);
-		return MEMBER_NAME + "님 계정이 등록되었습니다.";
-	}
-
 
 	@RequestMapping("/member/regist")
 	public String showRegist() {
 		return "member/regist";
 	}
 
-	@RequestMapping("/member/findPw")
-	public String showFindPw() {
-		return "member/findPw";
-	}
+    @RequestMapping("/member/findPw")
+    public String findPwGET() {
+        return "member/findPw";
+    }
+  
+    @PostMapping("/member/doFindPw")
+    public String findPwPOST(@ModelAttribute Member member, HttpServletResponse response) {
+        try {
+            memberService.findPw(response, member);
+            return "redirect:/member/sendCode";
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "redirect:/member/findPw";
+        }
+    }
+    
+    @GetMapping("/member/sendCode")
+    public String sendCode() {
+        return "member/sendCode";
+    }
+    
+	
 }

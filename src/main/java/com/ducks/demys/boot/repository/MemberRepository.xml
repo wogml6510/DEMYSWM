@@ -20,16 +20,32 @@
 		WHERE MEMBER_ID=#{MEMBER_ID}
 	</select>
 	
+	<select id="idCheck" parameterType="String" resultType="member">
+		SELECT * 
+		FROM MEMBER 
+		WHERE MEMBER_ID=#{MEMBER_ID}
+	</select>
+	
+	<select id="readMember" parameterType="String" resultType="member">
+		SELECT * 
+		FROM MEMBER 
+		WHERE MEMBER_ID=#{MEMBER_ID}
+	</select>
+	
 	<select id="selectMemberSequenceNextValue" resultType="int">
 		SELECT MEMBER_seq.nextVal
 		FROM DUAL
 	</select>
 	
-	<insert id="doJoin" parameterType="member">
-		INSERT INTO 
-		MEMBER(MEMBER_ID,MEMBER_PW,MEMBER_NAME,MEMBER_PIC,MEMBER_PHONE,MEMBER_EMAIL,MEMBER_AUTHRITY,MEMBER_DEP)
-		VALUES(#{MEMBER_ID},#{MEMBER_PW},#{MEMBER_NAME},#{MEMBER_PIC},#{MEMBER_PHONE},#{MEMBER_EMAIL},#{MEMBER_AUTHRITY},#{MEMBER_DEP})
-	</insert>
+
+	
+	<!-- 비밀번호 변경 -->
+	<update id="modifyPw" >
+		UPDATE MEMBER  
+		SET 
+		MEMBER_PW = #{MEMBER_PW} 
+		WHERE MEMBER_ID = #{MEMBER_ID}
+	</update>
 	
 	<update id="modifyMember" parameterType="member">
 		UPDATE MEMBER 

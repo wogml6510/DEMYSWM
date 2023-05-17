@@ -131,12 +131,29 @@ body {
 		</div>
 	<div class="main">	
 		<div class="main-box">	
+		  <form action="/member/changePassword" method="POST">
 			<div class="main-title"><i class="fa-solid fa-gear"></i></div>
+				<div class="form-group">
+      				<label class="newPw-name">아이디</label>
+      			<div class="input-group">
+        			<div class="input-group-prepend">
+        				<input type="hidden" class="input input-bordered" name="MEMBER_ID" value="${MEMBER_ID}" />
+ 					</div>     			
+      			</div>
+      			</div>
+      			<div class="form-group">
+      				<label class="newPw-name">임시 비밀번호</label>
+      			<div class="input-group">
+        			<div class="input-group-prepend">
+        				<input type="password" placeholder="0글자 영문자,숫자,특수문자 조합" class="input input-bordered"  name="tempPassword"  required/>
+ 					</div>     			
+      			</div>
+      			</div>
 				<div class="form-group">
       				<label class="newPw-name">새 비밀번호</label>
       			<div class="input-group">
         			<div class="input-group-prepend">
-        				<input type="text" placeholder="0글자 영문자,숫자,특수문자 조합" class="input input-bordered"  id="" name="" />
+        				<input type="password" placeholder="0글자 영문자,숫자,특수문자 조합" class="input input-bordered"  name="newPassword" required/>
  					</div>     			
       			</div>
       			</div>
@@ -144,15 +161,16 @@ body {
       			<label class="newPw-name">새 비밀번호 확인</label>
       			<div class="input-group">
         			<div class="input-group-prepend">
-        				<input type="text" placeholder="0글자 영문자,숫자,특수문자 조합" class="input input-bordered"  id="" name="" />
+        				<input type="password" placeholder="0글자 영문자,숫자,특수문자 조합" class="input input-bordered"  name="confirmPassword" required/>
  					</div>     			
       			</div>
       			</div>
 		<div class="card-footer row">						
-			<button type="button" id="findBtn"  onclick="find_go();" class="btn btn-se" style="margin-right: 10px;">확 인</button>
+			<input type="button" class="btn btn-se" style="margin-right: 10px;" value="확인"/>
 			<div class="col-sm-4"></div>
 			<button type="button" id="cancelBtn" onclick="CloseWindow();" class="btn btn-se"  style="margin-left: 10px;">취 소</button>
 		</div>	
+		</form>
 		</div>
 					</div>
 				</div>

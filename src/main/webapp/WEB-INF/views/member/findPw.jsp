@@ -20,8 +20,13 @@
 
 <!-- 사이트 공통 CSS -->
 <link rel="stylesheet" href="/resource/common.css" />
+
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <!-- 사이트 공통 JS -->
 <script src="/resource/common.js" defer="defer"></script>
+
+<script src="http://code.jquery.com/jquery-latest.js"></script>
+
 </head>
 <style>
 
@@ -58,8 +63,8 @@ body {
 	height : 313px;
 }
 .main-title {
-	padding-top : 10px;
-	padding-bottom : 10px;
+	padding-top : 20px;
+	padding-bottom : 20px;
 	text-align : center;
 	font-weight: bold;
 	font-size: 1.3rem;
@@ -128,19 +133,11 @@ body {
 	<div class="main">	
 		<div class="main-box">	
 			<div class="main-title">비밀번호 찾기</div>
-				<div class="form-group">
-      				<label class="findPw-name">이름</label>
-      			<div class="input-group">
-        			<div class="input-group-prepend">
-        				<input type="text" placeholder="뭥미뭥미" class="input input-bordered"  id="" name="" />
- 					</div>     			
-      			</div>
-      			</div>
       			<div class="form-group">
       			<label class="findPw-name">아이디</label>
       			<div class="input-group">
         			<div class="input-group-prepend">
-        				<input type="text" placeholder="anjdal92" class="input input-bordered"  id="" name="" />
+        				<input type="text" placeholder="anjdal92" class="input input-bordered"  id="MEMBER_ID" name="MEMBER_ID" required/>
  					</div>     			
       			</div>
       			</div>
@@ -148,12 +145,12 @@ body {
       			<label class="findPw-name">이메일</label>
       			<div class="input-group">
         			<div class="input-group-prepend">
-        				<input type="text" placeholder="anjdal92@naver.com" class="input input-bordered"  id="" name="" />
+        				<input type="text" placeholder="anjdal92@naver.com" class="input input-bordered"  id="MEMBER_EMAIL" name="MEMBER_EMAIL" required/>
  					</div>     			
       			</div>
 				</div>
 		<div class="card-footer row">						
-			<button type="button" id="findBtn"  onclick="find_go();" class="btn btn-se" style="margin-right: 10px;">확 인</button>
+			<button type="button" id="findBtn" class="btn btn-se" style="margin-right: 10px;" onclick="goToSendCodePage();">찾 기</button>
 			<div class="col-sm-4"></div>
 			<button type="button" id="cancelBtn" onclick="CloseWindow();" class="btn btn-se"  style="margin-left: 10px;">취 소</button>
 		</div>	
@@ -164,17 +161,36 @@ body {
 
 <script>
 
-function find_go(){
-	var form = $('form[role="form"]');		
-	form.submit();
-
-}
-
 function CloseWindow(parentURL){
 	
 	window.opener.location.reload(true);		
 	window.close();
 }
+
+
+$(document).ready(function() {
+	  $("#findBtn").click(function() {
+	    var id = $("#MEMBER_ID").val();
+	    var email = $("#MEMBER_EMAIL").val();
+
+	    $.ajax({
+	      url: "/member/doFindPw",
+	      type: "POST",
+	      data: {
+	        MEMBER_ID: id,
+	        MEMBER_EMAIL: email
+	      },
+	      success: function(response) {
+	        // 이메일 발송 후 sendCode.jsp로 화면 전환
+	        var newWindow = window.open("/member/sendCode", "_self");
+	        newWindow.focus();
+	      },
+	      error: function(xhr, status, error) {
+	        alert("이메일 발송 중 오류가 발생했습니다.");
+	      }
+	    });
+	  });
+	});
    </script>
 </body>
 

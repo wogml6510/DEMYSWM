@@ -134,7 +134,6 @@ a:hover{
  <div class="list-body">
  		<table class="table table-bordered text-center" style="text-align:center;width:100%" >
  		<colgroup>   
-          <col width="50"/>
           <col width="100"/>
           <col width="100"/>
           <col width="100"/>
@@ -146,7 +145,7 @@ a:hover{
         </colgroup>
         <thead>
 			<tr>
-				<th>업체번호</th>
+				<th style="display:none">업체번호</th>
 				<th>업체명</th>
 				<th>대표자명</th>
 				<th>대표번호</th>
@@ -159,7 +158,7 @@ a:hover{
 		<tbody style="">
 		  <c:forEach items="${contactsList }" var="contacts" >
 			<tr class="hover">
-				<td>${contacts.CT_NUM }</td>
+				<td style="display:none">${contacts.CT_NUM }</td>
 				<td>${contacts.CT_NAME }</td>
 				<td>${contacts.CT_CEO }</td>
 				<td>${contacts.CT_TEL }</td>
@@ -172,10 +171,10 @@ a:hover{
 		</tbody>	 
 	</table>
 </div>
-<div class="page-menu mt-5 flex justify-center" >
-    <div class="pagination d-inline flex" style="text-align:center;">
+<div class="page-menu mt-5 flex justify-center">
+    <div class="pagination d-inline flex"  style="font-size:2rem;height:20px;">
         <div class="page-item d-inline-flex" >
-      <a class="btn btn-sm btn-se ${currentPage > 1 ? '' : 'disabled'}" href="?page=${currentPage - 1}" aria-label="Previous">
+      <a class="btn btn-md btn-se ${currentPage > 1 ? '' : 'disabled'}" href="?page=${currentPage - 1}" aria-label="Previous">
         <span aria-hidden="true" >&laquo;</span>
         <span class="sr-only">Previous</span>
       </a>
@@ -185,19 +184,19 @@ a:hover{
       <c:choose>
         <c:when test="${pageNumber == currentPage}">
           <div class="page-item active d-inline-flex" aria-current="page">
-            <a class="btn btn-sm btn-hover">${pageNumber}</a>
+            <a class="btn btn-md btn-hover">${pageNumber}</a>
           </div>
         </c:when>
         <c:otherwise>
           <div class="page-item d-inline-flex">
-            <a class="btn btn-sm btn-se"  href="?page=${pageNumber}">${pageNumber}</a>
+            <a class="btn btn-md btn-se"  href="?page=${pageNumber}">${pageNumber}</a>
           </div>
         </c:otherwise>
       </c:choose>
     </c:forEach>
 
     <div class="page-item d-inline-flex">
-      <a class="btn btn-sm btn-se ${currentPage < totalPages ? '' : 'disabled'}" href="?page=${currentPage + 1}" aria-label="Next">
+      <a class="btn btn-md btn-se ${currentPage < totalPages ? '' : 'disabled'}" href="?page=${currentPage + 1}" aria-label="Next">
         <span aria-hidden="true">&raquo;</span>
         <span class="sr-only">Next</span>
       </a>

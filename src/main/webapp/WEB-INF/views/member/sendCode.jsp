@@ -126,7 +126,7 @@ body {
 				<div class="main-content">입력하신 이메일로 인증번호를 발송하였습니다.</div>
       			<div class="input-group">
         			<div class="input-group-prepend">
-        				<input type="text" placeholder="인증번호 입력" class="input input-bordered"  id="" name="" />
+        				<input type="text" placeholder="인증번호 입력" class="input input-bordered"  id="MEMBER_PW" name="MEMBER_PW" />
         				<button type="button" id="findBtn"  onclick="find_go();" class="btn btn-se" style="margin-right: 10px;">인 증</button>
  					</div>     			
       			</div>

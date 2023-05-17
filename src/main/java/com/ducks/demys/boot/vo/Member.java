@@ -27,5 +27,8 @@ public class Member {
 	private String MEMBER_DEP;
 	private int MEMBER_STATUS;
 	private int MEMBER_POSITION;
+	private String VERTIFICATION_CODE;
+	
+
 	
 }
