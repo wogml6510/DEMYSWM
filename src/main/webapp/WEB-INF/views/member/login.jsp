@@ -174,7 +174,7 @@ html,body{
 	   </div>
       <div>
          <div id="button-group" class="mt-5">
-           <button id="registBtn" class="font-demys" onclick="OpenWindow('regist','계정등록',500,670);">계정등록</button>&nbsp;&nbsp;
+           <button id="registBtn" class="font-demys" onclick="OpenWindow('registCode','인사과코드',400,350);">계정등록</button>&nbsp;&nbsp;
 <!--             <button id="registBtn" class="font-demys" onclick="OpenWindow('sendCode.jsp','인증코드',400,350);">계정등록</button>&nbsp;&nbsp;
           <button id="registBtn" class="font-demys" onclick="OpenWindow('newPw.jsp','새 비밀번호',400,350);">계정등록</button>&nbsp;&nbsp;
           <button id="registBtn" class="font-demys" onclick="OpenWindow('registCode.jsp','인사코드',400,350);">계정등록</button>&nbsp;&nbsp; -->

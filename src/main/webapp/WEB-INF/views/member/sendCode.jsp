@@ -5,7 +5,6 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
 <!-- 제이쿼리 불러오기 -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
@@ -124,12 +123,16 @@ body {
 		<div class="main-box">	
 			<div class="main-title"><i class="fa-regular fa-envelope"></i></div>
 				<div class="main-content">입력하신 이메일로 인증번호를 발송하였습니다.</div>
+				<form action="/member/doSendCode" method="POST" id="verificationForm">
       			<div class="input-group">
         			<div class="input-group-prepend">
-        				<input type="text" placeholder="인증번호 입력" class="input input-bordered"  id="MEMBER_PW" name="MEMBER_PW" />
-        				<button type="button" id="findBtn"  onclick="find_go();" class="btn btn-se" style="margin-right: 10px;">인 증</button>
+        				<input type="hidden" placeholder="인증번호 입력" class="input input-bordered"  id="VERTIFICATION_CODE" name="VERTIFICATION_CODE" value="${VERTIFICATION_CODE }"/>
+            			<input type="hidden" placeholder="아이디" class="input input-bordered"  id="MEMBER_ID" name="MEMBER_ID" value="${MEMBER_ID }"/>
+        				<input type="text" placeholder="인증번호 입력" class="input input-bordered"  id="enteredCode" name="enteredCode" />
+        				<button type="submit" id="findBtn" class="btn btn-se" style="margin-right: 10px;">인 증</button>
  					</div>     			
       			</div>
+      		</form>
       	</div>
 	</div>
 	</div>
@@ -137,12 +140,45 @@ body {
 
 <script>
 
-function find_go(){
-	var form = $('form[role="form"]');		
-	form.submit();
+$(document).ready(function() {
+  $("#findBtn").click(function() {
+    var enteredCode = $("#enteredCode").val();
+    var VERTIFICATION_CODE = $("#VERTIFICATION_CODE").val();
+    var MEMBER_ID = $("#MEMBER_ID").val();
 
-}
+    if (!enteredCode) {
+      alert("임시비밀번호 오류입니다.");
+      $("#enteredCode").val("");
+      return;
+    }
 
+    if (enteredCode === VERTIFICATION_CODE) {
+    	
+      $.ajax({
+        url: "/member/doSendCode",
+        method: "POST",
+        data: {
+          "VERTIFICATION_CODE": VERTIFICATION_CODE,
+          "MEMBER_ID": MEMBER_ID
+        },
+        success: function(data) {
+        	alert("인증에 성공했습니다.");
+        },
+        error: function(error) {
+          alert("유효하지 않은 인증 코드입니다. 다시 입력해주세요.");
+          return;
+        }
+      });
+    } else {
+      alert("인증번호가 일치하지 않습니다.");
+      $("#enteredCode").val("");
+      return;
+    }
+  });
+});
+
+
+	    	
 function CloseWindow(parentURL){
 	
 	window.opener.location.reload(true);		

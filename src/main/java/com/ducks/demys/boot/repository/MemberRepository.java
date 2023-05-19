@@ -32,8 +32,17 @@ public interface MemberRepository {
 	public Member readMember(String MEMBER_ID);
     
     public Member idCheck(String MEMBER_ID);
-  
-    public void modifyPw(Member member);
+
+	public String verifyVerificationCode(String MEMBER_ID, String VERTIFICATION_CODE);
+
+	public void updatePassword(String VERTIFICATION_CODE, String MEMBER_PW);
+
+	public void updateVerificationCode(String MEMBER_ID, String VERTIFICATION_CODE);
+
+	public void save(Member member);
+
+	//인사과 코드 인증
+	public Member findByPassword(String newAuthority, String authority_code);
 
 
 }

@@ -132,19 +132,22 @@ body {
 		</div>
 	<div class="main">	
 		<div class="main-box">	
+		<form action="/member/doRegistCode" method="POST" id="doRegistCode">
 			<div class="main-title"><i class="fa-solid fa-triangle-exclamation"></i></div>
 				<div class="main-content">계정등록을 위해 인사과 코드를 입력해주세요.</div>
       			<div class="input-group">
         			<div class="input-group-prepend">
-        				<input type="password" placeholder="코드를 입력해주세요." class="input input-bordered"  id="" name="" />
+        				<input type="hidden" placeholder="인사과권한" class="input input-bordered"  id="authority_code" name="authority_code" value="1234" />
+        				<input type="password" placeholder="코드를 입력해주세요." class="input input-bordered"  id="newAuthority" name="newAuthority" />
         				
 					</div>	  			
  				</div>   
  					<div class="card-footer row">						
-						<button type="button" id="findBtn"  onclick="find_go();" class="btn btn-se" style="margin-right: 10px;">확 인</button>
+						<button type="submit" id="findBtn"  onclick="registCode_go();" class="btn btn-se" style="margin-right: 10px;">확 인</button>
 					<div class="col-sm-4"></div>
 						<button type="button" id="cancelBtn" onclick="CloseWindow();" class="btn btn-se"  style="margin-left: 10px;">취 소</button>
       			</div>
+      			</form>
       	</div>
 	</div>
 	</div>
@@ -152,11 +155,17 @@ body {
 
 <script>
 
-function find_go(){
-	var form = $('form[role="form"]');		
-	form.submit();
 
-}
+function registCode_go() {
+	  var newAuthority = document.getElementById("newAuthority").value;
+	  var authority_code = document.getElementById("authority_code").value;
+
+	  if (newAuthority === authority_code) {
+	    document.getElementById("doRegistCode").submit(); // 폼 제출
+	  } else {
+	    alert("유효하지 않은 인사과 코드입니다. 다시 입력해주세요.");
+	  }
+	}
 
 function CloseWindow(parentURL){
 	

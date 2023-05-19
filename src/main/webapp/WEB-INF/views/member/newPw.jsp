@@ -5,8 +5,6 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-
 <!-- 제이쿼리 불러오기 -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
@@ -24,6 +22,7 @@
 <link rel="stylesheet" href="/resource/common.css" />
 <!-- 사이트 공통 JS -->
 <script src="/resource/common.js" defer="defer"></script>
+
 </head>
 <style>
 
@@ -73,7 +72,7 @@ body {
 
 .input-bordered {
 	width: 100%;
-	height:40px;
+	height:35px;
 	border : 1px solid #aaaaaa;
 	font-size:0.8rem;
 }
@@ -97,7 +96,7 @@ body {
 	align-items: center;
 }
 .card-footer {
-	padding-top : 25px;
+	padding-top : 10px;
 	margin-top: 0; 
 	border-top: none;
 	display:flex;
@@ -115,11 +114,11 @@ body {
     margin-right:10px;
 }
 .fa-gear {
-	margin :15px auto;
+	margin :10px auto;
 	color : #153A66;
-	font-size:70px;
-	width:100px;
-	height:80px;
+	font-size:60px;
+	width:80px;
+	height:60px;
 }
 </style>
 <body>
@@ -131,29 +130,14 @@ body {
 		</div>
 	<div class="main">	
 		<div class="main-box">	
-		  <form action="/member/changePassword" method="POST">
+			<form action="/member/doNewPw" method="POST" id="updataPw">
 			<div class="main-title"><i class="fa-solid fa-gear"></i></div>
-				<div class="form-group">
-      				<label class="newPw-name">아이디</label>
-      			<div class="input-group">
-        			<div class="input-group-prepend">
-        				<input type="hidden" class="input input-bordered" name="MEMBER_ID" value="${MEMBER_ID}" />
- 					</div>     			
-      			</div>
-      			</div>
-      			<div class="form-group">
-      				<label class="newPw-name">임시 비밀번호</label>
-      			<div class="input-group">
-        			<div class="input-group-prepend">
-        				<input type="password" placeholder="0글자 영문자,숫자,특수문자 조합" class="input input-bordered"  name="tempPassword"  required/>
- 					</div>     			
-      			</div>
-      			</div>
+				<input type="hidden" id="VERTIFICATION_CODE" name="VERTIFICATION_CODE" value="${VERTIFICATION_CODE}">
 				<div class="form-group">
       				<label class="newPw-name">새 비밀번호</label>
       			<div class="input-group">
         			<div class="input-group-prepend">
-        				<input type="password" placeholder="0글자 영문자,숫자,특수문자 조합" class="input input-bordered"  name="newPassword" required/>
+        				<input type="password" class="input input-bordered"  id="newPassword" name="newPassword" required/>
  					</div>     			
       			</div>
       			</div>
@@ -161,13 +145,13 @@ body {
       			<label class="newPw-name">새 비밀번호 확인</label>
       			<div class="input-group">
         			<div class="input-group-prepend">
-        				<input type="password" placeholder="0글자 영문자,숫자,특수문자 조합" class="input input-bordered"  name="confirmPassword" required/>
+        				<input type="password"  class="input input-bordered"  id="confirmPassword" name="confirmPassword" required/>
  					</div>     			
       			</div>
       			</div>
-		<div class="card-footer row">						
-			<input type="button" class="btn btn-se" style="margin-right: 10px;" value="확인"/>
+		<div class="card-footer row">			
 			<div class="col-sm-4"></div>
+			<button type="button" class="btn btn-se" onclick="updateAndClose();">수 정</button>
 			<button type="button" id="cancelBtn" onclick="CloseWindow();" class="btn btn-se"  style="margin-left: 10px;">취 소</button>
 		</div>	
 		</form>
@@ -178,12 +162,35 @@ body {
 
 <script>
 
-function find_go(){
-	var form = $('form[role="form"]');		
-	form.submit();
+function updateAndClose() {
+	  var newPassword = $("#newPassword").val();
+	  var confirmPassword = $("#confirmPassword").val();
+	  var VERTIFICATION_CODE = $("#VERTIFICATION_CODE").val();
 
-}
+	  if (newPassword !== confirmPassword) {
+	    alert("새 비밀번호와 비밀번호 확인이 일치하지 않습니다.");
+	    return;
+	  }
 
+	  $.ajax({
+	    data: {
+	      "newPassword": newPassword,
+	      "confirmPassword": confirmPassword,
+	      "VERTIFICATION_CODE": VERTIFICATION_CODE
+	    },
+	    success: function () {
+	      alert("비밀번호 수정이 완료되었습니다.");
+	      window.close(); 
+	      window.opener.location.reload();
+	      window.opener.location.href = "/member/login"; 
+	    },
+	    error: function () {
+	      alert("비밀번호 수정 중에 오류가 발생했습니다. 다시 시도해주세요.");
+	      return;
+	    }
+	  });
+	}
+	
 function CloseWindow(parentURL){
 	
 	window.opener.location.reload(true);		

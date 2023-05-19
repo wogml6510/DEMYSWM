@@ -58,13 +58,38 @@ public class MemberService {
 	public void removeMember(int MEMBER_NUM) {
 		memberRepository.removeMember(MEMBER_NUM);
 	}
+	
+	public void findPw(HttpServletResponse response, Member member) throws Exception {
+	    response.setContentType("text/html;charset=utf-8");
+	    Member ck = memberRepository.readMember(member.getMEMBER_ID());
+	    PrintWriter out = response.getWriter();
 
+	    if (memberRepository.idCheck(member.getMEMBER_ID()) == null ) {
+	        // 아이디가 존재하지 않는 경우 처리
+	        out.println("<script>");
+	        out.println("alert('아이디가 존재하지 않습니다.');");
+	        out.println("history.go(-1);");
+	        out.println("</script>");
+	    } else if (!member.getMEMBER_EMAIL().equals(ck.getMEMBER_EMAIL())) {
+	        // 이메일이 일치하지 않는 경우 처리
+	        out.println("<script>");
+	        out.println("alert('입력한 이메일이 일치하지 않습니다.');");
+	        out.println("history.go(-1);");
+	        out.println("</script>");
+	    } else {
+	        String verificationCode = generateTemporaryPassword();
+	        member.setVERTIFICATION_CODE(verificationCode);
+
+	        memberRepository.updateVerificationCode(member.getMEMBER_ID(), verificationCode);
+	        sendEmail(member, "findPw");
+	    }
+	}
 	//이메일발송
 	public void sendEmail(Member member, String div) throws MessagingException {
         String host = "smtp.naver.com";
         int port = 587;
-        String username = "dnjsal7461";
-        String password = "wjsrl6360!!";
+        String username = "본인 아이디";
+        String password = "본인 비밀번호";
         String fromEmail = "dnjsal7461@naver.com";
         String fromName = "DEMYS";
         String subject = "";
@@ -74,7 +99,7 @@ public class MemberService {
             subject = "DEMYS 임시 비밀번호";
             message = "안녕하세요. " + member.getMEMBER_ID() + ",\n\n"
                     + "We have generated a temporary password for your account. Please use the following password to log in:\n\n"
-                    + "Temporary Password: " + member.getMEMBER_PW() + "\n\n"
+                    + "Temporary Password: " + member.getVERTIFICATION_CODE() + "\n\n"
                     + "Please remember to change your password after logging in.\n\n"
                     + "Best regards,\n"
                     + "Your Company";
@@ -107,35 +132,8 @@ public class MemberService {
     }
 
 
-	public void findPw(HttpServletResponse response, Member member) throws Exception {
-	    response.setContentType("text/html;charset=utf-8");
-	    Member ck = memberRepository.readMember(member.getMEMBER_ID());
-	    PrintWriter out = response.getWriter();
-
-	    if (memberRepository.idCheck(member.getMEMBER_ID()) == null) {
-	        out.print("등록되지 않은 아이디입니다.");
-	        out.close();
-	    } else if (!member.getMEMBER_EMAIL().equals(ck.getMEMBER_EMAIL())) {
-	        out.print("등록되지 않은 이메일입니다.");
-	        out.close();
-	    } else {
-	        String MEMBER_PW = generateTemporaryPassword();
-	        member.setMEMBER_PW(MEMBER_PW);
-
-	        memberRepository.modifyPw(member);
-
-	        try {
-	            sendEmail(member, "findPw");
-	            out.print("이메일로 임시 비밀번호를 발송하였습니다.");
-	            out.close();
-	        } catch (Exception e) {
-	            e.printStackTrace();
-	            throw new Exception("이메일 발송에 실패하였습니다.");
-	        }
-	    }
-	}
-
-
+	
+	//임시 비밀번호 생성
 	private String generateTemporaryPassword() {
 	    StringBuilder password = new StringBuilder();
 	    String characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
@@ -148,4 +146,28 @@ public class MemberService {
 
 	    return password.toString();
 	}
+	
+	// 임시 비밀번호 검증
+	 public boolean verifyVerificationCode(String MEMBER_ID, String VERTIFICATION_CODE) {
+		if(VERTIFICATION_CODE == null || VERTIFICATION_CODE.isEmpty()) {
+			return false;
+		}
+		String code = memberRepository.verifyVerificationCode(MEMBER_ID, VERTIFICATION_CODE);
+        if (code != null) {
+            return true;
+        }
+        return false;
+    }
+
+	 
+	 public void updatePassword(String VERTIFICATION_CODE, String MEMBER_PW) {
+		    memberRepository.updatePassword(VERTIFICATION_CODE, MEMBER_PW);
+		}
+
+	public Member findByPassword(String newAuthority, String authority_code) {
+		return memberRepository.findByPassword(newAuthority, authority_code);
+	}
+	
+	
+	
 }

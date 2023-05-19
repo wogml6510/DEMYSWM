@@ -130,6 +130,7 @@ body {
 				<div class="navbar-logo">DEMYS PMS</div>
 			</div>	
 		</div>
+		<form action="/member/doFindPw" method="post">
 	<div class="main">	
 		<div class="main-box">	
 			<div class="main-title">비밀번호 찾기</div>
@@ -137,7 +138,7 @@ body {
       			<label class="findPw-name">아이디</label>
       			<div class="input-group">
         			<div class="input-group-prepend">
-        				<input type="text" placeholder="anjdal92" class="input input-bordered"  id="MEMBER_ID" name="MEMBER_ID" required/>
+        				<input type="text" placeholder="anjdal92" class="input input-bordered" onkeyup="checkReg(event)" id="MEMBER_ID" name="MEMBER_ID" required  />
  					</div>     			
       			</div>
       			</div>
@@ -145,17 +146,18 @@ body {
       			<label class="findPw-name">이메일</label>
       			<div class="input-group">
         			<div class="input-group-prepend">
-        				<input type="text" placeholder="anjdal92@naver.com" class="input input-bordered"  id="MEMBER_EMAIL" name="MEMBER_EMAIL" required/>
+        				<input type="text" placeholder="anjdal92@naver.com" class="input input-bordered" onkeyup="checkReg(event)" id="MEMBER_EMAIL" name="MEMBER_EMAIL" required />
  					</div>     			
       			</div>
 				</div>
 		<div class="card-footer row">						
-			<button type="button" id="findBtn" class="btn btn-se" style="margin-right: 10px;" onclick="goToSendCodePage();">찾 기</button>
+			<button type="submit" id="findBtn" class="btn btn-se" style="margin-right: 10px;" onclick="sendVerificationCode();">찾 기</button>
 			<div class="col-sm-4"></div>
 			<button type="button" id="cancelBtn" onclick="CloseWindow();" class="btn btn-se"  style="margin-left: 10px;">취 소</button>
 		</div>	
 		</div>
 					</div>
+					</form>
 				</div>
 
 
@@ -167,30 +169,72 @@ function CloseWindow(parentURL){
 	window.close();
 }
 
+function checkReg(event) {
+	  const regExp = /[^0-9a-zA-Z!@#$%^&*(),.?":{}|<>]/g;
+	  const del = event.target;
+	  if (regExp.test(del.value)) {
+	    del.value = del.value.replace(regExp, '');
+	  }
+	};
 
-$(document).ready(function() {
-	  $("#findBtn").click(function() {
-	    var id = $("#MEMBER_ID").val();
-	    var email = $("#MEMBER_EMAIL").val();
+function sendVerificationCode() {
+	  var MEMBER_ID = $("#MEMBER_ID").val();
+	  var MEMBER_EMAIL = $("#MEMBER_EMAIL").val();
 
-	    $.ajax({
-	      url: "/member/doFindPw",
-	      type: "POST",
-	      data: {
-	        MEMBER_ID: id,
-	        MEMBER_EMAIL: email
-	      },
-	      success: function(response) {
-	        // 이메일 발송 후 sendCode.jsp로 화면 전환
-	        var newWindow = window.open("/member/sendCode", "_self");
-	        newWindow.focus();
-	      },
-	      error: function(xhr, status, error) {
-	        alert("이메일 발송 중 오류가 발생했습니다.");
+	  if (!MEMBER_ID && !MEMBER_EMAIL) {
+	    alert("아이디와 이메일을 입력해주세요.");
+	    return;
+	  }
+
+	  if (!MEMBER_ID) {
+	    alert("아이디를 입력해주세요.");
+	    return;
+	    $("#MEMBER_ID").val("");
+	  }
+
+	  if (!MEMBER_EMAIL) {
+		    alert("이메일을 입력해주세요.");
+		    return;
+		    $("#MEMBER_EMAIL").val("");
+		}
+
+		// 이메일 형식 검증 (정규식 사용)
+		var emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+		if (!emailRegex.test(MEMBER_EMAIL)) {
+		    alert("유효한 이메일 형식으로 입력해주세요.");
+		    $("#MEMBER_EMAIL").val("");
+		    return;
+		}
+		data: {
+	 	   "member_ID": MEMBER_ID,
+	   	   "member_EMAIL": MEMBER_EMAIL
+	    }
+	  // 아이디와 이메일이 DB에 저장된 값인지 확인하는 AJAX 요청
+	  $.ajax({
+	    url: "/member/doFindPw",
+	    type: "POST",
+	    data:JSON.stringify(data),
+		contentType:"application/json",
+	    success: function(data) {
+	      if (data === "success") {
+
+	        alert("인증번호를 이메일로 보냈습니다.");
+
+	      } else {
+	        alert("아이디와 이메일이 일치하지 않습니다.");
+	        return;
+	        
 	      }
-	    });
+	    },
+	    error: function(error) {
+	      alert("AJAX 요청 중 오류가 발생했습니다.");
+	      $("#MEMBER_ID").val("");
+	      $("#MEMBER_EMAIL").val("");
+	    }
 	  });
-	});
+	}
+	
+
    </script>
 </body>
 
