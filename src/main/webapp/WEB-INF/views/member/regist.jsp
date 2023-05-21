@@ -252,10 +252,21 @@ function regist_go(){
 	}
 	
 	var form = $('form[role="form"]');
-	form.attr("action","/member/registMember");
+	form.attr("post","/member/registMember");
 	form.submit();
-}
+	var successMessage = "${successMessage}"; // 계정 등록 성공 메시지
+    var errorMessage = "${errorMessage}";     // 계정 등록 실패 메시지
 
+    if (successMessage) {
+        alert(successMessage); // 계정 등록 성공 메시지 알림창 표시
+        window.close();        // 오픈 윈도우 닫기
+        window.location.href = "/member/login"; // 로그인 화면으로 이동
+    }
+    if (errorMessage) {
+        alert(errorMessage);   // 계정 등록 실패 메시지 알림창 표시
+    }
+}
+	
 	
 function upload_go(){
 	if(!$('input[name="pictureFile"]').val()){
@@ -466,6 +477,11 @@ function upload_go(){
 		    $('#inputAuthority').removeClass('is-invalid');
 		  }
 		}
+	
+	var successMessage = "${successMessage}"; // successMessage 값을 JavaScript 변수에 할당
+	  if (successMessage) {
+	    alert(successMessage); // 알림창으로 메시지 표시
+	  }
 
 	function CloseWindow(parentURL){
 		

@@ -132,7 +132,7 @@ body {
 		</div>
 	<div class="main">	
 		<div class="main-box">	
-		<form action="doRegistCode" method="POST" id="doRegistCode">
+		<form action="doRegistCode" method="post" id="doRegistCode">
 			<div class="main-title"><i class="fa-solid fa-triangle-exclamation"></i></div>
 				<div class="main-content">계정등록을 위해 인사과 코드를 입력해주세요.</div>
       			<div class="input-group">

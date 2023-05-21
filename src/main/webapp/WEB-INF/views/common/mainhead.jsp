@@ -169,7 +169,7 @@ a:hover{
                   <div class="dropdown dropdown-end">
                         <label tabindex="0" class="btn btn-top btn-circle avatar">
                               <div class="w-10 rounded-full">
-                                    <img src="/resource/img/imja.jpg" />
+                                    <div class="manPicture " data-id="${member.MEMBER_ID }" style="width:40px;height:40px;display:block;margin:0 auto;"></div>
                               </div>
                         </label>
                         <ul tabindex="0" class="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
@@ -217,3 +217,22 @@ a:hover{
                   </ul>
             </div>
       </div>
+      
+<%--       <script>
+      	window.onload=function(){
+    	  	MemberPictureThumb('<%=request.getContextPath()%>');
+    	  }
+      
+
+      	function MemberPictureThumb(contextPath){
+      		   for(var target of document.querySelectorAll('.manPicture')){   
+      		      var id = target.getAttribute('data-id');
+      		      
+      		      target.style.backgroundImage="url('/common/mainhead/getPicture?MEMBER_ID="+MEMBER_ID+"')";            
+      		      target.style.backgroundPosition="center";
+      		      target.style.backgroundRepeat="no-repeat";
+      		      target.style.backgroundSize="cover";
+      		   }
+      		}
+      </script>
+ --%>

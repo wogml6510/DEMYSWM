@@ -5,18 +5,16 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Date;
-import java.util.UUID;
 
 import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
@@ -92,39 +90,31 @@ public class MemberController {
 	}
 
 	// 계정등록
-	@GetMapping("/member/regist")
+	@RequestMapping("/member/regist")
 	public String showRegist() {
 		return "member/regist";
 	}
 
-	
 	// 계정 등록 처리
-	@PostMapping("/member/registMember")
-	public String registMember(Member member, Model model) {
-		memberService.registMember(member);
+	@RequestMapping(value="/member/registMember", method = {RequestMethod.GET, RequestMethod.POST})
+	@ResponseBody
+	public String registMember(@RequestParam("MEMBER_POSITION") int MEMBER_POSITION,
+	                                       @RequestParam("MEMBER_AUTHORITY") int MEMBER_AUTHORITY, Member member) {
 		
-		/*
-		 * model.addAttribute(member.getMEMBER_NUM());
-		 * model.addAttribute(member.getMEMBER_PIC());
-		 * model.addAttribute(member.getMEMBER_ID());
-		 * model.addAttribute(member.getMEMBER_PW());
-		 * model.addAttribute(member.getMEMBER_NAME());
-		 * model.addAttribute(member.getMEMBER_PHONE());
-		 * model.addAttribute(member.getMEMBER_EMAIL());
-		 * model.addAttribute(member.getREGDATE());
-		 * model.addAttribute(member.getMEMBER_AUTHORITY());
-		 * model.addAttribute(member.getMEMBER_POSITION());
-		 * model.addAttribute(member.getMEMBER_DEP());
-		 */
-
-		model.addAttribute("successMassage", "계정 등록이 완료되었습니다.");
-		return "/member/login";
-	}
-
+			member.setREGDATE(new Date());
+			member.setMEMBER_POSITION(MEMBER_POSITION);
+	        member.setMEMBER_AUTHORITY(MEMBER_AUTHORITY);
+	        memberService.registMember(member);
+	        
+	        String script = "<script>alert('계정 등록이 완료되었습니다.');window.close(); window.opener.location.href='/member/login';</script>";
+	        return script;
+	        
+	} 
+	
 	@Value("${picturePath}")
 	private String picturePath;
 
-	@PostMapping(value = "/member/picture", produces = "text/plain;charset=utf-8")
+	@RequestMapping(value = "/member/picture", produces = "text/plain;charset=utf-8")
 	@ResponseBody
 	public String pictureUpload(@RequestParam("pictureFile") MultipartFile multi, String oldPicture) throws Exception {
 		String result = "";
