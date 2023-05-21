@@ -1,17 +1,29 @@
 package com.ducks.demys.boot.controller;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.util.Date;
+import java.util.UUID;
 
+import org.apache.commons.io.IOUtils;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.StringUtils;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.ducks.demys.boot.service.MemberService;
+import com.ducks.demys.boot.utils.MakeFileName;
 import com.ducks.demys.boot.vo.Member;
 
 import jakarta.servlet.http.HttpServletResponse;
@@ -28,8 +40,7 @@ public class MemberController {
 
 	// 로그인
 	@RequestMapping("/member/login")
-	public String showLogin() {
-		return "member/login";
+	public void showLogin() {
 	}
 
 	@RequestMapping("/member/doLogin")
@@ -38,7 +49,7 @@ public class MemberController {
 
 		if (MEMBER_ID.isEmpty() || MEMBER_PW.isEmpty()) {
 			model.addAttribute("error", "Please try login again");
-			return "member/login";
+			return "redirect:/member/login";
 		}
 
 		Member member = memberService.getMemberByMEMBER_ID(MEMBER_ID);
@@ -64,28 +75,116 @@ public class MemberController {
 	}
 
 	// 계정등록시 인사코드 확인
-	@RequestMapping("/member/registCode")
+	@GetMapping("/member/registCode")
 	public String showRegistCode() {
 		return "member/registCode";
 	}
 
 	@PostMapping("/member/doRegistCode")
-	public String doRegistCode(@RequestParam("newAuthority") String newAuthority, 
-	                           @RequestParam("authority_code") String authority_code, 
-	                           Model model) {
-		if (!newAuthority.equals("1234")) {
+	public String doRegistCode(@RequestParam("newAuthority") String newAuthority,
+			@RequestParam("authority_code") String authority_code, Model model) {
 
+		if (!newAuthority.equals(authority_code)) {
 			return "member/registCode";
-		}else {
-			return "member/regist";
 		}
-		
+
+		return "redirect:/member/regist";
 	}
 
 	// 계정등록
-	@RequestMapping("/member/regist")
+	@GetMapping("/member/regist")
 	public String showRegist() {
 		return "member/regist";
+	}
+
+	
+	// 계정 등록 처리
+	@PostMapping("/member/registMember")
+	public String registMember(Member member, Model model) {
+		memberService.registMember(member);
+		
+		/*
+		 * model.addAttribute(member.getMEMBER_NUM());
+		 * model.addAttribute(member.getMEMBER_PIC());
+		 * model.addAttribute(member.getMEMBER_ID());
+		 * model.addAttribute(member.getMEMBER_PW());
+		 * model.addAttribute(member.getMEMBER_NAME());
+		 * model.addAttribute(member.getMEMBER_PHONE());
+		 * model.addAttribute(member.getMEMBER_EMAIL());
+		 * model.addAttribute(member.getREGDATE());
+		 * model.addAttribute(member.getMEMBER_AUTHORITY());
+		 * model.addAttribute(member.getMEMBER_POSITION());
+		 * model.addAttribute(member.getMEMBER_DEP());
+		 */
+
+		model.addAttribute("successMassage", "계정 등록이 완료되었습니다.");
+		return "/member/login";
+	}
+
+	@Value("${picturePath}")
+	private String picturePath;
+
+	@PostMapping(value = "/member/picture", produces = "text/plain;charset=utf-8")
+	@ResponseBody
+	public String pictureUpload(@RequestParam("pictureFile") MultipartFile multi, String oldPicture) throws Exception {
+		String result = "";
+
+		/* 파일 저장 확인 */
+		result = savePicture(oldPicture, multi);
+
+		return result;
+	}
+
+	public String savePicture(String oldPicture, MultipartFile multi) throws Exception {
+		String fileName = "";
+
+		/* 파일 저장 폴더 설정 */
+		String uploadPath = this.picturePath;
+
+		/* 파일 유무 확인 */
+		if (!(multi == null || multi.isEmpty() || multi.getSize() > 1024 * 1024 * 1)) {
+			fileName = MakeFileName.toUUIDFileName(multi.getOriginalFilename(), "$$");
+			File storeFile = new File(uploadPath, fileName);
+
+			// local HDD에 저장
+			multi.transferTo(storeFile);
+		}
+
+		// 기존 파일 삭제
+		if (oldPicture != null && !oldPicture.isEmpty()) {
+			File oldFile = new File(uploadPath, oldPicture);
+			if (oldFile.exists()) {
+				oldFile.delete();
+			}
+		}
+
+		return fileName;
+	}
+
+	@GetMapping("/member/getPicture")
+	@ResponseBody
+	public byte[] getPicture(String MEMBER_ID) throws Exception {
+		Member member = memberService.getMemberByMEMBER_ID(MEMBER_ID);
+		if (member == null)
+			return null;
+
+		String picture = member.getMEMBER_PIC();
+		String imgPath = this.picturePath;
+
+		InputStream in = new FileInputStream(new File(imgPath, picture));
+
+		return IOUtils.toByteArray(in);
+	}
+
+	@GetMapping("/member/idCheck")
+	public ResponseEntity<String> idCheck(String MEMBER_ID) {
+		Member member = memberService.getMemberByMEMBER_ID(MEMBER_ID);
+
+		if (member != null) {
+			return ResponseEntity.ok("DUPLICATED");
+		} else {
+			return ResponseEntity.ok("AVAILABLE");
+		}
 	}
 
 	// 비밀번호 찾기(아이디,메일)
@@ -129,9 +228,8 @@ public class MemberController {
 
 	// 새 비밀번호 설정
 	@RequestMapping("/member/newPw")
-	public String newPw(@RequestParam("VERTIFICATION_CODE") String VERTIFICATION_CODE, Model model) {
+	public void newPw(@RequestParam("VERTIFICATION_CODE") String VERTIFICATION_CODE, Model model) {
 		model.addAttribute("VERTIFICATION_CODE", VERTIFICATION_CODE);
-		return "member/newPw";
 	}
 
 	@PostMapping("/member/doNewPw")

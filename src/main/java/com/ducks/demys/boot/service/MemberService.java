@@ -167,7 +167,5 @@ public class MemberService {
 	public Member findByPassword(String newAuthority, String authority_code) {
 		return memberRepository.findByPassword(newAuthority, authority_code);
 	}
-	
-	
-	
+
 }

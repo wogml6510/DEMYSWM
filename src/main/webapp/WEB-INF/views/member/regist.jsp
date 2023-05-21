@@ -44,7 +44,7 @@ body {
 }
 
 .register-card-body {
-	height : 638px;
+	height : 639px;
 	border : 4.5px solid #153A66;
 }
 .input-group {
@@ -109,11 +109,10 @@ body {
 				<div class="navbar-logo">DEMYS PMS</div>
 			</div>	
 		</div>
-	<!-- form start -->
-			<div class="card">
+				<div class="card">
 				<div class="register-card-body">
-					<form role="form" class="form-horizontal" action="regist" method="post">
-						<input type="hidden" name="picture" value="noImage.jpg" />
+					<form role="form" class="form-horizontal" action="/member/registMember" method="post">
+						<input type="hidden" name="MEMBER_PIC" value="noImage.jpg" accept="image/*" />
 						<div class="input-group mb-3">
 							<div class="mailbox-attachments clearfix" style="text-align: center;">
 								<div class="mailbox-attachment-icon has-img" id="pictureView"></div>
@@ -130,10 +129,10 @@ body {
 							<br />
 						</div>
 						<div class="form-group" style="display:flex;">
-      						<label class="label-box">아이디</label>
+      						<label for="inputId" class="label-box">아이디</label>
 							<div class="input-group2 input-group-sm" style="width:75.5%;">
-								<input name="id" onkeyup="this.value=this.value.replace(/[\ㄱ-ㅎㅏ-ㅣ가-힣]/g, &#39;&#39;);" type="text" class="form-control" id="id"
-									placeholder="   13글자 영문자,숫자 조합" style="width:74.5%;margin-left:auto;"> 
+								<input name="MEMBER_ID" onkeyup="this.value=this.value.replace(/[\ㄱ-ㅎㅏ-ㅣ가-힣]/g, &#39;&#39;);" type="text" class="form-control" id="inputId"
+									onkeyPress="id_check_onKey();" placeholder="   13글자 영문자,숫자 조합" maxlength ="20" style="width:74.5%;margin-left:auto;"> 
 									<span class="input-group-append-sm">
 									<button type="button" onclick="idCheck_go();" class="btn btn-se btn-sm btn-append">중복확인</button>
 								</span>
@@ -142,43 +141,43 @@ body {
 						<div class="form-group" style="display:flex;">
       						<label class="label-box">비밀번호</label>
 							<div class="input-group2 input-group-sm" style="width:75%;">
-								<input name="pw"  type="password" class="form-control" id="pw"
-									 placeholder="   20글자 영문자,숫자,특수문자 조합" style="width:100%;"> 
+								<input name="MEMBER_PW"  type="password" class="form-control" id="inputPassword"
+									 placeholder="   20글자 영문자,숫자,특수문자 조합" maxlength ="20" onchange="javascript:pw_length_check()" style="width:100%;"> 
 							</div>
 						</div>
 						<div class="form-group" style="display:flex;">
       						<label class="label-box">비밀번호 확인</label>
 							<div class="input-group2 input-group-sm" style="width:75%;">
-								<input name="pw"  type="password" class="form-control" id="pw"
+								<input name="MEMBER_PWCK"  type="password" class="form-control" id="inputPasswordCK" maxlength="20" onchange="javascript:pw_check()"
 									 placeholder="   비밀번호 확인" style="width:100%;"> 
 							</div>
 						</div>
 						<div class="form-group" style="display:flex;">
       						<label class="label-box">이름</label>
 							<div class="input-group2 input-group-sm" style="width:75%;">
-								<input name="name"  type="text" class="form-control" id="name"
-									 placeholder="   이름" style="width:100%;"> 
+								<input name="MEMBER_NAME"  type="text" class="form-control" id="inputName" maxlength="6" onchange="name_check()"
+									 placeholder="   이름" style="width:100%;">
 							</div>
 						</div>
 						<div class="form-group" style="display:flex;">
       						<label class="label-box">휴대폰 번호</label>
 							<div class="input-group2 input-group-sm" style="width:75%;">
-								<input name="phone"  type="text" class="form-control" id="phone"
-									 placeholder="   '-'없이 입력해주세요." style="width:100%;"> 
+								<input name="MEMBER_PHONE"  type="text" class="form-control" id="inputPhone" maxlength="11" onchange="phone_check()" onkeyup="this.value = this.value.replace(/[^\d]/g, '')"
+									 placeholder="   '-'없이 입력해주세요." style="width:100%;">
 							</div>
 						</div>
 						<div class="form-group" style="display:flex;">
       						<label class="label-box">이메일</label>
 							<div class="input-group2 input-group-sm" style="width:75%;">
-								<input name="email"  type="text" class="form-control" id="email"
-									 placeholder="   이메일을 입력해주세요." style="width:100%;"> 
+								<input name="MEMBER_EMAIL" type="text" onkeyup="this.value=this.value.replace(/[\ㄱ-ㅎㅏ-ㅣ가-힣]/g, &#39;&#39;);" class="form-control" id="inputEmail" onchange="email_check()"
+									 placeholder="   이메일을 입력해주세요." style="width:100%;">
 							</div>
 						</div>
 						<div class="form-group" style="display:flex;">
       						<label class="label-box">소속부서</label>
 							<div class="input-group2 input-group-sm" style="width:75%;">
-								<select class="select form-control select-sm w-full">
-									<option disabled selected>전체</option>
+								<select class="select form-control select-sm w-full" id="inputDep" name="MEMBER_DEP">
+									<option disabled selected value="">전체</option>
 									<option>개발1팀</option>
 									<option>개발2팀</option>
 									<option>인사팀</option>
@@ -188,28 +187,28 @@ body {
 						<div class="form-group" style="display:flex;">
       						<label class="label-box">직책</label>
 							<div class="input-group2 input-group-sm" style="width:75%;">
-								<select class="select form-control select-sm w-full">
-									<option disabled selected>전체</option>
-									<option>팀원</option>
-									<option>팀장</option>
+								<select class="select form-control select-sm w-full" id="inputPosition" name="MEMBER_POSITION" onchange="position_check()">
+									<option disabled selected value="">전체</option>
+									<option value=1>팀원</option>
+									<option value=2>팀장</option>
 								 </select>
 							</div>
 						</div>
 						<div class="form-group" style="display:flex;">
       						<label class="label-box">직급</label>
 							<div class="input-group2 input-group-sm" style="width:75%;">
-								<select class="select form-control select-sm w-full">
+								<select class="select form-control select-sm w-full" id="inputAuthority" name="MEMBER_AUTHORITY" onchange="authority_check()">
 									<option disabled selected>전체</option>
-									<option>사원</option>
-									<option>선임</option>
-									<option>책임</option>
+									<option value=1>사원</option>
+									<option value=2>선임</option>
+									<option value=3>책임</option>
 								 </select>
 							</div>
 						</div>
 						<div class="card-footer" style="">
 							<div class="row" style="display:flex;flex-direction:row;justify-content:center;margin-top:35px;">
 								<div class="" style="margin-right:10px;">
-									<button type="button" id="registBtn" onclick="regist_go();" class="btn btn-se">등&nbsp;&nbsp;록</button>
+									<button type="submit" id="registBtn" onclick="regist_go();" class="btn btn-se">등&nbsp;&nbsp;록</button>
 								</div>
 								<div class="" style="margin-left:10px;">
 									<button type="button" id="cancelBtn" onclick="CloseWindow();" class="btn btn-se">취&nbsp;&nbsp;소</button>
@@ -224,66 +223,188 @@ body {
 
 	<!-- /.content -->
 
-<!-- /.content-wrapper -->
 <!-- picture upload form  -->
-<form role="imageForm" action="picture.do" method="post" enctype="multipart/form-data">
+<form role="imageForm" action="MEMBER_PIC" method="post" enctype="multipart/form-data">
 	<input id="inputFile" name="pictureFile" type="file" class="form-control" style="display:none;" onchange="picture_go();">
 	<input id="oldFile" type="hidden" name="oldPicture" value="test" />
 	<input type="hidden" name="checkUpload" value="0" />	
 </form>
 
 <script>	
-	function regist_go(){
-		//alert("regist btn");
-		
-		var uploadCheck = $('input[name="checkUpload"]').val();  	
-		if(uploadCheck=='0'){
-		    alert("사진업로드는 필수 입니다");      
-		    return;
+
+function regist_go(){
+	//alert("regist btn");
+	
+	var uploadCheck = $('input[name="checkUpload"]').val();  	
+	if(uploadCheck=='0'){
+	    alert("사진업로드는 필수 입니다");      
+	    return;
+	}
+	
+	if(!$('input[name="MEMBER_ID"]').val()){
+	    alert("아이디는 필수입니다.");
+	    return;
+	}
+	if($('input[name="MEMBER_ID"]').val()!=checkedID){
+	    alert("아이디는 중복 확인이 필요합니다.");
+	    $('input[name="MEMBER_ID"]').focus();
+	    return;
+	}
+	
+	var form = $('form[role="form"]');
+	form.attr("action","/member/registMember");
+	form.submit();
+}
+
+	
+function upload_go(){
+	if(!$('input[name="pictureFile"]').val()){
+	    alert("사진을 선택하세요.");
+	    $('input[name="pictureFile"]').click();
+	    return;
+	 }  
+	
+	if($('input[name="checkUpload"]').val()==1){
+		alert("이미 업로드된 사진입니다.");
+		return;
+	}
+	
+	 var formData = new FormData($('form[role="imageForm"]')[0]);
+	 
+	 $.ajax({
+			url:"picture",
+			data:formData,
+			type:"post",
+		    processData:false,
+	        contentType:false,
+	        success:function(data){
+	        	//업로드 확인변수 세팅
+	            $('input[name="checkUpload"]').val(1);
+	            //저장된 파일명 저장.
+	            $('input#oldFile').val(data); // 변경시 삭제될 파일명	          
+	            $('form[role="form"]  input[name="MEMBER_PIC"]').val(data);	    	  
+	      	 	alert("사진이 업로드 되었습니다.");
+	        },
+	        error:function(error){
+	        	alert("업로드를 실패했습니다.");
+	        }
+	 });
+			
+}
+	
+	function id_check_onkey() {
+		if($('input[name="MEMBER_ID"]').val()!= checkedID) {
+		   $('input[name="MEMBER_ID"]').addClass('is-invalid');
 		}
-		
-		if(!$('input[name="id"]').val()){
-		    alert("아이디는 필수입니다.");
-		    return;
-		}
-		if($('input[name="id"]').val()!=checkedID){
-		    alert("아이디는 중복 확인이 필요합니다.");
-		    return;
-		}
-		
-		var form = $('form[role="form"]');
-		form.attr("action","regist.do");
-		form.submit();
 	}
 	
 	var checkedID ="";	
 	function idCheck_go(){
-		//alert("id check");
-		var id=$('input[name="id"]');
-		//alert(id);
+		var MEMBER_ID=$('input[name="MEMBER_ID"]');
 		
-		if(!id.val()){
-		  alert("아이디를 입력하시오");
-		  id.focus();
+		if(!MEMBER_ID.val()){
+		  alert("아이디를 입력해주세요.");
+		  MEMBER_ID.focus();
 		  return;
-		}
-		
+	}
 		$.ajax({
-			url:"idCheck.do",
+			url:"/member/idCheck",
 			method:"get",
-			data:"id="+id.val().trim(),
+			contentType: 'application/json',
+			data:"MEMBER_ID="+MEMBER_ID.val().trim(),
 			success:function(data){
 			 	if(data.toUpperCase() == "DUPLICATED"){
 			 		alert("중복된 아이디 입니다."); 
 				}else{
 				    alert("사용가능한 아이디 입니다.");
-				    checkedID=id.val().trim();
+					checkedID=MEMBER_ID.val().trim();
 				}
 			},
 			error:function(error){
 				alert(error.status);
 			}
 		});
+	}
+	
+	function pw_length_check() {
+		  var MEMBER_PW = $('#inputPassword').val().trim();
+		  if (MEMBER_PW.length < 8 || MEMBER_PW.length > 20) {
+		    alert("8글자 이상 20글자 이하입니다.");
+		    $('#inputPassword').focus();
+		    $('#inputPassword').addClass('is-invalid');
+		    return false;
+		  } else {
+		    $('#inputPassword').removeClass('is-invalid');
+		  }
+		}
+	
+	function pw_check() {
+		  var pw = $('input[name="MEMBER_PW"]');
+		  var pwCK = $('input[name="MEMBER_PWCK"]');
+		  
+		  if (pwCK.val().length < 8 || pwCK.val().length > 20) {
+		    alert("비밀번호 길이를 확인해주세요.");
+		    pwCK.focus();
+		    pwCK.addClass('is-invalid');
+		  } else {
+		    pwCK.removeClass('is-invalid');
+		  }
+		  
+		  if (pw.val() !== pwCK.val()) {
+			    alert("비밀번호가 일치하지 않습니다.");
+			    pwCK.val('');
+			    pwCK.focus();
+			    pwCK.addClass('is-invalid');
+			  } else {
+			    pwCK.removeClass('is-invalid');
+			  }
+			}
+	
+	function name_check(){
+		  var MEMBER_NAME = $('input[name="MEMBER_NAME"]');
+		  
+		  if(!MEMBER_NAME.val() || MEMBER_NAME.val() === ''){
+		    alert("이름을 입력해주세요.");
+		    MEMBER_NAME.focus();
+		    MEMBER_NAME.addClass('is-invalid');
+		  } else {
+		    MEMBER_NAME.removeClass('is-invalid');
+		  }
+		}
+
+	
+	function phone_check() {
+		  var MEMBER_PHONE = $('input[name="MEMBER_PHONE"]');
+		  var numericValue = MEMBER_PHONE.val().replace(/\D/g, "");
+
+		  if (numericValue.length !== 11) {
+		    alert("전화번호를 올바르게 입력해주세요.");
+		    MEMBER_PHONE.val(numericValue);
+		    MEMBER_PHONE.focus();
+		    MEMBER_PHONE.addClass('is-invalid');
+		  } else {
+		    if (MEMBER_PHONE.val() !== numericValue) {
+		      alert("전화번호는 숫자만 입력 가능합니다.");
+		      MEMBER_PHONE.val(numericValue);
+		      MEMBER_PHONE.focus();
+		      MEMBER_PHONE.addClass('is-invalid');
+		    } else {
+		      MEMBER_PHONE.removeClass('is-invalid');
+		    }
+		  }
+		}
+
+
+	
+	function email_check(){
+		var MEMBER_EMAIL = $('input[name="MEMBER_EMAIL"]');
+		if(!MEMBER_EMAIL.val().match('@')){
+			alert("이메일을 형식에 맞게 입력해주세요.");
+			MEMBER_EMAIL.focus();
+			MEMBER_EMAIL.addClass('is-invalid');
+		}else{
+			MEMBER_EMAIL.removeClass('is-invalid');
+		}
 	}
 	
 	function picture_go(){
@@ -311,7 +432,6 @@ body {
 			 
 			reader.onload = function (e) {
 				var pictureView = $('div#pictureView')[0];
-				//이미지 미리보기	        	
 			 	pictureView.style.backgroundImage = "url("+e.target.result+")";
 			 	pictureView.style.backgroundPosition="center";
 			 	pictureView.style.backgroundSize="cover";
@@ -323,42 +443,30 @@ body {
 		$('#inputFileName').val(picture.files[0].name);
 	}
 	
-	function upload_go(){
-		//alert("upload btn");
-		if(!$('input[name="pictureFile"]').val()){
-		    alert("사진을 선택하세요.");
-		    $('input[name="pictureFile"]').click();
-		    return;
-		 }  
-		
-		if($('input[name="checkUpload"]').val()==1){
-			alert("이미 업로드된 사진입니다.");
-			return;
+	function position_check() {
+		  var MEMBER_POSITION = parseInt($('#inputPosition').val());
+		  
+		  if (isNaN(MEMBER_POSITION)) {
+		    alert("직책을 선택해주세요.");
+		    $('#inputPosition').focus();
+		    $('#inputPosition').addClass('is-invalid');
+		  } else {
+		    $('#inputPosition').removeClass('is-invalid');
+		  }
 		}
-		
-		 var formData = new FormData($('form[role="imageForm"]')[0]);
-		 
-		 $.ajax({
-				url:"picture.do",
-				data:formData,
-				type:"post",
-			    processData:false,
-		        contentType:false,
-		        success:function(data){
-		        	//업로드 확인변수 세팅
-		            $('input[name="checkUpload"]').val(1);
-		            //저장된 파일명 저장.
-		            $('input#oldFile').val(data); // 변경시 삭제될 파일명	          
-		            $('form[role="form"]  input[name="picture"]').val(data);	    	  
-		      	 	alert("사진이 업로드 되었습니다.");
-		        },
-		        error:function(error){
-		        	alert("업로드를 실패했습니다.");
-		        }
-		 });
-				
-	}
-	
+
+	function authority_check() {
+		  var MEMBER_AUTHORITY = parseInt($('#inputAuthority').val());
+		  
+		  if (isNaN(MEMBER_AUTHORITY)) {
+		    alert("직급을 선택해주세요.");
+		    $('#inputAuthority').focus();
+		    $('#inputAuthority').addClass('is-invalid');
+		  } else {
+		    $('#inputAuthority').removeClass('is-invalid');
+		  }
+		}
+
 	function CloseWindow(parentURL){
 		
 		window.opener.location.reload(true);		
@@ -367,11 +475,4 @@ body {
 </script>
 
 </body>
-
-
-
-
-
-
-
 

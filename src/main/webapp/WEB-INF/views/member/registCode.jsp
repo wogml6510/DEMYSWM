@@ -132,7 +132,7 @@ body {
 		</div>
 	<div class="main">	
 		<div class="main-box">	
-		<form action="/member/doRegistCode" method="POST" id="doRegistCode">
+		<form action="doRegistCode" method="POST" id="doRegistCode">
 			<div class="main-title"><i class="fa-solid fa-triangle-exclamation"></i></div>
 				<div class="main-content">계정등록을 위해 인사과 코드를 입력해주세요.</div>
       			<div class="input-group">
@@ -161,11 +161,17 @@ function registCode_go() {
 	  var authority_code = document.getElementById("authority_code").value;
 
 	  if (newAuthority === authority_code) {
-	    document.getElementById("doRegistCode").submit(); // 폼 제출
-	  } else {
-	    alert("유효하지 않은 인사과 코드입니다. 다시 입력해주세요.");
-	  }
-	}
+		    window.location.href = "/member/regist"; // 페이지 전환
+
+		    // 페이지 전환이 완료된 후에 창 크기 조정
+		    setTimeout(function() {
+		      window.resizeTo(510, 755);
+		    }, 0);
+		  } else {
+		    alert("유효하지 않은 인사과 코드입니다. 다시 입력해주세요.");
+		    window.location.href = "/member/registCode";
+		  }
+		}
 
 function CloseWindow(parentURL){
 	
