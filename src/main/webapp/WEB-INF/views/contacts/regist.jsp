@@ -141,7 +141,7 @@ body {
         				<input type="text"  placeholder="대표자명을 입력하세요." class="input input-bordered w-full"  id="CT_CEO" name="CT_CEO"/>
  					</div>
  					<div class="input-group-prepend3">
-        				<select class="select select-bordered w-full" name="CT_TYPE">
+        				<select class="select select-bordered w-full" name="CT_TYPE" id="CT_TYPE">
 							<option value=1>협력업체</option>
 							<option value=2>거래처</option>
 							<option value=3>클라이언트</option>
@@ -152,16 +152,16 @@ body {
 					<label style="font-weight: bold;">전화번호</label>
 						<div class="form-box" style="display:flex;">
 							<div class="input-group-sm">
-								<select style="width: 22%;" name="CT_TEL" id="CT_TEL" class="select select-bordered float-left">
+								<select style="width: 22%;" name="phoneNumber1" id="ct_tel" class="select select-bordered float-left">
 										<option value="">-선택-</option>
 										<option value="010">010</option>
 										<option value="011">011</option>
 										<option value="010">070</option>
 								</select> 
 									<label class="float-left" style="padding: 0; text-align: center;width:5%;">&nbsp;-&nbsp;</label> 
-								<input style="width:34%;" type="text" class="input input-bordered float-left"  id="CT_TEL" name="CT_TEL" onkeyup="this.value = this.value.replace(/[^\d]/g, '')"/> 
+								<input style="width:34%;" type="text" class="input input-bordered float-left"  id="ct_tel" name="phoneNumber2" onkeyup="this.value = this.value.replace(/[^\d]/g, '')"/> 
 									<label class="float-left" style="padding: 0; text-align: center;width:5%;">&nbsp;-&nbsp;</label> 
-								<input style="width:34%;" type="text" class="input input-bordered float-right"  id="CT_TEL" name="CT_TEL" onkeyup="this.value = this.value.replace(/[^\d]/g, '')"/>
+								<input style="width:34%;" type="text" class="input input-bordered float-right"  id="ct_tel" name="phoneNumber3" onkeyup="this.value = this.value.replace(/[^\d]/g, '')"/>
 								</div>
 							</div>
 						</div>
@@ -178,11 +178,11 @@ body {
 					<label style="font-weight: bold;">팩스번호</label>
 						<div class="form-box" style="display:flex;">
 							<div class="input-group-sm">
-								<input style="width:30%;" type="text" class="input input-bordered float-left"  id="CT_FAX" name="CT_FAX"/> 
+								<input style="width:30%;" type="text" class="input input-bordered float-left"  id="CT_FAX" name="ct_fax1"/> 
 									<label class="float-left" style="padding: 0; text-align: center;width:5%;">&nbsp;-&nbsp;</label> 
-								<input style="width:30%;" type="text" class="input input-bordered float-left"  id="CT_FAX" name="CT_FAX" onkeyup="this.value = this.value.replace(/[^\d]/g, '')"/> 
+								<input style="width:30%;" type="text" class="input input-bordered float-left"  id="CT_FAX" name="ct_fax2" onkeyup="this.value = this.value.replace(/[^\d]/g, '')"/> 
 									<label class="float-left" style="padding: 0; text-align: center;width:5%;">&nbsp;-&nbsp;</label> 
-								<input style="width:30%;" type="text" class="input input-bordered float-right" id="CT_FAX" name="CT_FAX" onkeyup="this.value = this.value.replace(/[^\d]/g, '')"/>
+								<input style="width:30%;" type="text" class="input input-bordered float-right" id="CT_FAX" name="ct_fax3" onkeyup="this.value = this.value.replace(/[^\d]/g, '')"/>
 								</div>
 							</div>
 						</div>
@@ -191,7 +191,7 @@ body {
 			 			</div>     			
 			      			<div class="input-group">
 			        			<div class="input-group-prepend2">
-			        				<input type="text" id="sample6_postcode" placeholder="우편번호가 나오겠지여" class="input input-bordered w-full" name="CT_ADDR" value=""/>
+			        				<input type="text" id="sample6_postcode" placeholder="우편번호가 나오겠지여" class="input input-bordered w-full" name="ctPostcode" value=""/>
 			 					</div>
 			 					<div class="input-group-prepend3">
 			        				<button type="button" class="btn btn-se" onclick="sample6_execDaumPostcode();">우편번호 찾기</button>
@@ -199,15 +199,15 @@ body {
       						</div>
       					<div class="input-group">
         					<div class="input-group-prepend">
-        						<input type="text"  id="sample6_address" placeholder="주소가 나오고" class="input input-bordered w-full"  name="CT_ADDR" value=""/>
+        						<input type="text"  id="sample6_address" placeholder="주소가 나오고" class="input input-bordered w-full"  name="ctAddress" value=""/>
  							</div>     			
       					</div>
       					<div class="input-group">
         					<div class="input-group-prepend">
-        						<input type="text"  id="sample6_detailAddress" placeholder="상세주소가 나오겠지욥" class="input input-bordered w-full"  name="CT_ADDR" value=""/>
+        						<input type="text"  id="sample6_detailAddress" placeholder="상세주소가 나오겠지욥" class="input input-bordered w-full"  name="ctDetailAddress" value=""/>
  							</div>
  							<div class="input-group-prepend">
-        						<input type="text" id="sample6_extraAddress" placeholder="상세주소가 나오겠지욥" class="input input-bordered w-full"  name="CT_ADDR" value=""/>
+        						<input type="text" id="sample6_extraAddress" placeholder="상세주소가 나오겠지욥" class="input input-bordered w-full"  name="ctExtraAddress" value=""/>
  							</div>        			
       					</div>
       					<label style="font-weight: bold;">담당자명</label>
@@ -220,16 +220,16 @@ body {
 						<label style="font-weight: bold;">전화번호</label>
 						<div class="form-box" style="display:flex;">
 							<div class="input-group-sm">
-								<select style="width:22%;" name="CT_MG_TEL" id="CT_MG_TEL" class="select select-bordered float-left">
+								<select style="width:22%;" name="ct_mg_tel1" id="CT_MG_TEL" class="select select-bordered float-left">
 										<option value="">-선택-</option>
 										<option value="010">010</option>
 										<option value="011">011</option>
 										<option value="010">070</option>
 								</select> 
 									<label class="float-left" style="padding: 0; text-align: center;width:5%;">&nbsp;-&nbsp;</label> 
-								<input style="width:34%;" type="text" class="input input-bordered float-left"  id="CT_MG_TEL" name="CT_MG_TEL" onkeyup="this.value = this.value.replace(/[^\d]/g, '')"/> 
+								<input style="width:34%;" type="text" class="input input-bordered float-left"  id="CT_MG_TEL" name="ct_mg_tel2" onkeyup="this.value = this.value.replace(/[^\d]/g, '')"/> 
 									<label class="float-left" style="padding: 0; text-align: center;width:5%;">&nbsp;-&nbsp;</label> 
-								<input style="width:34%;" type="text" class="input input-bordered float-right"  id="CT_MG_TEL" name="CT_MG_TEL" onkeyup="this.value = this.value.replace(/[^\d]/g, '')"/>
+								<input style="width:34%;" type="text" class="input input-bordered float-right"  id="CT_MG_TEL" name="ct_mg_tel3" onkeyup="this.value = this.value.replace(/[^\d]/g, '')"/>
 								</div>
 							</div>
 						</div>
@@ -243,14 +243,11 @@ body {
 				</div>
 		</div>
 	</div>
-	<!-- /.content-wrapper -->
 <script>
 
 function sample6_execDaumPostcode() {
     new daum.Postcode({
         oncomplete: function(data) {
-            // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
-
             // 각 주소의 노출 규칙에 따라 주소를 조합한다.
             // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
             var addr = ''; // 주소 변수
@@ -294,88 +291,70 @@ function sample6_execDaumPostcode() {
     }).open();
 }
 
-
 function regist_go() {
     // 업체명
-    var ctName = document.getElementById("CT_NAME").value;
+    var ctName = document.getElementById("CT_NAME").value || "";
 
     // 대표자명
-    var ctCeo = document.getElementById("CT_CEO").value;
-
+    var ctCeo = document.getElementById("CT_CEO").value || "";
+    
     // 구분
-    var ctType = document.querySelector("#sample6 > div:nth-child(3) > div.input-group > div.input-group-prepend3 > select").value;
-
-    // 전화번호
-    var ctTel1 = document.querySelector("#sample6 > div:nth-child(5) > div > div > select").value;
-    var ctTel2 = document.querySelector("#sample6 > div:nth-child(5) > div > div > input:nth-child(3)").value;
-    var ctTel3 = document.querySelector("#sample6 > div:nth-child(5) > div > div > input:nth-child(5)").value;
-    var ctTel = ctTel1 + "-" + ctTel2 + "-" + ctTel3;
-
+    var ctType = document.querySelector('select#CT_TYPE option:checked').value || "";
+    
     // 이메일
-    var ctEmail = document.getElementById("inputEmail").value;
+    var ctEmail = document.getElementById("inputEmail").value || "";
 
     // 팩스번호
-    var ctFax1 = document.querySelector("#sample6 > div:nth-child(7) > div > div > input:nth-child(1)").value;
-    var ctFax2 = document.querySelector("#sample6 > div:nth-child(7) > div > div > input:nth-child(3)").value;
-    var ctFax3 = document.querySelector("#sample6 > div:nth-child(7) > div > div > input:nth-child(5)").value;
-    var ctFax = ctFax1 + "-" + ctFax2 + "-" + ctFax3;
-
+    var ctFax1 = document.querySelector("#sample6 > div:nth-child(7) > div > div > input:nth-child(1)").value || "";
+    var ctFax2 = document.querySelector("#sample6 > div:nth-child(7) > div > div > input:nth-child(3)").value || "";
+    var ctFax3 = document.querySelector("#sample6 > div:nth-child(7) > div > div > input:nth-child(5)").value || "";
+    
     // 주소
-    var ctPostcode = document.getElementById("sample6_postcode").value;
-    var ctAddress = document.getElementById("sample6_address").value;
-    var ctDetailAddress = document.getElementById("sample6_detailAddress").value;
-    var ctExtraAddress = document.getElementById("sample6_extraAddress").value;
-    var fullAddress = ctAddress + " " + ctDetailAddress + " " + ctExtraAddress;
+    var ctPostcode = document.getElementById("sample6_postcode").value || "";
+    var ctAddress = document.getElementById("sample6_address").value || "";
+    var ctDetailAddress = document.getElementById("sample6_detailAddress").value || "";
+    var ctExtraAddress = document.getElementById("sample6_extraAddress").value || "";
 
     // 담당자명
-    var ctManager = document.getElementById("CT_MANAGER").value;
+    var ctManager = document.getElementById("CT_MANAGER").value || "";
 
     // 담당자 전화번호
-    var ctManagerTel1 = document.querySelector("#sample6 > div:nth-child(12) > div > div > select").value;
-    var ctManagerTel2 = document.querySelector("#sample6 > div:nth-child(12) > div > div > input:nth-child(3)").value;
-    var ctManagerTel3 = document.querySelector("#sample6 > div:nth-child(12) > div > div > input:nth-child(5)").value;
-    var ctManagerTel = ctManagerTel1 + "-" + ctManagerTel2 + "-" + ctManagerTel3;
+    var ctManagerTel1 = document.querySelector("#sample6 > div:nth-child(12) > div > div > select").value || "";
+    var ctManagerTel2 = document.querySelector("#sample6 > div:nth-child(12) > div > div > input:nth-child(3)").value || "";
+    var ctManagerTel3 = document.querySelector("#sample6 > div:nth-child(12) > div > div > input:nth-child(5)").value || "";
 
-    // 서버로 데이터 전송
-    var formData = new FormData();
-    formData.append("CT_NAME", ctName);
-    formData.append("CT_CEO", ctCeo);
-    formData.append("CT_TYPE", ctType);
-    formData.append("CT_TEL", ctTel);
-    formData.append("CT_EMAIL", ctEmail);
-    formData.append("CT_FAX", ctFax);
-    formData.append("CT_POSTCODE", ctPostcode);
-    formData.append("CT_ADDRESS", fullAddress);
-    formData.append("CT_MANAGER", ctManager);
-    formData.append("CT_MANAGER_TEL", ctManagerTel);
+    // 데이터 객체 생성
+    var data = {
+        CT_NAME: ctName,
+        CT_CEO: ctCeo,
+        CT_TYPE: ctType,
+        CT_TEL: ctTel,
+        CT_EMAIL: ctEmail,
+        CT_FAX: ctFax,
+        CT_ADDRESS: fullAddress,
+        CT_MANAGER: ctManager,
+        CT_MANAGER_TEL: ctManagerTel
+    };
 
     // AJAX 요청 보내기
-    var xhr = new XMLHttpRequest();
-    xhr.open("POST", "/contacts/doRegist", true);
-    xhr.onreadystatechange = function() {
-        if (xhr.readyState === 4 && xhr.status === 200) {
-            // 요청 완료 후 처리할 코드 작성
-            console.log(xhr.responseText);
+    $.ajax({
+        url: "/contacts/doRegist",
+        method: "POST",
+        data: data,
+        success: function(response) {
+        },
+        error: function(error) {
+            console.error("AJAX 요청 중 오류가 발생했습니다.");
         }
-    };
-    xhr.send(formData);
+    });
 }
-
-function CloseWindow() {
-  
-}
-
-
-
 
 function CloseWindow(parentURL){
 	
 	window.opener.location.reload(true);		
 	window.close();
 }
-
-
-   </script>
+  </script>
 </body>
 
 
