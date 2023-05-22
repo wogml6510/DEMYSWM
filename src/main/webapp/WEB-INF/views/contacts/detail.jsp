@@ -53,8 +53,8 @@ body {
 	height : 763px;
 }
 .main-title {
-	padding-top : 5px;
-	padding-bottom : 10px;
+	padding-top : 30px;
+	padding-bottom : 30px;
 	text-align : center;
 	font-weight: bold;
 	font-size: 1.5rem;
@@ -122,12 +122,13 @@ body {
 	<div class="main">	
 		<div class="main-box">	
 			<div class="main-title">업체 정보 상세</div>
-			<form role="form" class="form-horizontal" action="modify.do" method="post" enctype="multipart/form-data">	
+			<form role="form" class="form-horizontal" action="/contacts/modify" method="post">	
+				<input type="hidden" class="input input-bordered w-full"  id="CT_NUM" name="CT_NUM" readonly value="${contacts.CT_NUM }"/>
 				<div class="form-group">
       				<label style="font-weight: bold;">업체명</label>
       			<div class="input-group">
         			<div class="input-group-prepend">
-        				<input type="text" placeholder="Type here" class="input input-bordered w-full"  id="" name="" readonly value=""/>
+        				<input type="text" class="input input-bordered w-full"  id="CT_NAME" name="CT_NAME" readonly value="${contacts.CT_NAME }"/>
  					</div>     			
       			</div>
       			<div class="flex justify-between">
@@ -136,85 +137,55 @@ body {
  				</div>       			
       			<div class="input-group">
         			<div class="input-group-prepend2">
-        				<input type="text"  placeholder="Type here" class="input input-bordered w-full"  id="" name="" readonly value=""/>
+        				<input type="text" class="input input-bordered w-full"  id="CT_CEO" name="CT_CEO" readonly value="${contacts.CT_CEO }"/>
  					</div>
  					<div class="input-group-prepend3">
-        				<input type="text"  placeholder="Type here" class="input input-bordered w-full"  id="" name="" readonly value=""/>
+        				<input type="text" class="input input-bordered w-full" id="CT_TYPE" name="CT_TYPE" readonly value="<c:if test="${contacts.CT_TYPE eq '1'}">협력업체</c:if><c:if test="${contacts.CT_TYPE eq '2'}">거래처</c:if><c:if test="${contacts.CT_TYPE eq '3'}">클라이언트</c:if>" />
       				</div>
       			</div>
       			<div class="form-group row">
 					<label style="font-weight: bold;">전화번호</label>
 						<div class="form-box" style="display:flex;">
-								<input type="text" style="width:22%;" placeholder="Type here" class="input input-bordered w-full"  id="" name="" readonly value=""/>
-							
-									<label class="float-left" style="padding: 0; text-align: center;width:5%;">&nbsp;-&nbsp;</label> 
-								<input style="width:34%;" name="" type="text" class="input input-bordered float-left" id="" name="" readonly value="" /> 
-									<label class="float-left" style="padding: 0; text-align: center;width:5%;">&nbsp;-&nbsp;</label> 
-								<input style="width:34%;" name="" type="text" class="input input-bordered float-right" id="" name="" readonly value=""/>
-							</div>
+							<input type="text" class="input input-bordered w-full"  id="CT_TEL" name="CT_TEL" readonly value="${contacts.CT_TEL }"/>
 						</div>
+				</div>
 				<div class="form-group row">
 					<label style="font-weight: bold;">이메일</label>
 						<div class="form-box" style="display:flex;">
 							<div class="input-group-sm w-full flex">
-								<input style="width:45%;" name="" type="text" class="input input-bordered float-left" id="" name="" readonly value=""/> 
-								<label class="float-left" style="padding: 0; text-align: center;width:10%;">&nbsp;@&nbsp;</label> 
-									<input style="width:45%;" name="" type="text" class="input input-bordered float-right" id="" name="" readonly value=""/>
+								<input type="text" class="input input-bordered w-full" id="CT_EMAIL" name="CT_EMAIL" readonly value="${contacts.CT_EMAIL }"/>
 							</div>
 						</div>
 					</div>
 				<div class="form-group row">
 					<label style="font-weight: bold;">팩스번호</label>
 						<div class="form-box" style="display:flex;">
-								<input style="width:30%;" name="" type="text" class="input input-bordered float-left" value=""/> 
-									<label class="float-left" style="padding: 0; text-align: center;width:5%;">&nbsp;-&nbsp;</label> 
-								<input style="width:30%;" name="" type="text" class="input input-bordered float-left" value=""/> 
-									<label class="float-left" style="padding: 0; text-align: center;width:5%;">&nbsp;-&nbsp;</label> 
-								<input style="width:30%;" name="" type="text" class="input input-bordered float-right" value="" />
+								<input type="text" class="input input-bordered w-full" id="CT_FAX" name="CT_FAX" readonly value="${contacts.CT_FAX }"/> 
 							</div>
 						</div>
-						<div class="flex justify-between">
+						<div class="orm-group row">
 			      			<label style="font-weight: bold;">주소</label>
-			 			</div>     			
-			      			<div class="input-group">
-			        			<div class="input-group-prepend2">
-			        				<input type="text" id="sample6_postcode" placeholder="우편번호가 나오겠지여" class="input input-bordered w-full" name="" value=""/>
+			        			<div class="form-box" style="display:flex;">
+			        				<input type="text" id="CT_ADDR" class="input input-bordered w-full" name="CT_ADDR" readonly value="${contacts.CT_ADDR }"/>
 			 					</div>
       						</div>
-      					<div class="input-group">
-        					<div class="input-group-prepend">
-        						<input type="text"  id="sample6_address" placeholder="주소가 나오고" class="input input-bordered w-full"  name="address" value=""/>
- 							</div>     			
-      					</div>
-      					<div class="input-group">
-        					<div class="input-group-prepend">
-        						<input type="text"  id="sample6_detailAddress" placeholder="상세주소가 나오겠지욥" class="input input-bordered w-full"  name="" value=""/>
- 							</div>
- 							<div class="input-group-prepend">
-        						<input type="text" id="sample6_extraAddress" placeholder="상세주소가 나오겠지욥" class="input input-bordered w-full"  name="" value=""/>
- 							</div>        			
-      					</div>
       					<label style="font-weight: bold;">담당자명</label>
       					<div class="input-group">
         					<div class="input-group-prepend">
-        						<input type="text" placeholder="Type here" class="input input-bordered w-full"  name="" value=""/>
+        						<input type="text" class="input input-bordered w-full" id="CT_MANAGER" name="CT_MANAGER" readonly value="${contacts.CT_MANAGER }"/>
  							</div>     			
       					</div>
       					<div class="form-group row">
 						<label style="font-weight: bold;">전화번호</label>
 						<div class="form-box" style="display:flex;">
-								<input type="text" style="width:22%;" placeholder="Type here" class="input input-bordered w-full"  id="" name="" readonly value=""/>
-									<label class="float-left" style="padding: 0; text-align: center;width:5%;">&nbsp;-&nbsp;</label> 
-								<input style="width:34%;" name="" type="text" class="input input-bordered float-left" id="" name="" readonly value="" /> 
-									<label class="float-left" style="padding: 0; text-align: center;width:5%;">&nbsp;-&nbsp;</label> 
-								<input style="width:34%;" name="" type="text" class="input input-bordered float-right" id="" name="" readonly value=""/>
+								<input type="text" class="input input-bordered w-full"  id="CT_MG_TEL" name="CT_MG_TEL" readonly value="${contacts.CT_MG_TEL }"/>
 							</div>
 						</div>
 						</div>
 		<div class="card-footer row" style="margin-top: 0; border-top: none;display:flex;flex-direction:row;justify-content:center;">						
-			<button type="button" id="modifyBtn" onclick="location.href='modify.jsp" class="btn btn-se" style="margin-right: 10px;">수 정</button>
-			<div class="col-sm-4"></div>
-			<button type="button" id="cancelBtn" onclick="CloseWindow();" class="btn btn-se"  style="margin-left: 10px;">취 소</button>
+			<button type="button" id="modifyBtn" onclick="location.href='modify?CT_NAME=${contacts.CT_NAME}';" class="btn btn-se" style="margin-right: 10px;">수 정</button>
+			<button type="button" id="removeBtn" onclick="remove_go();" class="btn btn-se" style="margin-right: 10px;">삭 제</button>
+			<button type="button" id="cancelBtn" onclick="CloseWindow();" class="btn btn-se">취 소</button>
 		</div>	
 			</form>
 					</div>
@@ -223,11 +194,29 @@ body {
 
 <script>
 
-function modify_go(){
-	var form = $('form[role="form"]');		
-	form.submit();
+function remove_go() {
+	  var CT_NUM = getCT_NUM();
+	  if (confirm('업체를 삭제하시겠습니까?')) {
+	    $.ajax({
+	      url: '/contacts/remove',
+	      method: 'post',
+	      data: { CT_NUM: CT_NUM },
+	      success: function(response) {
+	    	  window.opener.location.reload(); // 새로고침
+	          window.opener.location.href = '/contacts/list'; // 이동
+	          window.close(); // 닫기
+	      },
+	      error: function(error) {
+	        console.error('삭제 작업 중 오류가 발생했습니다.');
+	      }
+	    });
+	  }
+	}
 
-}
+	function getCT_NUM() {
+	  var CT_NUM = document.getElementById('CT_NUM').value;
+	  return CT_NUM;
+	}
 
 function CloseWindow(parentURL){
 	

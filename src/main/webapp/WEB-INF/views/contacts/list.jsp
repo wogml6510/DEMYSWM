@@ -133,24 +133,14 @@ a:hover{
  </div>
  <div class="list-body">
  		<table class="table table-bordered text-center" style="text-align:center;width:100%" >
- 		<colgroup>   
-          <col width="100"/>
-          <col width="100"/>
-          <col width="100"/>
-          <col width="100"/>
-          <col width="150"/>
-          <col width="100"/>
-          <col width="100"/>
-          <col />
-        </colgroup>
         <thead>
 			<tr>
-				<th style="display:none">업체번호</th>
-				<th>업체명</th>
+				<th>업체번호</th>
+				<th style="width:100px;">업체명</th>
 				<th>대표자명</th>
 				<th>대표번호</th>
-				<th>팩스번호</th>
-				<th>대표주소</th>
+				<th style="width:140px;">팩스번호</th>
+				<th style="width:140px;">대표주소</th>
 				<th>담당자명</th>
 				<th>담당자연락처</th>
 			</tr>
@@ -158,8 +148,8 @@ a:hover{
 		<tbody style="">
 		  <c:forEach items="${contactsList }" var="contacts" >
 			<tr class="hover">
-				<td style="display:none">${contacts.CT_NUM }</td>
-				<td>${contacts.CT_NAME }</td>
+				<td>${contacts.CT_NUM }</td>
+				<td><a href="javascript:OpenWindow('detail?CT_NAME=${contacts.CT_NAME}', '업체 상세', 550, 800);">${contacts.CT_NAME}</a></td>
 				<td>${contacts.CT_CEO }</td>
 				<td>${contacts.CT_TEL }</td>
 				<td>${contacts.CT_FAX }</td>
@@ -172,13 +162,13 @@ a:hover{
 	</table>
 </div>
 <div class="page-menu mt-5 flex justify-center">
-    <div class="pagination d-inline flex"  style="font-size:2rem;height:20px;">
-        <div class="page-item d-inline-flex" >
-      <a class="btn btn-md btn-se ${currentPage > 1 ? '' : 'disabled'}" href="?page=${currentPage - 1}" aria-label="Previous">
-        <span aria-hidden="true" >&laquo;</span>
+  <div class="pagination d-inline flex" style="font-size:2rem;height:20px;">
+    <div class="page-item d-inline-flex">
+      <a class="btn btn-md btn-se" href="?page=${currentPage - 1}" aria-label="Previous" id="previousBtn">
+        <span aria-hidden="true">&laquo;</span>
         <span class="sr-only">Previous</span>
       </a>
-    </div> 
+    </div>
 
     <c:forEach begin="1" end="${totalPages}" var="pageNumber">
       <c:choose>
@@ -189,14 +179,14 @@ a:hover{
         </c:when>
         <c:otherwise>
           <div class="page-item d-inline-flex">
-            <a class="btn btn-md btn-se"  href="?page=${pageNumber}">${pageNumber}</a>
+            <a class="btn btn-md btn-se" href="?page=${pageNumber}">${pageNumber}</a>
           </div>
         </c:otherwise>
       </c:choose>
     </c:forEach>
 
     <div class="page-item d-inline-flex">
-      <a class="btn btn-md btn-se ${currentPage < totalPages ? '' : 'disabled'}" href="?page=${currentPage + 1}" aria-label="Next">
+      <a class="btn btn-md btn-se" href="?page=${currentPage + 1}" aria-label="Next" id="nextBtn">
         <span aria-hidden="true">&raquo;</span>
         <span class="sr-only">Next</span>
       </a>
@@ -204,13 +194,12 @@ a:hover{
   </div>
 </div>
 </div>
+
 	<script>
 		function OpenWindow(UrlStr, WinTitle, WinWidth, WinHeight) {
 			winleft = (screen.width - WinWidth) / 2;
 			wintop = (screen.height - WinHeight) / 2;
-			var win = window.open(UrlStr , WinTitle , "scrollbars=yes,width="+ WinWidth  
-									+",height="+ WinHeight +",top="+ wintop +",left=" 
-									+ winleft +",resizable=yes"  );
+			var win = window.open(UrlStr, WinTitle, "scrollbars=yes, location=no, width="+ WinWidth +", height="+ WinHeight +", top="+ wintop +", left="+ winleft +", resizable=yes");
 			win.focus() ; 
 	}
 
@@ -233,6 +222,16 @@ a:hover{
 		      });
 		    });
 		  });
+	 
+	 window.onload = function() {
+		    var previousBtn = document.getElementById('previousBtn');
+		    var currentPage = ${currentPage};
+
+		    if (currentPage === 1) {
+		      previousBtn.classList.add('disabled');
+		      previousBtn.removeAttribute('href');
+		    }
+		  };
  </script>
 		</body>
 		</html>

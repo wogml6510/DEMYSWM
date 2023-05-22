@@ -22,17 +22,23 @@
 		WHERE CT_NUM=#{CT_NUM}
 	</select>
 	
+	<select id="getContactsByCT_NAME" resultType="Contacts">
+		SELECT *
+		FROM CONTACTS
+		WHERE CT_NAME=#{CT_NAME}
+	</select>
+	
 	<select id="selectContactsSequenceNextValue" resultType="int">
 		SELECT
 		CONTACTS_seq.nextVal
 		FROM DUAL
 	</select>
 	
-	<insert id="registContacts">
+	<update id="registContacts">
 		INSERT INTO
-		CONTACTS(CT_NAME,CT_TEL,CT_CEO,CT_MANAGER,CT_MG_TEL,CT_TYPE,CT_ADDR,CT_EMAIL)
-		VALUES(#{CT_NAME},#{CT_TEL},#{CT_CEO},#{CT_MANAGER},#{CT_MG_TEL},#{CT_TYPE},#{CT_ADDR},#{CT_EMAIL})
-	</insert>
+		CONTACTS(CT_NUM,CT_NAME,CT_TEL,CT_CEO,CT_MANAGER,CT_MG_TEL,CT_TYPE,CT_ADDR,CT_EMAIL)
+		VALUES(#{CT_NUM},#{CT_NAME},#{CT_TEL},#{CT_CEO},#{CT_MANAGER},#{CT_MG_TEL},#{CT_TYPE},#{CT_ADDR},#{CT_EMAIL})
+	</update>
 	
 	<update id="modifyContacts">
 		UPDATE CONTACTS

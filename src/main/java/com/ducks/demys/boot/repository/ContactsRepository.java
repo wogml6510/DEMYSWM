@@ -16,6 +16,8 @@ public interface ContactsRepository {
 	
 	public Contacts getContactsByCT_NUM(int CT_NUM);
 	
+	public Contacts getContactsByCT_NAME(String CT_NAME);
+	
 	public int selectContactsSequenceNextValue();
 	
 	public void registContacts(Contacts contacts);

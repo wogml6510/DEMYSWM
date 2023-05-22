@@ -57,9 +57,35 @@ public class ContactsController {
 	
 	@RequestMapping("/contacts/doRegist")
 	@ResponseBody
-	public String doRegist(Model model,Contacts contacts) {
-		Contacts RgContacts = contactsService.registContacts(contacts);
-		model.addAttribute("RgContacts",RgContacts);
-	return "redirect:/contacts/list";
+	public String registContacts(Model model,Contacts contacts, @RequestParam("CT_TYPE") int CT_TYPE) {
+		
+		contacts.setCT_TYPE(CT_TYPE);
+		contactsService.registContacts(contacts);
+		
+		String script = "<script>alert('업체 등록이 완료되었습니다.');window.close(); window.opener.location.href='/contacts/list';</script>";
+        return script;
+	}
+	
+	@RequestMapping("/contacts/detail")
+	public void showDetail(Model model, String CT_NAME) {
+		
+		Contacts contacts = contactsService.getContactsByCT_NAME(CT_NAME);
+		model.addAttribute("contacts",contacts);
+
+	}
+	
+	@RequestMapping("/contacts/modify")
+	public void Modify(Model model, String CT_NAME) {
+		
+		Contacts contacts = contactsService.getContactsByCT_NAME(CT_NAME);
+		model.addAttribute("contacts",contacts);
+	}
+	
+	
+	
+	@RequestMapping("/contacts/remove")
+	@ResponseBody
+	public void removeContacts(@RequestParam("CT_NUM") int CT_NUM) {
+		contactsService.removeContacts(CT_NUM);
 	}
 }

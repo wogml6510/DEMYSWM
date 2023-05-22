@@ -123,7 +123,7 @@ body {
 		</div>
 	<div class="main">	
 		<div class="main-box">	
-		<form class="table-box-type-1" method="POST" action="../contacts/doRegist" >
+		<form class="table-box-type-1" method="post" action="/contacts/doRegist" >
 			<div class="main-title">신규업체 등록</div>
 				<div class="form-group">
       				<label style="font-weight: bold;">업체명</label>
@@ -141,10 +141,10 @@ body {
         				<input type="text"  placeholder="대표자명을 입력하세요." class="input input-bordered w-full"  id="CT_CEO" name="CT_CEO"/>
  					</div>
  					<div class="input-group-prepend3">
-        				<select class="select select-bordered w-full" >
-							<option value="1">협력업체</option>
-							<option value="2">클라이언트</option>
-							<option value="3">거래처</option>
+        				<select class="select select-bordered w-full" name="CT_TYPE">
+							<option value=1>협력업체</option>
+							<option value=2>거래처</option>
+							<option value=3>클라이언트</option>
 						 </select>
       				</div>
       			</div>
@@ -159,9 +159,9 @@ body {
 										<option value="010">070</option>
 								</select> 
 									<label class="float-left" style="padding: 0; text-align: center;width:5%;">&nbsp;-&nbsp;</label> 
-								<input style="width:34%;" type="text" class="input input-bordered float-left"  id="CT_TEL" name="CT_TEL" /> 
+								<input style="width:34%;" type="text" class="input input-bordered float-left"  id="CT_TEL" name="CT_TEL" onkeyup="this.value = this.value.replace(/[^\d]/g, '')"/> 
 									<label class="float-left" style="padding: 0; text-align: center;width:5%;">&nbsp;-&nbsp;</label> 
-								<input style="width:34%;" type="text" class="input input-bordered float-right"  id="CT_TEL" name="CT_TEL"/>
+								<input style="width:34%;" type="text" class="input input-bordered float-right"  id="CT_TEL" name="CT_TEL" onkeyup="this.value = this.value.replace(/[^\d]/g, '')"/>
 								</div>
 							</div>
 						</div>
@@ -169,16 +169,8 @@ body {
 					<label style="font-weight: bold;">이메일</label>
 						<div class="form-box" style="display:flex;">
 							<div class="input-group-sm w-full flex">
-								<input style="width:45%;" type="text" class="input input-bordered float-left"  id="CT_EMAIL" name="CT_EMAIL" /> 
-								<label class="float-left" style="padding: 0; text-align: center;width:10%;">&nbsp;@&nbsp;</label> 
-								<div style="width:45%;">
-									<select name="CT_EMAIL" id="CT_EMAIL" class="select select-bordered float-left w-full">
-										<option value="">-선택-</option>
-										<option value="">naver.com</option>
-										<option value="">gmail.com</option>
-										<option value="">hanmail.net</option>
-									</select> 
-								</div>
+								<input name="CT_EMAIL" type="text" onkeyup="this.value=this.value.replace(/[\ㄱ-ㅎㅏ-ㅣ가-힣]/g, &#39;&#39;);" class="input input-bordered w-full" id="inputEmail" onchange="email_check()"
+									 placeholder=" 이메일을 입력해주세요.">
 							</div>
 						</div>
 					</div>
@@ -188,9 +180,9 @@ body {
 							<div class="input-group-sm">
 								<input style="width:30%;" type="text" class="input input-bordered float-left"  id="CT_FAX" name="CT_FAX"/> 
 									<label class="float-left" style="padding: 0; text-align: center;width:5%;">&nbsp;-&nbsp;</label> 
-								<input style="width:30%;" type="text" class="input input-bordered float-left"  id="CT_FAX" name="CT_FAX"/> 
+								<input style="width:30%;" type="text" class="input input-bordered float-left"  id="CT_FAX" name="CT_FAX" onkeyup="this.value = this.value.replace(/[^\d]/g, '')"/> 
 									<label class="float-left" style="padding: 0; text-align: center;width:5%;">&nbsp;-&nbsp;</label> 
-								<input style="width:30%;" type="text" class="input input-bordered float-right" id="CT_FAX" name="CT_FAX" />
+								<input style="width:30%;" type="text" class="input input-bordered float-right" id="CT_FAX" name="CT_FAX" onkeyup="this.value = this.value.replace(/[^\d]/g, '')"/>
 								</div>
 							</div>
 						</div>
@@ -199,7 +191,7 @@ body {
 			 			</div>     			
 			      			<div class="input-group">
 			        			<div class="input-group-prepend2">
-			        				<input type="text" id="sample6_postcode" placeholder="우편번호가 나오겠지여" class="input input-bordered w-full" name="" value=""/>
+			        				<input type="text" id="sample6_postcode" placeholder="우편번호가 나오겠지여" class="input input-bordered w-full" name="CT_ADDR" value=""/>
 			 					</div>
 			 					<div class="input-group-prepend3">
 			        				<button type="button" class="btn btn-se" onclick="sample6_execDaumPostcode();">우편번호 찾기</button>
@@ -207,15 +199,15 @@ body {
       						</div>
       					<div class="input-group">
         					<div class="input-group-prepend">
-        						<input type="text"  id="sample6_address" placeholder="주소가 나오고" class="input input-bordered w-full"  name="address" value=""/>
+        						<input type="text"  id="sample6_address" placeholder="주소가 나오고" class="input input-bordered w-full"  name="CT_ADDR" value=""/>
  							</div>     			
       					</div>
       					<div class="input-group">
         					<div class="input-group-prepend">
-        						<input type="text"  id="sample6_detailAddress" placeholder="상세주소가 나오겠지욥" class="input input-bordered w-full"  name="" value=""/>
+        						<input type="text"  id="sample6_detailAddress" placeholder="상세주소가 나오겠지욥" class="input input-bordered w-full"  name="CT_ADDR" value=""/>
  							</div>
  							<div class="input-group-prepend">
-        						<input type="text" id="sample6_extraAddress" placeholder="상세주소가 나오겠지욥" class="input input-bordered w-full"  name="" value=""/>
+        						<input type="text" id="sample6_extraAddress" placeholder="상세주소가 나오겠지욥" class="input input-bordered w-full"  name="CT_ADDR" value=""/>
  							</div>        			
       					</div>
       					<label style="font-weight: bold;">담당자명</label>
@@ -235,14 +227,14 @@ body {
 										<option value="010">070</option>
 								</select> 
 									<label class="float-left" style="padding: 0; text-align: center;width:5%;">&nbsp;-&nbsp;</label> 
-								<input style="width:34%;" type="text" class="input input-bordered float-left"  id="CT_MG_TEL" name="CT_MG_TEL"/> 
+								<input style="width:34%;" type="text" class="input input-bordered float-left"  id="CT_MG_TEL" name="CT_MG_TEL" onkeyup="this.value = this.value.replace(/[^\d]/g, '')"/> 
 									<label class="float-left" style="padding: 0; text-align: center;width:5%;">&nbsp;-&nbsp;</label> 
-								<input style="width:34%;" type="text" class="input input-bordered float-right"  id="CT_MG_TEL" name="CT_MG_TEL"/>
+								<input style="width:34%;" type="text" class="input input-bordered float-right"  id="CT_MG_TEL" name="CT_MG_TEL" onkeyup="this.value = this.value.replace(/[^\d]/g, '')"/>
 								</div>
 							</div>
 						</div>
 		<div class="card-footer row" style="margin-top: 0; border-top: none;display:flex;flex-direction:row;justify-content:center;">						
-			<button type="button" id="registBtn"  onclick="regist_go();" class="btn btn-se" style="margin-right: 10px;">등 록</button>
+			<button type="submit" id="registBtn"  onclick="regist_go();" class="btn btn-se" style="margin-right: 10px;">등 록</button>
 			<div class="col-sm-4"></div>
 			<button type="button" id="cancelBtn" onclick="CloseWindow();" class="btn btn-se"  style="margin-left: 10px;">취 소</button>
 		</div>	
@@ -302,13 +294,79 @@ function sample6_execDaumPostcode() {
     }).open();
 }
 
-function regist_go(){
-	var form = $('form[role="form"]');
-	form.attr("action","../contacts/doRegist");
-	alert('등록');
-	form.submit();
 
+function regist_go() {
+    // 업체명
+    var ctName = document.getElementById("CT_NAME").value;
+
+    // 대표자명
+    var ctCeo = document.getElementById("CT_CEO").value;
+
+    // 구분
+    var ctType = document.querySelector("#sample6 > div:nth-child(3) > div.input-group > div.input-group-prepend3 > select").value;
+
+    // 전화번호
+    var ctTel1 = document.querySelector("#sample6 > div:nth-child(5) > div > div > select").value;
+    var ctTel2 = document.querySelector("#sample6 > div:nth-child(5) > div > div > input:nth-child(3)").value;
+    var ctTel3 = document.querySelector("#sample6 > div:nth-child(5) > div > div > input:nth-child(5)").value;
+    var ctTel = ctTel1 + "-" + ctTel2 + "-" + ctTel3;
+
+    // 이메일
+    var ctEmail = document.getElementById("inputEmail").value;
+
+    // 팩스번호
+    var ctFax1 = document.querySelector("#sample6 > div:nth-child(7) > div > div > input:nth-child(1)").value;
+    var ctFax2 = document.querySelector("#sample6 > div:nth-child(7) > div > div > input:nth-child(3)").value;
+    var ctFax3 = document.querySelector("#sample6 > div:nth-child(7) > div > div > input:nth-child(5)").value;
+    var ctFax = ctFax1 + "-" + ctFax2 + "-" + ctFax3;
+
+    // 주소
+    var ctPostcode = document.getElementById("sample6_postcode").value;
+    var ctAddress = document.getElementById("sample6_address").value;
+    var ctDetailAddress = document.getElementById("sample6_detailAddress").value;
+    var ctExtraAddress = document.getElementById("sample6_extraAddress").value;
+    var fullAddress = ctAddress + " " + ctDetailAddress + " " + ctExtraAddress;
+
+    // 담당자명
+    var ctManager = document.getElementById("CT_MANAGER").value;
+
+    // 담당자 전화번호
+    var ctManagerTel1 = document.querySelector("#sample6 > div:nth-child(12) > div > div > select").value;
+    var ctManagerTel2 = document.querySelector("#sample6 > div:nth-child(12) > div > div > input:nth-child(3)").value;
+    var ctManagerTel3 = document.querySelector("#sample6 > div:nth-child(12) > div > div > input:nth-child(5)").value;
+    var ctManagerTel = ctManagerTel1 + "-" + ctManagerTel2 + "-" + ctManagerTel3;
+
+    // 서버로 데이터 전송
+    var formData = new FormData();
+    formData.append("CT_NAME", ctName);
+    formData.append("CT_CEO", ctCeo);
+    formData.append("CT_TYPE", ctType);
+    formData.append("CT_TEL", ctTel);
+    formData.append("CT_EMAIL", ctEmail);
+    formData.append("CT_FAX", ctFax);
+    formData.append("CT_POSTCODE", ctPostcode);
+    formData.append("CT_ADDRESS", fullAddress);
+    formData.append("CT_MANAGER", ctManager);
+    formData.append("CT_MANAGER_TEL", ctManagerTel);
+
+    // AJAX 요청 보내기
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST", "/contacts/doRegist", true);
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            // 요청 완료 후 처리할 코드 작성
+            console.log(xhr.responseText);
+        }
+    };
+    xhr.send(formData);
 }
+
+function CloseWindow() {
+  
+}
+
+
+
 
 function CloseWindow(parentURL){
 	

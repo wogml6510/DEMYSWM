@@ -121,12 +121,13 @@ body {
 		</div>
 	<div class="main">	
 		<div class="main-box">	
+		<form class="table-box-type-1" method="post" action="/contacts/modify" >
 			<div class="main-title">업체 정보 수정</div>
 				<div class="form-group">
       				<label style="font-weight: bold;">업체명</label>
       			<div class="input-group">
         			<div class="input-group-prepend">
-        				<input type="text" placeholder="Type here" class="input input-bordered w-full"  name="" value=""/>
+        				<input type="text" class="input input-bordered w-full"  id="CT_NAME" name="CT_NAME" style="background-color:#e7e7e7;" readonly value="${contacts.CT_NAME }"/>
  					</div>     			
       			</div>
       			<div class="flex justify-between">
@@ -135,13 +136,13 @@ body {
  				</div>     			
       			<div class="input-group">
         			<div class="input-group-prepend2">
-        				<input type="text" placeholder="Type here" class="input input-bordered w-full" name="" value="" readonly/>
+        				<input type="text"  placeholder="대표자명을 입력하세요." class="input input-bordered w-full"  id="CT_CEO" name="CT_CEO" value="${contacts.CT_CEO }"/>
  					</div>
  					<div class="input-group-prepend3">
-        				<select class="select select-bordered w-full" >
-							<option>협력업체</option>
-							<option>클라이언트</option>
-							<option>거래처</option>
+        				<select class="select select-bordered w-full" name="CT_TYPE">
+							<option value=1>협력업체</option>
+							<option value=2>거래처</option>
+							<option value=3>클라이언트</option>
 						 </select>
       				</div>
       			</div>
@@ -149,16 +150,16 @@ body {
 					<label style="font-weight: bold;">전화번호</label>
 						<div class="form-box" style="display:flex;">
 							<div class="input-group-sm">
-								<select style="width: 22%;" name="" id="" class="select select-bordered float-left">
+								<select style="width: 22%;" name="ctTel1" id="ctTel1" class="select select-bordered float-left" >
 										<option value="">-선택-</option>
 										<option value="010">010</option>
 										<option value="011">011</option>
 										<option value="010">070</option>
 								</select> 
 									<label class="float-left" style="padding: 0; text-align: center;width:5%;">&nbsp;-&nbsp;</label> 
-								<input style="width:34%;" name="" type="text" class="input input-bordered float-left" value="" /> 
+								<input style="width:34%;" name="ctTel2" id="ctTel2" type="text" class="input input-bordered float-left"/> 
 									<label class="float-left" style="padding: 0; text-align: center;width:5%;">&nbsp;-&nbsp;</label> 
-								<input style="width:34%;" name="" type="text" class="input input-bordered float-right" value=""/>
+								<input style="width:34%;" name="ctTel3" id="ctTel3" type="text" class="input input-bordered float-right" />
 								</div>
 							</div>
 						</div>
@@ -166,16 +167,7 @@ body {
 					<label style="font-weight: bold;">이메일</label>
 						<div class="form-box" style="display:flex;">
 							<div class="input-group-sm w-full flex">
-								<input style="width:45%;" name="" type="text" class="input input-bordered float-left" value="" /> 
-								<label class="float-left" style="padding: 0; text-align: center;width:10%;">&nbsp;@&nbsp;</label> 
-								<div style="width:45%;">
-									<select name="" id="" class="select select-bordered float-left w-full">
-										<option value="">-선택-</option>
-										<option value="">naver.com</option>
-										<option value="">gmail.com</option>
-										<option value="">hanmail.net</option>
-									</select> 
-								</div>
+								<input name="CT_EMAIL" type="text" onkeyup="this.value=this.value.replace(/[\ㄱ-ㅎㅏ-ㅣ가-힣]/g, &#39;&#39;);" class="input input-bordered w-full" id="inputEmail" value="${contacts.CT_EMAIL }" onchange="email_check()">
 							</div>
 						</div>
 					</div>
@@ -183,11 +175,11 @@ body {
 					<label style="font-weight: bold;">팩스번호</label>
 						<div class="form-box" style="display:flex;">
 							<div class="input-group-sm">
-								<input style="width:30%;" name="" type="text" class="input input-bordered float-left" value=""/> 
+								<input style="width:30%;" name="CT_FAX" type="text" class="input input-bordered float-left" value="${CT_FAX }"/> 
 									<label class="float-left" style="padding: 0; text-align: center;width:5%;">&nbsp;-&nbsp;</label> 
-								<input style="width:30%;" name="" type="text" class="input input-bordered float-left" value=""/> 
+								<input style="width:30%;" name="CT_FAX" type="text" class="input input-bordered float-left" value="${CT_FAX }"/> 
 									<label class="float-left" style="padding: 0; text-align: center;width:5%;">&nbsp;-&nbsp;</label> 
-								<input style="width:30%;" name="" type="text" class="input input-bordered float-right" value="" />
+								<input style="width:30%;" name="CT_FAX" type="text" class="input input-bordered float-right" value="${CT_FAX }" />
 								</div>
 							</div>
 						</div>
@@ -196,7 +188,7 @@ body {
 			 			</div>     			
 			      			<div class="input-group">
 			        			<div class="input-group-prepend2">
-			        				<input type="text" id="sample6_postcode" placeholder="우편번호가 나오겠지여" class="input input-bordered w-full" name="" value=""/>
+			        				<input type="text" id="sample6_postcode" class="input input-bordered w-full" name="CT_ADDR" value="${CT_ADDR }"/>
 			 					</div>
 			 					<div class="input-group-prepend3">
 			        				<button type="button" class="btn btn-se" onclick="sample6_execDaumPostcode();">우편번호 찾기</button>
@@ -204,37 +196,37 @@ body {
       						</div>
       					<div class="input-group">
         					<div class="input-group-prepend">
-        						<input type="text"  id="sample6_address" placeholder="주소가 나오고" class="input input-bordered w-full"  name="address" value=""/>
+        						<input type="text"  id="sample6_address" class="input input-bordered w-full"  name="CT_ADDR" value="${CT_ADDR }"/>
  							</div>     			
       					</div>
       					<div class="input-group">
         					<div class="input-group-prepend">
-        						<input type="text"  id="sample6_detailAddress" placeholder="상세주소가 나오겠지욥" class="input input-bordered w-full"  name="" value=""/>
+        						<input type="text"  id="sample6_detailAddress"  class="input input-bordered w-full"  name="CT_ADDR" value="${CT_ADDR }"/>
  							</div>
  							<div class="input-group-prepend">
-        						<input type="text" id="sample6_extraAddress" placeholder="상세주소가 나오겠지욥" class="input input-bordered w-full"  name="" value=""/>
+        						<input type="text" id="sample6_extraAddress" class="input input-bordered w-full"  name="CT_ADDR" value="${CT_ADDR }"/>
  							</div>        			
       					</div>
       					<label style="font-weight: bold;">담당자명</label>
       					<div class="input-group">
         					<div class="input-group-prepend">
-        						<input type="text" placeholder="Type here" class="input input-bordered w-full"  name="" value=""/>
+        						<input type="text" class="input input-bordered w-full" name="CT_MANAGER" value="${CT_MANAGERR }"/>
  							</div>     			
       					</div>
       					<div class="form-group row">
 						<label style="font-weight: bold;">전화번호</label>
 						<div class="form-box" style="display:flex;">
 							<div class="input-group-sm">
-								<select style="width:22%;" name="" id="" class="select select-bordered float-left">
+								<select style="width:22%;" name="CT_MG_TEL" id="CT_MG_TEL" class="select select-bordered float-left">
 										<option value="">-선택-</option>
 										<option value="010">010</option>
 										<option value="011">011</option>
 										<option value="010">070</option>
 								</select> 
 									<label class="float-left" style="padding: 0; text-align: center;width:5%;">&nbsp;-&nbsp;</label> 
-								<input style="width:34%;" name="" type="text" class="input input-bordered float-left" /> 
+								<input style="width:34%;" name="CT_MG_TEL" type="text" class="input input-bordered float-left" value="${CT_MG_TEL }" /> 
 									<label class="float-left" style="padding: 0; text-align: center;width:5%;">&nbsp;-&nbsp;</label> 
-								<input style="width:34%;" name="" type="text" class="input input-bordered float-right" />
+								<input style="width:34%;" name="CT_MG_TEL" type="text" class="input input-bordered float-right" value="${CT_MG_TEL}" />
 								</div>
 							</div>
 						</div>
@@ -243,10 +235,11 @@ body {
 			<div class="col-sm-4"></div>
 			<button type="button" id="cancelBtn" onclick="CloseWindow();" class="btn btn-se"  style="margin-left: 10px;">취 소</button>
 		</div>	
-					</div>
 				</div>
+			</form>
 		</div>
 	</div>
+</div>
 	<!-- /.content-wrapper -->
 <script>
 
@@ -298,9 +291,70 @@ function sample6_execDaumPostcode() {
     }).open();
 }
 
-function modify_go(){
-	var form = $('form[role="form"]');		
-	form.submit();
+function regist_go() {
+
+    // 대표자명
+    var ctCeo = document.getElementById("CT_CEO").value;
+
+    // 구분
+    var ctType = document.querySelector("#sample6 > div:nth-child(3) > div.input-group > div.input-group-prepend3 > select").value;
+
+    // 전화번호
+    var ctTel1 = document.querySelector("#sample6 > div:nth-child(5) > div > div > select").value;
+    var ctTel2 = document.querySelector("#sample6 > div:nth-child(5) > div > div > input:nth-child(3)").value;
+    var ctTel3 = document.querySelector("#sample6 > div:nth-child(5) > div > div > input:nth-child(5)").value;
+    var ctTel = ctTel1 + "-" + ctTel2 + "-" + ctTel3;
+
+    // 이메일
+    var ctEmail = document.getElementById("inputEmail").value;
+
+    // 팩스번호
+    var ctFax1 = document.querySelector("#sample6 > div:nth-child(7) > div > div > input:nth-child(1)").value;
+    var ctFax2 = document.querySelector("#sample6 > div:nth-child(7) > div > div > input:nth-child(3)").value;
+    var ctFax3 = document.querySelector("#sample6 > div:nth-child(7) > div > div > input:nth-child(5)").value;
+    var ctFax = ctFax1 + "-" + ctFax2 + "-" + ctFax3;
+
+    // 주소
+    var ctPostcode = document.getElementById("sample6_postcode").value;
+    var ctAddress = document.getElementById("sample6_address").value;
+    var ctDetailAddress = document.getElementById("sample6_detailAddress").value;
+    var ctExtraAddress = document.getElementById("sample6_extraAddress").value;
+    var fullAddress = ctAddress + ctDetailAddress;
+
+    // 담당자명
+    var ctManager = document.getElementById("CT_MANAGER").value;
+
+    // 담당자 전화번호
+    var ctManagerTel1 = document.querySelector("#sample6 > div:nth-child(12) > div > div > select").value;
+    var ctManagerTel2 = document.querySelector("#sample6 > div:nth-child(12) > div > div > input:nth-child(3)").value;
+    var ctManagerTel3 = document.querySelector("#sample6 > div:nth-child(12) > div > div > input:nth-child(5)").value;
+    var ctManagerTel = ctManagerTel1 + "-" + ctManagerTel2 + "-" + ctManagerTel3;
+
+    // 서버로 데이터 전송
+    var formData = new FormData();
+    formData.append("CT_CEO", ctCeo);
+    formData.append("CT_TYPE", ctType);
+    formData.append("CT_TEL", ctTel);
+    formData.append("CT_EMAIL", ctEmail);
+    formData.append("CT_FAX", ctFax);
+    formData.append("CT_ADDRESS", fullAddress);
+    formData.append("CT_MANAGER", ctManager);
+    formData.append("CT_MANAGER_TEL", ctManagerTel);
+
+    // AJAX 요청 보내기
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST", "/contacts/modify", true);
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            // 요청 완료 후 처리할 코드 작성
+            console.log(xhr.responseText);
+        }
+    };
+    xhr.send(formData);
+}
+
+function CloseWindow() {
+    // 창 닫기 코드 작성
 }
 
 function CloseWindow(parentURL){

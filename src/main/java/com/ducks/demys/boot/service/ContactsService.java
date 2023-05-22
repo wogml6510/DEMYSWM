@@ -29,6 +29,10 @@ public class ContactsService {
 		return contactsRepository.getContactsByCT_NUM(CT_NUM);
 	}
 	
+	public Contacts getContactsByCT_NAME(String CT_NAME) {
+		return contactsRepository.getContactsByCT_NAME(CT_NAME);
+	}
+	
 	public Contacts registContacts(Contacts contacts) {
 		contacts.setCT_NUM(contactsRepository.selectContactsSequenceNextValue());
 		contactsRepository.registContacts(contacts);
