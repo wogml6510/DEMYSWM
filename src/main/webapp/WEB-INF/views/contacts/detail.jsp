@@ -122,7 +122,7 @@ body {
 	<div class="main">	
 		<div class="main-box">	
 			<div class="main-title">업체 정보 상세</div>
-			<form role="form" class="form-horizontal" action="/contacts/modify" method="post">	
+			<form role="form" class="form-horizontal" action="/contacts/modify" method="post" id="modifyForm">	
 				<input type="hidden" class="input input-bordered w-full"  id="CT_NUM" name="CT_NUM" readonly value="${contacts.CT_NUM }"/>
 				<div class="form-group">
       				<label style="font-weight: bold;">업체명</label>
@@ -182,8 +182,21 @@ body {
 							</div>
 						</div>
 						</div>
-		<div class="card-footer row" style="margin-top: 0; border-top: none;display:flex;flex-direction:row;justify-content:center;">						
-			<button type="button" id="modifyBtn" onclick="location.href='modify?CT_NAME=${contacts.CT_NAME}';" class="btn btn-se" style="margin-right: 10px;">수 정</button>
+		<div class="card-footer row" style="margin-top: 0; border-top: none;display:flex;flex-direction:row;justify-content:center;">	
+			    <input type="hidden" name="phoneNumber1" value="${phoneNumber1 }">
+			    <input type="hidden" name="phoneNumber2" value="${phoneNumber2 }">
+			    <input type="hidden" name="phoneNumber3" value="${phoneNumber3 }">
+			    <input type="hidden" name="ct_fax1" value="${ct_fax1 }">
+			    <input type="hidden" name="ct_fax2" value="${ct_fax2 }">
+			    <input type="hidden" name="ct_fax3" value="${ct_fax3 }">
+			    <input type="hidden" name="ct_mg_tel1" value="${ct_mg_tel1 }">
+			    <input type="hidden" name="ct_mg_tel2" value="${ct_mg_tel2 }">
+			    <input type="hidden" name="ct_mg_tel3" value="${ct_mg_tel3 }">
+			    <input type="hidden" name="postcode" value="${postcode }">
+			    <input type="hidden" name="address" value="${address }">
+			    <input type="hidden" name="detailAddress" value="${detailAddress }">
+			    <input type="hidden" name="extraAddress" value="${extraAddress }">
+			<button type="button" id="modifyBtn" class="btn btn-se" style="margin-right: 10px;" onclick="modify_go('${contacts.CT_NAME}');">수 정</button>
 			<button type="button" id="removeBtn" onclick="remove_go();" class="btn btn-se" style="margin-right: 10px;">삭 제</button>
 			<button type="button" id="cancelBtn" onclick="CloseWindow();" class="btn btn-se">취 소</button>
 		</div>	
@@ -193,6 +206,13 @@ body {
 		</div>
 
 <script>
+
+
+function modify_go() {
+    // 폼 전송
+    document.getElementById("modifyForm").submit();
+}
+
 
 function remove_go() {
 	  var CT_NUM = getCT_NUM();

@@ -146,23 +146,28 @@ body {
 						 </select>
       				</div>
       			</div>
-      			<div class="form-group row">
-					<label style="font-weight: bold;">전화번호</label>
-						<div class="form-box" style="display:flex;">
-							<div class="input-group-sm">
-								<select style="width: 22%;" name="ctTel1" id="ctTel1" class="select select-bordered float-left" >
-										<option value="">-선택-</option>
-										<option value="010">010</option>
-										<option value="011">011</option>
-										<option value="010">070</option>
-								</select> 
-									<label class="float-left" style="padding: 0; text-align: center;width:5%;">&nbsp;-&nbsp;</label> 
-								<input style="width:34%;" name="ctTel2" id="ctTel2" type="text" class="input input-bordered float-left"/> 
-									<label class="float-left" style="padding: 0; text-align: center;width:5%;">&nbsp;-&nbsp;</label> 
-								<input style="width:34%;" name="ctTel3" id="ctTel3" type="text" class="input input-bordered float-right" />
-								</div>
-							</div>
-						</div>
+      		<div class="form-group row">
+			    <label style="font-weight: bold;">전화번호</label>
+			    <div class="form-box" style="display:flex;">
+			        <div class="input-group-sm">
+			            <select style="width: 22%;" name="phoneNumber1" id="ct_tel1" class="select select-bordered float-left" value="${phoneNumber1 }">
+			                <option value="">-선택-</option>
+						    <option value="02" ${phoneNumber1 == '02' ? 'selected' : ''}>02</option>
+						    <option value="031" ${phoneNumber1 == '031' ? 'selected' : ''}>031</option>
+						    <option value="041" ${phoneNumber1 == '041' ? 'selected' : ''}>041</option>
+						    <option value="042" ${phoneNumber1 == '042' ? 'selected' : ''}>042</option>
+						    <option value="044" ${phoneNumber1 == '044' ? 'selected' : ''}>044</option>
+						    <option value="033" ${phoneNumber1 == '033' ? 'selected' : ''}>033</option>
+						    <option value="053" ${phoneNumber1 == '053' ? 'selected' : ''}>053</option>
+						    <option value="054" ${phoneNumber1 == '054' ? 'selected' : ''}>054</option>
+						</select>
+			            <label class="float-left" style="padding: 0; text-align: center;width:5%;">&nbsp;-&nbsp;</label> 
+			            <input style="width:34%;" type="text" class="input input-bordered float-left" id="ct_tel2" name="phoneNumber2" onkeyup="this.value = this.value.replace(/[^\d]/g, '')" value="${ phoneNumber2}"/> 
+			            <label class="float-left" style="padding: 0; text-align: center;width:5%;">&nbsp;-&nbsp;</label> 
+			            <input style="width:34%;" type="text" class="input input-bordered float-right" id="ct_tel3" name="phoneNumber3" onkeyup="this.value = this.value.replace(/[^\d]/g, '')" value="${ phoneNumber3}"/>
+			        </div>
+			    </div>
+			</div>
 				<div class="form-group row">
 					<label style="font-weight: bold;">이메일</label>
 						<div class="form-box" style="display:flex;">
@@ -175,11 +180,11 @@ body {
 					<label style="font-weight: bold;">팩스번호</label>
 						<div class="form-box" style="display:flex;">
 							<div class="input-group-sm">
-								<input style="width:30%;" name="CT_FAX" type="text" class="input input-bordered float-left" value="${CT_FAX }"/> 
+								<input style="width:30%;" type="text" class="input input-bordered float-left"  id="CT_FAX" name="ct_fax1" onkeyup="this.value = this.value.replace(/[^\d]/g, '')" value="${ct_fax1 }"/> 
 									<label class="float-left" style="padding: 0; text-align: center;width:5%;">&nbsp;-&nbsp;</label> 
-								<input style="width:30%;" name="CT_FAX" type="text" class="input input-bordered float-left" value="${CT_FAX }"/> 
+								<input style="width:30%;" type="text" class="input input-bordered float-left"  id="CT_FAX" name="ct_fax2" onkeyup="this.value = this.value.replace(/[^\d]/g, '')" value="${ct_fax2 }"/> 
 									<label class="float-left" style="padding: 0; text-align: center;width:5%;">&nbsp;-&nbsp;</label> 
-								<input style="width:30%;" name="CT_FAX" type="text" class="input input-bordered float-right" value="${CT_FAX }" />
+								<input style="width:30%;" type="text" class="input input-bordered float-right" id="CT_FAX" name="ct_fax3" onkeyup="this.value = this.value.replace(/[^\d]/g, '')" value="${ct_fax3 }"/>
 								</div>
 							</div>
 						</div>
@@ -188,7 +193,7 @@ body {
 			 			</div>     			
 			      			<div class="input-group">
 			        			<div class="input-group-prepend2">
-			        				<input type="text" id="sample6_postcode" class="input input-bordered w-full" name="CT_ADDR" value="${CT_ADDR }"/>
+			        				<input type="text" id="sample6_postcode" class="input input-bordered w-full" name="postcode" value="${postcode }"/>
 			 					</div>
 			 					<div class="input-group-prepend3">
 			        				<button type="button" class="btn btn-se" onclick="sample6_execDaumPostcode();">우편번호 찾기</button>
@@ -196,15 +201,15 @@ body {
       						</div>
       					<div class="input-group">
         					<div class="input-group-prepend">
-        						<input type="text"  id="sample6_address" class="input input-bordered w-full"  name="CT_ADDR" value="${CT_ADDR }"/>
+        						<input type="text"  id="sample6_address" class="input input-bordered w-full"  name="address" value="${address }"/>
  							</div>     			
       					</div>
       					<div class="input-group">
         					<div class="input-group-prepend">
-        						<input type="text"  id="sample6_detailAddress"  class="input input-bordered w-full"  name="CT_ADDR" value="${CT_ADDR }"/>
+        						<input type="text"  id="sample6_detailAddress"  class="input input-bordered w-full"  name="detailAddress" value="${detailAddress }"/>
  							</div>
  							<div class="input-group-prepend">
-        						<input type="text" id="sample6_extraAddress" class="input input-bordered w-full"  name="CT_ADDR" value="${CT_A DDR }"/>
+        						<input type="text" id="sample6_extraAddress" class="input input-bordered w-full"  name="extraAddress" value="${extraAddress }"/>
  							</div>        			
       					</div>
       					<label style="font-weight: bold;">담당자명</label>
@@ -213,20 +218,20 @@ body {
         						<input type="text" class="input input-bordered w-full" name="CT_MANAGER" value="${contacts.CT_MANAGER }"/>
  							</div>     			
       					</div>
-      					<div class="form-group row">
+     					<div class="form-group row">
 						<label style="font-weight: bold;">전화번호</label>
 						<div class="form-box" style="display:flex;">
 							<div class="input-group-sm">
-								<select style="width:22%;" name="CT_MG_TEL" id="CT_MG_TEL" class="select select-bordered float-left">
-										<option value="">-선택-</option>
-										<option value="010">010</option>
-										<option value="011">011</option>
-										<option value="010">070</option>
+								<select style="width:22%;" name="ct_mg_tel1" id="CT_MG_TEL" class="select select-bordered float-left" value="${ct_mg_tel1}"> 
+										 <option value="">-선택-</option>
+										 <option value="010" ${ct_mg_tel1 == '010' ? 'selected' : ''}>010</option>
+										 <option value="011" ${ct_mg_tel1 == '011' ? 'selected' : ''}>011</option>
+										 <option value="070" ${ct_mg_tel1 == '070' ? 'selected' : ''}>070</option>
 								</select> 
 									<label class="float-left" style="padding: 0; text-align: center;width:5%;">&nbsp;-&nbsp;</label> 
-								<input style="width:34%;" name="CT_MG_TEL" type="text" class="input input-bordered float-left" value="${CT_MG_TEL }" /> 
+								<input style="width:34%;" type="text" class="input input-bordered float-left"  id="CT_MG_TEL" name="ct_mg_tel2" onkeyup="this.value = this.value.replace(/[^\d]/g, '')" value="${ct_mg_tel2}"/> 
 									<label class="float-left" style="padding: 0; text-align: center;width:5%;">&nbsp;-&nbsp;</label> 
-								<input style="width:34%;" name="CT_MG_TEL" type="text" class="input input-bordered float-right" value="${CT_MG_TEL}" />
+								<input style="width:34%;" type="text" class="input input-bordered float-right"  id="CT_MG_TEL" name="ct_mg_tel3" onkeyup="this.value = this.value.replace(/[^\d]/g, '')" value="${ct_mg_tel3}"/>
 								</div>
 							</div>
 						</div>
@@ -240,9 +245,7 @@ body {
 		</div>
 	</div>
 </div>
-	<!-- /.content-wrapper -->
 <script>
-
 function sample6_execDaumPostcode() {
     new daum.Postcode({
         oncomplete: function(data) {
@@ -291,12 +294,6 @@ function modify_go() {
     // 구분
     var ctType = document.querySelector("#sample6 > div:nth-child(3) > div.input-group > div.input-group-prepend3 > select").value;
 
-    // 전화번호
-    var ctTel1 = document.querySelector("#sample6 > div:nth-child(5) > div > div > select").value;
-    var ctTel2 = document.querySelector("#sample6 > div:nth-child(5) > div > div > input:nth-child(3)").value;
-    var ctTel3 = document.querySelector("#sample6 > div:nth-child(5) > div > div > input:nth-child(5)").value;
-    var ctTel = ctTel1 + "-" + ctTel2 + "-" + ctTel3;
-
     // 이메일
     var ctEmail = document.getElementById("inputEmail").value;
 
@@ -322,29 +319,30 @@ function modify_go() {
     var ctManagerTel3 = document.querySelector("#sample6 > div:nth-child(12) > div > div > input:nth-child(5)").value;
     var ctManagerTel = ctManagerTel1 + "-" + ctManagerTel2 + "-" + ctManagerTel3;
 
-    // 서버로 데이터 전송
-    var formData = new FormData();
-    formData.append("CT_CEO", ctCeo);
-    formData.append("CT_TYPE", ctType);
-    formData.append("CT_TEL", ctTel);
-    formData.append("CT_EMAIL", ctEmail);
-    formData.append("CT_FAX", ctFax);
-    formData.append("CT_ADDRESS", fullAddress);
-    formData.append("CT_MANAGER", ctManager);
-    formData.append("CT_MANAGER_TEL", ctManagerTel);
+    var data = {
+            CT_NAME: ctName,
+            CT_CEO: ctCeo,
+            CT_TYPE: ctType,
+            CT_TEL: ctTel,
+            CT_EMAIL: ctEmail,
+            CT_FAX: ctFax,
+            CT_ADDRESS: fullAddress,
+            CT_MANAGER: ctManager,
+            CT_MANAGER_TEL: ctManagerTel
+        };
 
-    // AJAX 요청 보내기
-    var xhr = new XMLHttpRequest();
-    xhr.open("POST", "/contacts/modify", true);
-    xhr.onreadystatechange = function() {
-        if (xhr.readyState === 4 && xhr.status === 200) {
-            // 요청 완료 후 처리할 코드 작성
-            console.log(xhr.responseText);
-        }
-    };
-    xhr.send(formData);
-}
-
+        // AJAX 요청 보내기
+        $.ajax({
+            url: "/contacts/doRegist",
+            method: "POST",
+            data: data,
+            success: function(response) {
+            },
+            error: function(error) {
+                console.error("AJAX 요청 중 오류가 발생했습니다.");
+            }
+        });
+    }
 
 function CloseWindow(parentURL){
 	

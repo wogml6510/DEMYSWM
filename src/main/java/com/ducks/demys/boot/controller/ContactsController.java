@@ -1,6 +1,8 @@
 package com.ducks.demys.boot.controller;
 
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -76,8 +78,6 @@ public class ContactsController {
 		if (!ct_mg_tel1.isEmpty() && !ct_mg_tel2.isEmpty() && !ct_mg_tel3.isEmpty()) {
 		    mgNumber = ct_mg_tel1 + "-" + ct_mg_tel2 + "-" + ct_mg_tel3;
 		}
-
-
 	    contacts.setCT_ADDR(fullAddress);
 	    contacts.setCT_TEL(phoneNumber);
 	    contacts.setCT_FAX(faxNumber);
@@ -92,20 +92,101 @@ public class ContactsController {
 	
 	@RequestMapping("/contacts/detail")
 	public void showDetail(Model model, String CT_NAME) {
-		
-		Contacts contacts = contactsService.getContactsByCT_NAME(CT_NAME);
-		model.addAttribute("contacts",contacts);
+	    Contacts contacts = contactsService.getContactsByCT_NAME(CT_NAME);
+	    model.addAttribute("contacts", contacts);
+	    
+	    // 전화번호를 쪼개어 각 부분을 모델에 추가
+	    if (contacts != null) {
+	        String phoneNumber = contacts.getCT_TEL();
+	        
+	        if (phoneNumber != null && !phoneNumber.isEmpty()) {
+	            String[] phoneNumberParts = phoneNumber.split("-");
+	            
+	            if (phoneNumberParts.length == 3) {
+	                model.addAttribute("phoneNumber1", phoneNumberParts[0]);
+	                model.addAttribute("phoneNumber2", phoneNumberParts[1]);
+	                model.addAttribute("phoneNumber3", phoneNumberParts[2]);
+	            }
+	        }
+	        String ct_fax = contacts.getCT_FAX();
+	        
+	        if (ct_fax != null && !ct_fax.isEmpty()) {
+	        	String[] ct_fax_Parts = ct_fax.split("-");
+	        	
+	        	if (ct_fax_Parts.length == 3) {
+	        		model.addAttribute("ct_fax1", ct_fax_Parts[0]);
+	        		model.addAttribute("ct_fax2", ct_fax_Parts[1]);
+	        		model.addAttribute("ct_fax3", ct_fax_Parts[2]);
+	        	}
+	        }
+	        String ct_mg_tel = contacts.getCT_MG_TEL();
+	        
+	        if (ct_mg_tel != null && !ct_mg_tel.isEmpty()) {
+	        	String[] ct_mg_tel_Parts = ct_mg_tel.split("-");
+	        	
+	        	if (ct_mg_tel_Parts.length == 3) {
+	        		model.addAttribute("ct_mg_tel1", ct_mg_tel_Parts[0]);
+	        		model.addAttribute("ct_mg_tel2", ct_mg_tel_Parts[1]);
+	        		model.addAttribute("ct_mg_tel3", ct_mg_tel_Parts[2]);
+	        	}
+	        }
 
+	     String ct_address = contacts.getCT_ADDR();
+
+	     // 앞쪽 괄호 기준으로 자르기
+	     int firstBracketIndex = ct_address.indexOf("(");
+	     int lastBracketIndex = ct_address.indexOf(")");
+	     String postcode = ct_address.substring(firstBracketIndex, lastBracketIndex + 1);
+
+	     // 뒤쪽 괄호 기준으로 자르기
+	     lastBracketIndex = ct_address.lastIndexOf("(");
+	     String extraAddress = ct_address.substring(lastBracketIndex + 1, ct_address.lastIndexOf(")"));
+
+	     // 앞쪽 괄호와 뒤쪽 괄호를 제외한 주소 추출
+	     String address = ct_address.substring(firstBracketIndex + 7, lastBracketIndex - 1).trim();
+
+	     // 주소에서 마지막 공백으로 자르기
+	     int lastSpaceIndex = address.lastIndexOf(" ");
+	     String detailAddress = address.substring(lastSpaceIndex + 1).trim();
+	     address = address.substring(0, lastSpaceIndex).trim();
+
+	     // 모델에 변수 추가
+	     model.addAttribute("postcode", postcode);
+	     model.addAttribute("address", address);
+	     model.addAttribute("detailAddress", detailAddress);
+	     model.addAttribute("extraAddress", extraAddress);
+	    }
 	}
 	
 	@RequestMapping("/contacts/modify")
-	public void Modify(Model model, String CT_NAME) {
+	public String showModify(Model model, String phoneNumber1, String phoneNumber2, String phoneNumber3, String ct_fax1, String ct_fax2, String ct_fax3, 
+			String ct_mg_tel1, String ct_mg_tel2, String ct_mg_tel3, String postcode, String address, String detailAddress, String extraAddress, String CT_NAME) {
 
-		Contacts contacts = contactsService.getContactsByCT_NAME(CT_NAME);
-		model.addAttribute("contacts",contacts);
+	    Contacts contacts = contactsService.getContactsByCT_NAME(CT_NAME);
+	    model.addAttribute("contacts", contacts);
+	    model.addAttribute("phoneNumber1", phoneNumber1);
+	    model.addAttribute("phoneNumber2", phoneNumber2);
+	    model.addAttribute("phoneNumber3", phoneNumber3);
+	    model.addAttribute("ct_fax1", ct_fax1);
+	    model.addAttribute("ct_fax2", ct_fax2);
+	    model.addAttribute("ct_fax3", ct_fax3);
+	    model.addAttribute("ct_mg_tel1", ct_mg_tel1);
+	    model.addAttribute("ct_mg_tel2", ct_mg_tel2);
+	    model.addAttribute("ct_mg_tel3", ct_mg_tel3);
+	    model.addAttribute("postcode", postcode);
+	    model.addAttribute("address", address);
+	    model.addAttribute("detailAddress", detailAddress);
+	    model.addAttribute("extraAddress", extraAddress);
+	    
+	    return "contacts/modify";
 	}
 
-
+	
+	
+	
+	
+	
+	
 	@RequestMapping("/contacts/remove")
 	@ResponseBody
 	public void removeContacts(@RequestParam("CT_NUM") int CT_NUM) {
