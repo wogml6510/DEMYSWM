@@ -52,16 +52,12 @@ public class ContactsController {
 	
 	@RequestMapping("/contacts/doRegist")
 	@ResponseBody
-	public String registContacts(Model model, Contacts contacts, @RequestParam("CT_TYPE") int CT_TYPE,
-	        @RequestParam("phoneNumber1") String phoneNumber1, @RequestParam("phoneNumber2") String phoneNumber2,
-	        @RequestParam("phoneNumber3") String phoneNumber3, @RequestParam("ct_fax1") String ct_fax1, @RequestParam("ct_fax2") String ct_fax2,
-	        @RequestParam("ct_fax3") String ct_fax3, @RequestParam("ct_mg_tel1") String ct_mg_tel1, @RequestParam("ct_mg_tel2") String ct_mg_tel2,
-	        @RequestParam("ct_mg_tel3") String ct_mg_tel3,@RequestParam("ctPostcode") String ctPostcode, @RequestParam("ctAddress") String ctAddress,
-	        @RequestParam("ctDetailAddress") String ctDetailAddress, @RequestParam("ctExtraAddress") String ctExtraAddress) {
+	public String registContacts(Model model, Contacts contacts, int CT_TYPE, String phoneNumber1, String phoneNumber2, String phoneNumber3,String ct_fax1, 
+			String ct_fax2, String ct_fax3, String ct_mg_tel1, String ct_mg_tel2, String ct_mg_tel3, String postcode, String address, String detailAddress, String extraAddress) {
 		
 		String fullAddress = "";
-		if (!ctAddress.isEmpty() && !ctDetailAddress.isEmpty() && !ctExtraAddress.isEmpty()) {
-		    fullAddress = "(" + ctPostcode + ") " + ctAddress + " " + ctDetailAddress + " " + ctExtraAddress;
+		if (!address.isEmpty() && !detailAddress.isEmpty() && !extraAddress.isEmpty()) {
+		    fullAddress = "(" + postcode + ") " + address + " " + detailAddress + " " + extraAddress;
 		}
 
 		String phoneNumber = "";
@@ -91,8 +87,8 @@ public class ContactsController {
 	}
 	
 	@RequestMapping("/contacts/detail")
-	public void showDetail(Model model, String CT_NAME) {
-	    Contacts contacts = contactsService.getContactsByCT_NAME(CT_NAME);
+	public void showDetail(Model model, int CT_NUM) {
+	    Contacts contacts = contactsService.getContactsByCT_NUM(CT_NUM);
 	    model.addAttribute("contacts", contacts);
 	    
 	    // 전화번호를 쪼개어 각 부분을 모델에 추가
@@ -133,22 +129,21 @@ public class ContactsController {
 
 	     String ct_address = contacts.getCT_ADDR();
 
-	     // 앞쪽 괄호 기준으로 자르기
-	     int firstBracketIndex = ct_address.indexOf("(");
-	     int lastBracketIndex = ct_address.indexOf(")");
-	     String postcode = ct_address.substring(firstBracketIndex, lastBracketIndex + 1);
+	  // 앞쪽 괄호 기준으로 자르기
+	  int firstBracketIndex = ct_address.indexOf("(");
+	  String postcode = ct_address.substring(firstBracketIndex, ct_address.indexOf(")") + 1);
 
-	     // 뒤쪽 괄호 기준으로 자르기
-	     lastBracketIndex = ct_address.lastIndexOf("(");
-	     String extraAddress = ct_address.substring(lastBracketIndex + 1, ct_address.lastIndexOf(")"));
+	  // 뒤쪽 괄호 기준으로 자르기
+	  int lastBracketIndex = ct_address.lastIndexOf("(");
+	  String extraAddress = ct_address.substring(lastBracketIndex).trim();
 
-	     // 앞쪽 괄호와 뒤쪽 괄호를 제외한 주소 추출
-	     String address = ct_address.substring(firstBracketIndex + 7, lastBracketIndex - 1).trim();
+	  // 앞쪽 괄호와 뒤쪽 괄호를 제외한 주소 추출
+	  String address = ct_address.substring(postcode.length() + 1, lastBracketIndex).trim();
 
-	     // 주소에서 마지막 공백으로 자르기
-	     int lastSpaceIndex = address.lastIndexOf(" ");
-	     String detailAddress = address.substring(lastSpaceIndex + 1).trim();
-	     address = address.substring(0, lastSpaceIndex).trim();
+	  // 남은 주소에서 뒤에서 첫번째 공백을 기준으로 자르기
+	  int lastSpaceIndex = address.lastIndexOf(" ");
+	  String detailAddress = address.substring(lastSpaceIndex + 1).trim();
+	  address = address.substring(0, lastSpaceIndex).trim();
 
 	     // 모델에 변수 추가
 	     model.addAttribute("postcode", postcode);
@@ -181,12 +176,44 @@ public class ContactsController {
 	    return "contacts/modify";
 	}
 
-	
-	
-	
-	
-	
-	
+	@RequestMapping("/contacts/doModify")
+	@ResponseBody
+	public String modifyContacts(Contacts contacts, int CT_TYPE, String phoneNumber1, String phoneNumber2, String phoneNumber3, String ct_fax1,
+	        String ct_fax2, String ct_fax3, String ct_mg_tel1, String ct_mg_tel2, String ct_mg_tel3, String postcode, String address, String detailAddress, String extraAddress) {
+
+	    String fullAddress = "";
+	    if (!address.isEmpty() && !detailAddress.isEmpty() && !extraAddress.isEmpty()) {
+	        fullAddress = postcode + " "  + address + " " + detailAddress + " " + extraAddress;
+	    }
+
+	    String phoneNumber = "";
+	    if (!phoneNumber1.isEmpty() && !phoneNumber2.isEmpty() && !phoneNumber3.isEmpty()) {
+	        phoneNumber = phoneNumber1 + "-" + phoneNumber2 + "-" + phoneNumber3;
+	    }
+
+	    String faxNumber = "";
+	    if (!ct_fax1.isEmpty() && !ct_fax2.isEmpty() && !ct_fax3.isEmpty()) {
+	        faxNumber = ct_fax1 + "-" + ct_fax2 + "-" + ct_fax3;
+	    }
+
+	    String mgNumber = "";
+	    if (!ct_mg_tel1.isEmpty() && !ct_mg_tel2.isEmpty() && !ct_mg_tel3.isEmpty()) {
+	        mgNumber = ct_mg_tel1 + "-" + ct_mg_tel2 + "-" + ct_mg_tel3;
+	    }
+
+	    contacts.setCT_ADDR(fullAddress);
+	    contacts.setCT_TEL(phoneNumber);
+	    contacts.setCT_FAX(faxNumber);
+	    contacts.setCT_MG_TEL(mgNumber);
+	    contacts.setCT_TYPE(CT_TYPE);
+
+	    contactsService.modifyContacts(contacts);
+
+	    String script = "<script>alert('업체 수정이 완료되었습니다.');window.close(); window.opener.location.href='/contacts/list';</script>";
+	    return script;
+	}
+
+
 	@RequestMapping("/contacts/remove")
 	@ResponseBody
 	public void removeContacts(@RequestParam("CT_NUM") int CT_NUM) {

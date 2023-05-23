@@ -196,7 +196,8 @@ body {
 			    <input type="hidden" name="address" value="${address }">
 			    <input type="hidden" name="detailAddress" value="${detailAddress }">
 			    <input type="hidden" name="extraAddress" value="${extraAddress }">
-			<button type="button" id="modifyBtn" class="btn btn-se" style="margin-right: 10px;" onclick="modify_go('${contacts.CT_NAME}');">수 정</button>
+			    <input type="hidden" name="CT_NUM" value="${contacts.CT_NUM }" >
+ 			<button type="button" id="modifyBtn" class="btn btn-se" style="margin-right: 10px;" onclick="modify_go();">수 정</button>
 			<button type="button" id="removeBtn" onclick="remove_go();" class="btn btn-se" style="margin-right: 10px;">삭 제</button>
 			<button type="button" id="cancelBtn" onclick="CloseWindow();" class="btn btn-se">취 소</button>
 		</div>	

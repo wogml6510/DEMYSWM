@@ -137,50 +137,33 @@
                               
                         </ul>
                   </div>
-                  <ul>
-                  <c:if test="${!rq.logined}">
-	        <li>
-	          <a href="${rq.joinUri}" class="h-full flex items-center px-3 hover:underline">
-	            <span>회원가입</span>
-	          </a>
-	        </li>
-	      	<li>
-	          <a href="${rq.loginUri}" class="h-full flex items-center px-3 hover:underline">
-	            <span>로그인</span>
-	          </a>
-	        </li>
-        </c:if>
-        <c:if test="${session.logined}">
-        	<li>
-	          <a href="/member/myPage" class="h-full flex items-center px-3 hover:underline">
-	            <span>${member.MEMBER_NICKNAME}'s Profile</span>
-	          </a>
-	        </li>
-        	<li>
-	          <a href="${session.logoutUri}" class="h-full flex items-center px-3 hover:underline">
-	            <span>로그아웃</span>
-	          </a>
-	        </li>
-        </c:if>
-        </ul>
-                  <div class="dropdown dropdown-end">
-                        <label tabindex="0" class="btn btn-top btn-circle avatar">
-                              <div class="w-10 rounded-full">
-                                    <img src="/resource/img/imja.jpg" />
-                              </div>
-                        </label>
-                        <ul tabindex="0" class="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
-                              style="color: black;">
-                              <li>
-                                    <a href="#" class="justify-between btn-drop"> MyPage </a>
-                              </li>
-                              <li>
-                                    <a href="#" class="btn-drop">Logout</a>
-                              </li>
-                        </ul>
-                  </div>
-            </div>
-      </div>
+                 <c:if test="${not empty member.MEMBER_ID}">
+				  <li style="margin: 0 auto;color:black;list-style-type: none;">
+				    <span>
+				      ${member.MEMBER_NAME}
+				      <c:choose>
+				        <c:when test="${member.MEMBER_POSITION eq 1}">
+				          사원
+				        </c:when>
+				        <c:when test="${member.MEMBER_POSITION eq 2}">
+				          선임
+				        </c:when>
+				        <c:when test="${member.MEMBER_POSITION eq 3}">
+				          책임
+				        </c:when>
+				      </c:choose>
+				    </span>
+				  </li>
+				</c:if>
+				
+				<c:if test="${empty member.MEMBER_ID}">
+				  <li>
+				    <a href="/member/login" class="text-black text-right ml-2 mr-1">
+				      <span>로그인</span>
+				    </a>
+				  </li>
+				</c:if>
+
       <div class="flex" style="background-color: #153A66;">
             <div class="navbar text-neutral-content" style="width:18%; border-right: 2px solid #f7f7f7;">
                   <a class="btn btn-ghost normal-case text-xl">사이드바</a>

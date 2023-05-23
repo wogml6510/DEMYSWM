@@ -149,7 +149,7 @@ a:hover{
 		  <c:forEach items="${contactsList }" var="contacts" >
 			<tr class="hover">
 				<td>${contacts.CT_NUM }</td>
-				<td><a href="javascript:OpenWindow('detail?CT_NAME=${contacts.CT_NAME}', '업체 상세', 550, 800);">${contacts.CT_NAME}</a></td>
+				<td><a href="javascript:OpenWindow('detail?CT_NUM=${contacts.CT_NUM}', '업체 상세', 550, 800);">${contacts.CT_NAME}</a></td>
 				<td>${contacts.CT_CEO }</td>
 				<td>${contacts.CT_TEL }</td>
 				<td>${contacts.CT_FAX }</td>

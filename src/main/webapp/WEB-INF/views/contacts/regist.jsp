@@ -153,10 +153,14 @@ body {
 						<div class="form-box" style="display:flex;">
 							<div class="input-group-sm">
 								<select style="width: 22%;" name="phoneNumber1" id="ct_tel" class="select select-bordered float-left">
-										<option value="">-선택-</option>
-										<option value="010">010</option>
-										<option value="011">011</option>
-										<option value="010">070</option>
+										<option value="02">02</option>
+									    <option value="031">031</option>
+									    <option value="041">041</option>
+									    <option value="042">042</option>
+									    <option value="044">044</option>
+									    <option value="033">033</option>
+									    <option value="053">053</option>
+									    <option value="054">054</option>
 								</select> 
 									<label class="float-left" style="padding: 0; text-align: center;width:5%;">&nbsp;-&nbsp;</label> 
 								<input style="width:34%;" type="text" class="input input-bordered float-left"  id="ct_tel" name="phoneNumber2" onkeyup="this.value = this.value.replace(/[^\d]/g, '')"/> 
@@ -191,7 +195,7 @@ body {
 			 			</div>     			
 			      			<div class="input-group">
 			        			<div class="input-group-prepend2">
-			        				<input type="text" id="sample6_postcode" placeholder="우편번호가 나오겠지여" class="input input-bordered w-full" name="ctPostcode" value=""/>
+			        				<input type="text" id="sample6_postcode" placeholder="우편번호가 나오겠지여" class="input input-bordered w-full" name="postcode" value=""/>
 			 					</div>
 			 					<div class="input-group-prepend3">
 			        				<button type="button" class="btn btn-se" onclick="sample6_execDaumPostcode();">우편번호 찾기</button>
@@ -199,15 +203,15 @@ body {
       						</div>
       					<div class="input-group">
         					<div class="input-group-prepend">
-        						<input type="text"  id="sample6_address" placeholder="주소가 나오고" class="input input-bordered w-full"  name="ctAddress" value=""/>
+        						<input type="text"  id="sample6_address" placeholder="주소가 나오고" class="input input-bordered w-full"  name="address" value=""/>
  							</div>     			
       					</div>
       					<div class="input-group">
         					<div class="input-group-prepend">
-        						<input type="text"  id="sample6_detailAddress" placeholder="상세주소가 나오겠지욥" class="input input-bordered w-full"  name="ctDetailAddress" value=""/>
+        						<input type="text"  id="sample6_detailAddress" placeholder="상세주소가 나오겠지욥" class="input input-bordered w-full"  name="detailAddress" value=""/>
  							</div>
  							<div class="input-group-prepend">
-        						<input type="text" id="sample6_extraAddress" placeholder="상세주소가 나오겠지욥" class="input input-bordered w-full"  name="ctExtraAddress" value=""/>
+        						<input type="text" id="sample6_extraAddress" placeholder="상세주소가 나오겠지욥" class="input input-bordered w-full"  name="extraAddress" value=""/>
  							</div>        			
       					</div>
       					<label style="font-weight: bold;">담당자명</label>
@@ -289,64 +293,6 @@ function sample6_execDaumPostcode() {
             document.getElementById("sample6_detailAddress").focus();
         }
     }).open();
-}
-
-function regist_go() {
-    // 업체명
-    var ctName = document.getElementById("CT_NAME").value || "";
-
-    // 대표자명
-    var ctCeo = document.getElementById("CT_CEO").value || "";
-    
-    // 구분
-    var ctType = document.querySelector('select#CT_TYPE option:checked').value || "";
-    
-    // 이메일
-    var ctEmail = document.getElementById("inputEmail").value || "";
-
-    // 팩스번호
-    var ctFax1 = document.querySelector("#sample6 > div:nth-child(7) > div > div > input:nth-child(1)").value || "";
-    var ctFax2 = document.querySelector("#sample6 > div:nth-child(7) > div > div > input:nth-child(3)").value || "";
-    var ctFax3 = document.querySelector("#sample6 > div:nth-child(7) > div > div > input:nth-child(5)").value || "";
-    
-    // 주소
-    var ctPostcode = document.getElementById("sample6_postcode").value || "";
-    var ctAddress = document.getElementById("sample6_address").value || "";
-    var ctDetailAddress = document.getElementById("sample6_detailAddress").value || "";
-    var ctExtraAddress = document.getElementById("sample6_extraAddress").value || "";
-
-    // 담당자명
-    var ctManager = document.getElementById("CT_MANAGER").value || "";
-
-    // 담당자 전화번호
-    var ctManagerTel1 = document.querySelector("#sample6 > div:nth-child(12) > div > div > select").value || "";
-    var ctManagerTel2 = document.querySelector("#sample6 > div:nth-child(12) > div > div > input:nth-child(3)").value || "";
-    var ctManagerTel3 = document.querySelector("#sample6 > div:nth-child(12) > div > div > input:nth-child(5)").value || "";
-
-    // 데이터 객체 생성
-    var data = {
-        CT_NAME: ctName,
-        CT_CEO: ctCeo,
-        CT_TYPE: ctType,
-        CT_TEL: ctTel,
-        CT_EMAIL: ctEmail,
-        CT_FAX: ctFax,
-        CT_ADDRESS: fullAddress,
-        CT_MANAGER: ctManager,
-        CT_MANAGER_TEL: ctManagerTel
-    };
-
-    // AJAX 요청 보내기
-    $.ajax({
-        url: "/contacts/doRegist",
-        method: "POST",
-        data: data,
-        success: function(response) {
-        },
-        error: function(error) {
-            console.error("AJAX 요청 중 오류가 발생했습니다.");
-        }
-    });
 }
 
 function CloseWindow(parentURL){

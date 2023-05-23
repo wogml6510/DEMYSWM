@@ -121,8 +121,9 @@ body {
 		</div>
 	<div class="main">	
 		<div class="main-box">	
-		<form class="table-box-type-1" method="post" action="/contacts/modify" >
+		<form class="table-box-type-1" method="post" action="/contacts/doModify" >
 			<div class="main-title">업체 정보 수정</div>
+			<input type="hidden" id="CT_NUM" name="CT_NUM" value="${contacts.CT_NUM }"/>
 				<div class="form-group">
       				<label style="font-weight: bold;">업체명</label>
       			<div class="input-group">
@@ -139,7 +140,7 @@ body {
         				<input type="text"  placeholder="대표자명을 입력하세요." class="input input-bordered w-full"  id="CT_CEO" name="CT_CEO" value="${contacts.CT_CEO }"/>
  					</div>
  					<div class="input-group-prepend3">
-        				<select class="select select-bordered w-full" name="CT_TYPE">
+        				<select class="select select-bordered w-full" name="CT_TYPE" id="CT_TYPE">
 							<option value=1>협력업체</option>
 							<option value=2>거래처</option>
 							<option value=3>클라이언트</option>
@@ -236,7 +237,7 @@ body {
 							</div>
 						</div>
 		<div class="card-footer row" style="margin-top: 0; border-top: none;display:flex;flex-direction:row;justify-content:center;">						
-			<button type="button" id="registBtn"  onclick="modify_go();" class="btn btn-se" style="margin-right: 10px;">수 정</button>
+			<button type="submit" id="modifyBtn" class="btn btn-se" style="margin-right: 10px;">수 정</button>
 			<div class="col-sm-4"></div>
 			<button type="button" id="cancelBtn" onclick="CloseWindow();" class="btn btn-se"  style="margin-left: 10px;">취 소</button>
 		</div>	
@@ -286,63 +287,6 @@ function sample6_execDaumPostcode() {
     }).open();
 }
 
-function modify_go() {
-
-    // 대표자명
-    var ctCeo = document.getElementById("CT_CEO").value;
-
-    // 구분
-    var ctType = document.querySelector("#sample6 > div:nth-child(3) > div.input-group > div.input-group-prepend3 > select").value;
-
-    // 이메일
-    var ctEmail = document.getElementById("inputEmail").value;
-
-    // 팩스번호
-    var ctFax1 = document.querySelector("#sample6 > div:nth-child(7) > div > div > input:nth-child(1)").value;
-    var ctFax2 = document.querySelector("#sample6 > div:nth-child(7) > div > div > input:nth-child(3)").value;
-    var ctFax3 = document.querySelector("#sample6 > div:nth-child(7) > div > div > input:nth-child(5)").value;
-    var ctFax = ctFax1 + "-" + ctFax2 + "-" + ctFax3;
-
-    // 주소
-    var ctPostcode = document.getElementById("sample6_postcode").value;
-    var ctAddress = document.getElementById("sample6_address").value;
-    var ctDetailAddress = document.getElementById("sample6_detailAddress").value;
-    var ctExtraAddress = document.getElementById("sample6_extraAddress").value;
-    var fullAddress = ctAddress + ctDetailAddress;
-
-    // 담당자명
-    var ctManager = document.getElementById("CT_MANAGER").value;
-
-    // 담당자 전화번호
-    var ctManagerTel1 = document.querySelector("#sample6 > div:nth-child(12) > div > div > select").value;
-    var ctManagerTel2 = document.querySelector("#sample6 > div:nth-child(12) > div > div > input:nth-child(3)").value;
-    var ctManagerTel3 = document.querySelector("#sample6 > div:nth-child(12) > div > div > input:nth-child(5)").value;
-    var ctManagerTel = ctManagerTel1 + "-" + ctManagerTel2 + "-" + ctManagerTel3;
-
-    var data = {
-            CT_NAME: ctName,
-            CT_CEO: ctCeo,
-            CT_TYPE: ctType,
-            CT_TEL: ctTel,
-            CT_EMAIL: ctEmail,
-            CT_FAX: ctFax,
-            CT_ADDRESS: fullAddress,
-            CT_MANAGER: ctManager,
-            CT_MANAGER_TEL: ctManagerTel
-        };
-
-        // AJAX 요청 보내기
-        $.ajax({
-            url: "/contacts/doRegist",
-            method: "POST",
-            data: data,
-            success: function(response) {
-            },
-            error: function(error) {
-                console.error("AJAX 요청 중 오류가 발생했습니다.");
-            }
-        });
-    }
 
 function CloseWindow(parentURL){
 	
