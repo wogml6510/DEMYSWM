@@ -163,6 +163,24 @@
 				    </a>
 				  </li>
 				</c:if>
+				<div class="dropdown dropdown-end">
+                        <label tabindex="0" class="btn btn-top btn-circle avatar">
+                              <div class="w-10 rounded-full">
+                                    <div class="manPicture " data-id="${member.MEMBER_ID }" style="width:40px;height:40px;display:block;margin:0 auto;"></div>
+                              </div>
+                        </label>
+                        <ul tabindex="0" class="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
+                              style="color: black;">
+                              <li>
+                                    <a href="#" class="justify-between"> MyPage </a>
+                              </li>
+                              <li>
+								    <a href="/member/logout" > Logout </a>
+							  </li>
+                        </ul>
+                  </div>
+            </div>
+      </div>
 
       <div class="flex" style="background-color: #153A66;">
             <div class="navbar text-neutral-content" style="width:18%; border-right: 2px solid #f7f7f7;">

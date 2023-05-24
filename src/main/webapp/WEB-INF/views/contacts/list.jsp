@@ -2,6 +2,10 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ include file="../common/mainhead.jsp"%>
 
+<c:set var="contactsList" value="${dataMap.contactsList }"/>
+<c:set var="pageMaker" value="${dataMap.pageMaker }" />
+<c:set var="cri" value="${pageMaker.cri }"/>
+
 <!-- 제이쿼리 불러오기 -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
@@ -44,7 +48,7 @@ a:hover{
 }
 .main-box {
 	width:100%;
-	height:955px;
+	height:945px;
 }
 .contacts_select2 {
 	display:flex;
@@ -79,13 +83,11 @@ a:hover{
 
 .list-body {
 	margin : 0 20px;
-
-	border-top:2px solid #333333;
-    border-bottom:2px solid #333333;
 }
 
 .table-bordered > table th, .table-bordered> table td{
 	border : 1px solid black;
+	height: 40px;
 }
 
 .regist-btn {
@@ -98,34 +100,38 @@ a:hover{
 	background-color:#016FA0;
 }
 
+.table>thead {
+    background-color: #f5f4f4;
+    vertical-align: bottom;
+    height: 50px;
+}
 </style>
 
 <body>
-  <div class="main-box" style="border:3px solid red;">
+  <div class="main-box">
   <div class="contacts_select">
-  	<div class="contacts_select2">
-      <div class="con-se1">
-        <select class="select select-bordered w-full max-w-xs">
-		<option disabled selected>전체</option>
-		<option>협력업체</option>
-		<option>클라이언트</option>
-		<option>거래처</option>
-	  </select>
-	</div>
-	<div class="con-se2">
- 	 <select class="select select-bordered w-full max-w-xs">
-		<option disabled selected>업체명</option>
-		<option>담당자</option>
-		<option>대표번호</option>
-	  </select>
-	  
+  <div class="contacts_select2">
+    <div class="con-se1">
+      <select class="select select-bordered w-full max-w-xs" id="CT_TYPE" name="CT_TYPE">
+        <option value="0" ${cri.CT_TYPE eq '0' ? 'selected' : "" }>전체</option>
+        <option value="1" ${cri.CT_TYPE eq '1' ? 'selected' : "" }>협력업체</option>
+        <option value="2" ${cri.CT_TYPE eq '2' ? 'selected' : "" }>클라이언트</option>
+        <option value="3" ${cri.CT_TYPE eq '3' ? 'selected' : "" }>거래처</option>
+      </select>
     </div>
-    	<input class="input input-bordered w-full max-w-xs" type="text" name="keyword" placeholder="검색어를 입력하세요." value=""/>
-            <span class="input-group-apspend">
-               <button class="btn btn-se" type="button" id="searchBtn" data-card-widget="search" onclick="list_go(1);">
-                 <i class="fa fa-fw fa-search"></i>
-                   </button>
-            </span>
+	  <div class="con-se2">
+      <select class="select select-bordered w-full max-w-xs" id="searchType" name="searchType">
+      	<option value="" ${cri.searchType=='' ? 'selected':"" }>구분</option>
+      	<option value="n" ${cri.searchType=='n' ? 'selected':"" }>업체명</option>
+		<option value="m" ${cri.searchType=='m' ? 'selected':"" }>담당자</option>
+      </select>
+    </div>
+    <input class="input input-bordered w-full max-w-xs" type="text" name="keyword" id="keyword" placeholder="검색어를 입력하세요." value="${cri.keyword }"/>
+    <span class="input-group-apspend">
+      <button class="btn btn-se" type="button" id="searchBtn" data-card-widget="search" onclick="list_go(1);">
+        <i class="fa fa-fw fa-search"></i>
+      </button>
+    </span>
     <div class="regist-btn">
     	<button type="button" class="btn btn-se" onclick="OpenWindow('regist','신규업체 등록',550,800);" >등 록</button>
     </div>
@@ -145,9 +151,9 @@ a:hover{
 				<th>담당자연락처</th>
 			</tr>
 		</thead>
-		<tbody style="">
+		<tbody>
 		  <c:forEach items="${contactsList }" var="contacts" >
-			<tr class="hover">
+			<tr class="hover" style="height: 55px;">
 				<td>${contacts.CT_NUM }</td>
 				<td><a href="javascript:OpenWindow('detail?CT_NUM=${contacts.CT_NUM}', '업체 상세', 550, 800);">${contacts.CT_NAME}</a></td>
 				<td>${contacts.CT_CEO }</td>
@@ -161,41 +167,28 @@ a:hover{
 		</tbody>	 
 	</table>
 </div>
-<div class="page-menu mt-5 flex justify-center">
-  <div class="pagination d-inline flex" style="font-size:2rem;height:20px;">
-    <div class="page-item d-inline-flex">
-      <a class="btn btn-md btn-se" href="?page=${currentPage - 1}" aria-label="Previous" id="previousBtn">
-        <span aria-hidden="true">&laquo;</span>
-        <span class="sr-only">Previous</span>
-      </a>
-    </div>
 
-    <c:forEach begin="1" end="${totalPages}" var="pageNumber">
-      <c:choose>
-        <c:when test="${pageNumber == currentPage}">
-          <div class="page-item active d-inline-flex" aria-current="page">
-            <a class="btn btn-md btn-hover">${pageNumber}</a>
-          </div>
-        </c:when>
-        <c:otherwise>
-          <div class="page-item d-inline-flex">
-            <a class="btn btn-md btn-se" href="?page=${pageNumber}">${pageNumber}</a>
-          </div>
-        </c:otherwise>
-      </c:choose>
-    </c:forEach>
-
-    <div class="page-item d-inline-flex">
-      <a class="btn btn-md btn-se" href="?page=${currentPage + 1}" aria-label="Next" id="nextBtn">
-        <span aria-hidden="true">&raquo;</span>
-        <span class="sr-only">Next</span>
-      </a>
-    </div>
-  </div>
-</div>
+<br/>
+ <%@ include file="/WEB-INF/views/module/pagination.jsp" %>
 </div>
 
 	<script>
+	
+	function list_go(page, url) {
+	    if (!url) url = "/contacts/list";
+	    
+	    var jobForm = $('#jobForm');
+	    $("form#jobForm input[name='page']").val(page);
+	    $("form#jobForm input[name='searchType']").val($('select[name="searchType"]').val());
+	    $("form#jobForm input[name='keyword']").val($('div.contacts_select2>input[name="keyword"]').val());
+	    $("form#jobForm input[name='perPageNum']").val($('select[name="perPageNum"]').val(13));
+	    $("form#jobForm input[name='CT_TYPE']").val($('select[name="CT_TYPE"]').val());
+	    $('form#jobForm').attr({
+	        action: url,
+	        method: 'get'
+	    }).submit();
+	}
+	
 		function OpenWindow(UrlStr, WinTitle, WinWidth, WinHeight) {
 			winleft = (screen.width - WinWidth) / 2;
 			wintop = (screen.height - WinHeight) / 2;
@@ -210,28 +203,6 @@ a:hover{
 		window.close();
 	}
 	
-	 document.addEventListener("DOMContentLoaded", function() {
-		    const paginationButtons = document.querySelectorAll(".pagination .page-item");
-
-		    paginationButtons.forEach(function(button) {
-		      button.addEventListener("click", function() {
-		        paginationButtons.forEach(function(btn) {
-		          btn.classList.remove("active");
-		        });
-		        this.classList.add("active");
-		      });
-		    });
-		  });
-	 
-	 window.onload = function() {
-		    var previousBtn = document.getElementById('previousBtn');
-		    var currentPage = ${currentPage};
-
-		    if (currentPage === 1) {
-		      previousBtn.classList.add('disabled');
-		      previousBtn.removeAttribute('href');
-		    }
-		  };
  </script>
 		</body>
 		</html>

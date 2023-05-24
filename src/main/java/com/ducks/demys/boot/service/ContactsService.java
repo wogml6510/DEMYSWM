@@ -1,9 +1,14 @@
 package com.ducks.demys.boot.service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import org.apache.ibatis.session.RowBounds;
 import org.springframework.stereotype.Service;
 
+import com.ducks.demys.boot.command.ContactsSearchCriteria;
+import com.ducks.demys.boot.command.PageMaker;
 import com.ducks.demys.boot.repository.ContactsRepository;
 import com.ducks.demys.boot.vo.Contacts;
 
@@ -12,10 +17,26 @@ public class ContactsService {
 	
 	private ContactsRepository contactsRepository;
 	
-	public ContactsService(ContactsRepository contactsRepository) {
+	public  ContactsService(ContactsRepository contactsRepository) {
 		this.contactsRepository= contactsRepository;
 	}
 	
+	public Map<String,Object> getSelectSearchContactsList(ContactsSearchCriteria cri) {
+		Map<String,Object> dataMap = new HashMap<String,Object>();
+
+		RowBounds rowbounds = new RowBounds(cri.getStartRowNum(),cri.getPerPageNum());
+		List<Contacts> contactsList = contactsRepository.getSelectSearchContactsList(cri, rowbounds);
+		dataMap.put("contactsList", contactsList);
+
+		PageMaker pageMaker = new PageMaker();
+		pageMaker.setCri(cri);
+		pageMaker.setTotalCount(contactsRepository.selectSearchContactsListCount(cri));
+
+		dataMap.put("pageMaker", pageMaker);
+
+		return dataMap;
+	}
+
 	public List<Contacts> getContactsList(){
 
 		return contactsRepository.getContactsList();

@@ -1,15 +1,15 @@
 package com.ducks.demys.boot.controller;
 
-import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import java.util.Map;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.ducks.demys.boot.command.ContactsSearchCriteria;
 import com.ducks.demys.boot.service.ContactsService;
 import com.ducks.demys.boot.vo.Contacts;
 
@@ -22,27 +22,17 @@ public class ContactsController {
 	}
 	
 	@RequestMapping("/contacts/list")
-	public String showList(Model model, @RequestParam(value = "page", defaultValue = "1") int page) {
-	    int pageSize = 13; 
-	    List<Contacts> contactsList = contactsService.getContactsList();
-	    
-	    int totalItems = contactsList.size();
-	    int totalPages = (int) Math.ceil((double) totalItems / pageSize);
-	    
-	    if (page > totalPages) {
-	        page = totalPages;
-	    }
-	    
-	    int startIndex = (page - 1) * pageSize;
-	    int endIndex = Math.min(startIndex + pageSize, totalItems);
-	    
-	    List<Contacts> paginatedContacts = contactsList.subList(startIndex, endIndex);
-	    
-	    model.addAttribute("contactsList", paginatedContacts);
-	    model.addAttribute("currentPage", page);
-	    model.addAttribute("totalPages", totalPages);
-	    
-	    return "contacts/list";
+	public String showList(Model model, ContactsSearchCriteria cri) {
+	
+		if (cri.getPage() < 1) cri.setPage(1);
+		if (cri.getPerPageNum() < 1) cri.setPerPageNum(13);
+
+		Map<String,Object> dataMap = contactsService.getSelectSearchContactsList(cri);
+		
+
+		model.addAttribute("dataMap", dataMap);
+		
+		return "contacts/list";
 	}
 	
 	@RequestMapping("/contacts/regist")
