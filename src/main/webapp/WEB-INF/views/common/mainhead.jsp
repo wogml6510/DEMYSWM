@@ -218,21 +218,22 @@ a:hover{
             </div>
       </div>
       
-<%--       <script>
-      	window.onload=function(){
-    	  	MemberPictureThumb('<%=request.getContextPath()%>');
-    	  }
-      
+<script>
 
-      	function MemberPictureThumb(contextPath){
-      		   for(var target of document.querySelectorAll('.manPicture')){   
-      		      var id = target.getAttribute('data-id');
-      		      
-      		      target.style.backgroundImage="url('/common/mainhead/getPicture?MEMBER_ID="+MEMBER_ID+"')";            
-      		      target.style.backgroundPosition="center";
-      		      target.style.backgroundRepeat="no-repeat";
-      		      target.style.backgroundSize="cover";
-      		   }
-      		}
-      </script>
- --%>
+window.onload=function(){
+  	MemberPictureThumb('<%=request.getContextPath()%>');
+  }
+  
+  
+function MemberPictureThumb(contextPath){
+	   for(var target of document.querySelectorAll('.manPicture')){   
+	      var id = target.getAttribute('data-id');
+	      
+	      target.style.backgroundImage="url('"+contextPath+"/member/getPicture?MEMBER_ID="+id+"')";            
+	      target.style.backgroundPosition="center";
+	      target.style.backgroundRepeat="no-repeat";
+	      target.style.backgroundSize="cover";
+	   }
+	}
+</script> 
+      
