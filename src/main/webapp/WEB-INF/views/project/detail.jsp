@@ -56,6 +56,7 @@
 		   			</div>
 	   			</div>
 	   			
+	   			
 	   			<!-- 프로젝트정보 -->
 	   			<div id="project_BODY" >
 	   				<div class="p-info-detail">
