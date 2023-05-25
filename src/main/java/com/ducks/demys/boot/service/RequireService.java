@@ -19,13 +19,20 @@ public class RequireService {
 	public List<Require> getRequireListByPJ_NUM(int PJ_NUM){
 		return requireRepository.getRequireListByPJ_NUM(PJ_NUM);
 	}
+	//수정
+	public List<Require> getSearchRequire(String searchKeywordTypeCode, String searchKeyword, int PJ_NUM) {
+		List<Require> require = requireRepository.getSearchRequire(searchKeywordTypeCode, searchKeyword, PJ_NUM);
+		return require;
+	}
+	//수정
 
 	public Require getRequireByREQUIRE_NUM(int REQUIRE_NUM){
-		return requireRepository.getRequireByREQUIRE_NUM(REQUIRE_NUM);
+		Require requireList = requireRepository.getRequireByREQUIRE_NUM(REQUIRE_NUM);
+		return requireList;
 	}
 	
 	public void registRequire(Require require) {
-		require.setPJ_NUM(requireRepository.selectRequireSequenceNextValue());
+		require.setREQUIRE_NUM(requireRepository.selectRequireSequenceNextValue());
 		requireRepository.registRequire(require);
 	}
 	

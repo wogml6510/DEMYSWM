@@ -4,9 +4,11 @@ import java.util.Date;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 @Getter
 @Setter
+@ToString
 public class Require {
 	
 	private int REQUIRE_NUM;
@@ -17,5 +19,6 @@ public class Require {
 	private int MEMBER_NUM;
 	private int PJ_NUM;
 	private int CT_NUM;
+	private String MEMBER_NAME;
 
 }

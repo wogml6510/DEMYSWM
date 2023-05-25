@@ -11,6 +11,10 @@ public interface RequireRepository {
 
 	public List<Require> getRequireListByPJ_NUM(int PJ_NUM);
 	
+	//수정
+	public List<Require> getSearchRequire(String searchKeywordTypeCode,	String searchKeyword, int PJ_NUM);
+	//수정
+	
 	public Require getRequireByREQUIRE_NUM(int REQUIRE_NUM);
 	
 	public int selectRequireSequenceNextValue();
